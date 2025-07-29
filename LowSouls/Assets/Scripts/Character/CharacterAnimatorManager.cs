@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 namespace LS
 {
@@ -68,6 +69,23 @@ namespace LS
             character.animator.SetFloat("Horizontal", horizontalMovement, 0.1f, Time.deltaTime);
             character.animator.SetFloat("Vertical", verticalMovement, 0.1f, Time.deltaTime);
 //            #endregion
+        }
+
+        public virtual void PlayTargetActionAnimation
+            (string targetAnimation, 
+            bool isPerformingAction, 
+            bool applyRootMotion = true,
+            bool canRotate = false, 
+            bool canMove = false)
+        {
+            character.animator.applyRootMotion = applyRootMotion;
+            character.animator.CrossFade(targetAnimation, 0.2f);
+            //Can be used to stop character from attempting new actions (true if stunned etc,...)
+            character.isPerformingAction = isPerformingAction;
+            character.canRotate = canRotate;
+            character.canMove = canMove;
+
+            character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
     }
 }

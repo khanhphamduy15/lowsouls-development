@@ -4,6 +4,5 @@ namespace LS
 {
     public class PlayerAnimatorManager : CharacterAnimatorManager
     {
-
     }
 }

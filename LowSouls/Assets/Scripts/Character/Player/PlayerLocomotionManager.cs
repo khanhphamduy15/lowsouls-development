@@ -66,6 +66,7 @@ namespace LS
 
         private void HandleGroundedMovement()
         {
+            if (!player.canMove) return;
             GetMovementValues();
             //Move direction based on camera facing perspective (goc cam) & movement input
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
@@ -88,6 +89,7 @@ namespace LS
 
         private void HandleRotation()
         {
+            if (!player.canRotate) return; 
             targetRotationDirection = Vector3.zero;
             targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
             targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
@@ -103,9 +105,30 @@ namespace LS
             transform.rotation = targetRotation;
         }
 
-        private void AttemptToPerformDodge()
+        public void AttemptToPerformDodge()
         {
+            //moving when dodge = roll, staying still when dodge = backstep
+            if (player.isPerformingAction)
+            {
+               return;
+            }
 
+            if (moveAmount > 0)
+            {
+                Vector3 inputDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput
+                                       + PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
+
+                inputDirection.y = 0;
+                rollDirection = inputDirection.normalized;
+                Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
+                player.transform.rotation = playerRotation;
+
+                player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true);
+            } else
+            {
+                //backstep
+                //Not implemented, missing animation
+            }
         }
     }
 }

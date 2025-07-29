@@ -21,6 +21,9 @@ namespace LS
         public float cameraHorizontalInput;
         public float cameraVerticalInput;
 
+        [Header("Player Action Input")]
+        [SerializeField] bool dodgeInput = false;
+        
         private void OnEnable()
         {
             if (playerControls == null)
@@ -29,6 +32,7 @@ namespace LS
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             }
             playerControls.Enable();
         }
@@ -74,9 +78,17 @@ namespace LS
 
         private void Update()
         {
-            HandlePlayerMovementInput();
-            HandleCameraMovementInput();
+            HandleAllInputs();
         }
+
+        private void HandleAllInputs()
+        {
+            HandleCameraMovementInput();
+            HandlePlayerMovementInput();
+            HandleDodgeInput();
+        }
+
+        //Movements
         private void HandlePlayerMovementInput()
         {
             verticalInput = movementInput.y;
@@ -105,6 +117,18 @@ namespace LS
             cameraHorizontalInput = cameraInput.x;
         }
 
+        //Actions   
+        private void HandleDodgeInput()
+        {
+            if (dodgeInput)
+            {
+                dodgeInput = false;
+                //Return if menu or ui window is open
+                //Dodge
+
+                player.playerLocomotionManager.AttemptToPerformDodge();
+            }
+        }
         private void OnApplicationFocus(bool focus)
         {
             if (enabled)
