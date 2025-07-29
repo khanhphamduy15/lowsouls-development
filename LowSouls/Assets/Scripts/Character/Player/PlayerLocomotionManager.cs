@@ -5,16 +5,19 @@ namespace LS
     public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         PlayerManager player;
-        public float verticalMovement;
-        public float horizontalMovement;
-        public float moveAmount;
+        [HideInInspector] public float verticalMovement;
+        [HideInInspector] public float horizontalMovement;
+        [HideInInspector] public float moveAmount;
 
+        [Header("Movement Settings")]
         [SerializeField] float walkingSpeed = 2f;
         [SerializeField] float runningSpeed = 5f;
         [SerializeField] float rotationSpeed = 15;
-
         private Vector3 moveDirection;
         private Vector3 targetRotationDirection;
+
+        [Header("Dodge")]
+        private Vector3 rollDirection;
 
         protected override void Awake()
         {
@@ -22,6 +25,24 @@ namespace LS
             player = GetComponent<PlayerManager>();
         }
 
+        protected override void Update()
+        {
+            base.Update();
+            if (player.IsOwner)
+            {
+                player.characterNetworkManager.verticalMovement.Value = verticalMovement;
+                player.characterNetworkManager.horizontalMovement.Value = horizontalMovement;
+                player.characterNetworkManager.moveAmount.Value = moveAmount;
+            }
+            else
+            {
+                verticalMovement = player.characterNetworkManager.verticalMovement.Value;
+                horizontalMovement = player.characterNetworkManager.horizontalMovement.Value;
+                moveAmount = player.characterNetworkManager.moveAmount.Value;
+
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+            }
+        }
         public void HandleAllMovement()
         {
             //Ground movements
@@ -34,17 +55,18 @@ namespace LS
             
         }
 
-        private void GetVerticalAndHorizontalInputs()
+        private void GetMovementValues()
         {
             verticalMovement = PlayerInputManager.instance.verticalInput;
             horizontalMovement = PlayerInputManager.instance.horizontalInput;
+            moveAmount = PlayerInputManager.instance.moveAmount;
 
             //Clamp movement
         } 
 
         private void HandleGroundedMovement()
         {
-            GetVerticalAndHorizontalInputs();
+            GetMovementValues();
             //Move direction based on camera facing perspective (goc cam) & movement input
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
             moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
@@ -79,6 +101,11 @@ namespace LS
             Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
             Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation,rotationSpeed * Time.deltaTime);
             transform.rotation = targetRotation;
+        }
+
+        private void AttemptToPerformDodge()
+        {
+
         }
     }
 }

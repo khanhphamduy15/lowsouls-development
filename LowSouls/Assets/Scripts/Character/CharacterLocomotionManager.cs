@@ -9,5 +9,9 @@ namespace LS
 
         }
 
+        protected virtual void Update()
+        {
+
+        }
     }
 }

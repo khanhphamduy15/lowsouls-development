@@ -4,15 +4,17 @@ namespace LS
 {
     public class CharacterManager : NetworkBehaviour
     {
-        public CharacterController characterController;
+        [HideInInspector] public CharacterController characterController;
+        [HideInInspector] public Animator animator;
 
-        CharacterNetworkManager characterNetworkManager;
+        [HideInInspector] public CharacterNetworkManager characterNetworkManager;
 
         protected virtual void Awake()
         {
             DontDestroyOnLoad(this);
 
             characterController = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
         }
 
@@ -40,6 +42,11 @@ namespace LS
                     characterNetworkManager.networkRotation.Value,
                     characterNetworkManager.networkRotationSmoothTime);
             }
+        }
+
+        protected virtual void LateUpdate()
+        {
+
         }
     }
 }
