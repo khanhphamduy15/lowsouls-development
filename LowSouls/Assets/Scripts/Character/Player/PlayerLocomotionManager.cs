@@ -13,6 +13,7 @@ namespace LS
         [SerializeField] float walkingSpeed = 2f;
         [SerializeField] float runningSpeed = 5f;
         [SerializeField] float rotationSpeed = 15;
+        [SerializeField] float sprintingSpeed = 8f;
         private Vector3 moveDirection;
         private Vector3 targetRotationDirection;
 
@@ -40,7 +41,7 @@ namespace LS
                 horizontalMovement = player.characterNetworkManager.horizontalMovement.Value;
                 moveAmount = player.characterNetworkManager.moveAmount.Value;
 
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
             }
         }
         public void HandleAllMovement()
@@ -74,17 +75,23 @@ namespace LS
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-            if (PlayerInputManager.instance.moveAmount > 0.5f)
+            if (player.playerNetworkManager.isSprinting.Value)
             {
-                //move at run speed
-                player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
             }
-            else if (PlayerInputManager.instance.moveAmount <= 0.5f)
+            else
             {
-                //move at walk speed
-                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+                if (PlayerInputManager.instance.moveAmount > 0.5f)
+                {
+                    //move at run speed
+                    player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                }
+                else if (PlayerInputManager.instance.moveAmount <= 0.5f)
+                {
+                    //move at walk speed
+                    player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+                }
             }
-
         }
 
         private void HandleRotation()
@@ -129,6 +136,27 @@ namespace LS
                 //backstep
                 //Not implemented, missing animation
             }
+        }
+
+        public void HandleSprinting()
+        {
+            if (player.isPerformingAction)
+            {
+                player.playerNetworkManager.isSprinting.Value = false;  
+            }
+            // no stamina => sprinting = false
+            // moving => sprinting = true
+            if (moveAmount >= 0.5)
+            {
+                player.playerNetworkManager.isSprinting.Value = true;
+            }
+            // not moving => sprinting = true
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+            // stationary => sprinting = false
+
         }
     }
 }

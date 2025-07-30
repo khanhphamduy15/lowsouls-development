@@ -23,6 +23,7 @@ namespace LS
 
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
+        [SerializeField] bool sprintInput = false;
         
         private void OnEnable()
         {
@@ -33,6 +34,13 @@ namespace LS
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+
+                //Hold => bool = true
+                playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+                //Release => bool = false
+                playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+
+
             }
             playerControls.Enable();
         }
@@ -86,6 +94,7 @@ namespace LS
             HandleCameraMovementInput();
             HandlePlayerMovementInput();
             HandleDodgeInput();
+            HandleSprinting();
         }
 
         //Movements
@@ -108,7 +117,7 @@ namespace LS
             {
                 return;
             }
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
         }
 
         private void HandleCameraMovementInput()
@@ -129,6 +138,19 @@ namespace LS
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
         }
+
+        private void HandleSprinting()
+        {
+            if (sprintInput)
+            {
+                player.playerLocomotionManager.HandleSprinting();
+            }
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+        }
+
         private void OnApplicationFocus(bool focus)
         {
             if (enabled)

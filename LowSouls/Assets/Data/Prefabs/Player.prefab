@@ -131,8 +131,9 @@ MonoBehaviour:
   horizontalMovement: 0
   moveAmount: 0
   walkingSpeed: 2
-  runningSpeed: 5
+  runningSpeed: 4
   rotationSpeed: 15
+  sprintingSpeed: 6
 --- !u!114 &-3966386331775050033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +155,7 @@ MonoBehaviour:
   canMove: 1
   playerLocomotionManager: {fileID: 0}
   playerAnimatorManager: {fileID: 0}
+  playerNetworkManager: {fileID: 0}
 --- !u!143 &-7875021588539770521
 CharacterController:
   m_ObjectHideFlags: 0
@@ -204,6 +206,8 @@ MonoBehaviour:
   verticalMovement:
     m_InternalValue: 0
   moveAmount:
+    m_InternalValue: 0
+  isSprinting:
     m_InternalValue: 0
 --- !u!114 &-7579761659635329869
 MonoBehaviour:
