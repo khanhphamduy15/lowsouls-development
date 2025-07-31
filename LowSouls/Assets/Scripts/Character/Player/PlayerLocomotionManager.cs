@@ -14,11 +14,13 @@ namespace LS
         [SerializeField] float runningSpeed = 5f;
         [SerializeField] float rotationSpeed = 15;
         [SerializeField] float sprintingSpeed = 8f;
+        [SerializeField] int sprintingStaminaCost = 1;
         private Vector3 moveDirection;
         private Vector3 targetRotationDirection;
 
         [Header("Dodge")]
         private Vector3 rollDirection;
+        [SerializeField] float rollStaminaCost = 12;
 
         protected override void Awake()
         {
@@ -119,6 +121,10 @@ namespace LS
             {
                return;
             }
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+            {
+                return;
+            }
 
             if (moveAmount > 0)
             {
@@ -136,6 +142,7 @@ namespace LS
                 //backstep
                 //Not implemented, missing animation
             }
+            player.playerNetworkManager.currentStamina.Value -= rollStaminaCost;
         }
 
         public void HandleSprinting()
@@ -143,6 +150,12 @@ namespace LS
             if (player.isPerformingAction)
             {
                 player.playerNetworkManager.isSprinting.Value = false;  
+            }
+
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+                return;
             }
             // no stamina => sprinting = false
             // moving => sprinting = true
@@ -156,7 +169,10 @@ namespace LS
                 player.playerNetworkManager.isSprinting.Value = false;
             }
             // stationary => sprinting = false
-
+            if (player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerNetworkManager.currentStamina.Value -= sprintingStaminaCost * Time.deltaTime;
+            }
         }
     }
 }

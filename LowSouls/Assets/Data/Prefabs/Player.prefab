@@ -65,16 +65,10 @@ PrefabInstance:
       addedObject: {fileID: 1091426249159456900}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -9047000394147238092}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -3966386331775050033}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7875021588539770521}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -6831212938714996448}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7579761659635329869}
@@ -84,6 +78,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
       insertIndex: -1
       addedObject: {fileID: -902327309144292272}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6561565743686701106}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6579378839786728154}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4113623230920652389}
   m_SourcePrefab: {fileID: 100100000, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
 --- !u!1 &7671385893040799921 stripped
 GameObject:
@@ -115,25 +118,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &-9047000394147238092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7671385893040799921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 643d52b52735370478e1caecdc4a2fab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verticalMovement: 0
-  horizontalMovement: 0
-  moveAmount: 0
-  walkingSpeed: 2
-  runningSpeed: 4
-  rotationSpeed: 15
-  sprintingSpeed: 6
 --- !u!114 &-3966386331775050033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +140,7 @@ MonoBehaviour:
   playerLocomotionManager: {fileID: 0}
   playerAnimatorManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
+  playerStatsManager: {fileID: 0}
 --- !u!143 &-7875021588539770521
 CharacterController:
   m_ObjectHideFlags: 0
@@ -181,34 +166,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &-6831212938714996448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7671385893040799921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d2f443e4db71984ebd84abf741883d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  networkPosition:
-    m_InternalValue: {x: 0, y: 0, z: 0}
-  networkRotation:
-    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
-  networkPositionVelocity: {x: 0, y: 0, z: 0}
-  networkPositionSmoothTime: 0.1
-  networkRotationSmoothTime: 0.1
-  horizontalMovement:
-    m_InternalValue: 0
-  verticalMovement:
-    m_InternalValue: 0
-  moveAmount:
-    m_InternalValue: 0
-  isSprinting:
-    m_InternalValue: 0
 --- !u!114 &-7579761659635329869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,3 +287,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c109c234f5d60f449fdd5fc71e98a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6561565743686701106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7671385893040799921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d38963e0c3c80449cdeaacc0da39c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaRegenerationAmount: 0.5
+  staminaRegenerationDelay: 2
+--- !u!114 &6579378839786728154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7671385893040799921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2f443e4db71984ebd84abf741883d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
+  networkPositionVelocity: {x: 0, y: 0, z: 0}
+  networkPositionSmoothTime: 0.1
+  networkRotationSmoothTime: 0.1
+  horizontalMovement:
+    m_InternalValue: 0
+  verticalMovement:
+    m_InternalValue: 0
+  moveAmount:
+    m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  endurance:
+    m_InternalValue: 5
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
+    m_InternalValue: 0
+--- !u!114 &4113623230920652389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7671385893040799921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643d52b52735370478e1caecdc4a2fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalMovement: 0
+  horizontalMovement: 0
+  moveAmount: 0
+  walkingSpeed: 2
+  runningSpeed: 5
+  rotationSpeed: 15
+  sprintingSpeed: 8
+  sprintingStaminaCost: 1
+  rollStaminaCost: 15
