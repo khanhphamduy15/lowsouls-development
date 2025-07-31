@@ -24,7 +24,8 @@ namespace LS
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
-        
+        [SerializeField] bool jumpInput = false;
+
         private void OnEnable()
         {
             if (playerControls == null)
@@ -34,6 +35,7 @@ namespace LS
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+                playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
 
                 //Hold => bool = true
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -94,7 +96,7 @@ namespace LS
             HandleCameraMovementInput();
             HandlePlayerMovementInput();
             HandleDodgeInput();
-            HandleSprinting();
+            HandleSprintingInput();
         }
 
         //Movements
@@ -139,7 +141,7 @@ namespace LS
             }
         }
 
-        private void HandleSprinting()
+        private void HandleSprintingInput()
         {
             if (sprintInput)
             {
@@ -151,6 +153,22 @@ namespace LS
             }
         }
 
+        private void HandleJumpInput()
+        {
+            if (jumpInput)
+            {
+                jumpInput = false;
+                //Return if menu or ui window is open
+
+                //Attempt to Jump
+
+                player.playerLocomotionManager.AttemptToPerformJump();
+            }
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+        }
         private void OnApplicationFocus(bool focus)
         {
             if (enabled)

@@ -14,14 +14,14 @@ namespace LS
         [SerializeField] float runningSpeed = 5f;
         [SerializeField] float rotationSpeed = 15;
         [SerializeField] float sprintingSpeed = 8f;
-        [SerializeField] int sprintingStaminaCost = 1;
+        [SerializeField] int sprintingStaminaCost = 2;
         private Vector3 moveDirection;
         private Vector3 targetRotationDirection;
 
         [Header("Dodge")]
         private Vector3 rollDirection;
         [SerializeField] float rollStaminaCost = 12;
-
+        [SerializeField] int jumpStaminaCost = 8;
         protected override void Awake()
         {
             base.Awake();
@@ -114,6 +114,36 @@ namespace LS
             transform.rotation = targetRotation;
         }
 
+        public void HandleSprinting()
+        {
+            if (player.isPerformingAction)
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+                return;
+            }
+            // no stamina => sprinting = false
+            // moving => sprinting = true
+            if (moveAmount >= 0.5)
+            {
+                player.playerNetworkManager.isSprinting.Value = true;
+            }
+            // not moving => sprinting = true
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+            // stationary => sprinting = false
+            if (player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerNetworkManager.currentStamina.Value -= sprintingStaminaCost * Time.deltaTime;
+            }
+        }
+
         public void AttemptToPerformDodge()
         {
             //moving when dodge = roll, staying still when dodge = backstep
@@ -145,34 +175,31 @@ namespace LS
             player.playerNetworkManager.currentStamina.Value -= rollStaminaCost;
         }
 
-        public void HandleSprinting()
+        public void AttemptToPerformJump()
         {
             if (player.isPerformingAction)
-            {
-                player.playerNetworkManager.isSprinting.Value = false;  
-            }
-
-            if (player.playerNetworkManager.currentStamina.Value <= 0)
-            {
-                player.playerNetworkManager.isSprinting.Value = false;
                 return;
-            }
-            // no stamina => sprinting = false
-            // moving => sprinting = true
-            if (moveAmount >= 0.5)
-            {
-                player.playerNetworkManager.isSprinting.Value = true;
-            }
-            // not moving => sprinting = true
-            else
-            {
-                player.playerNetworkManager.isSprinting.Value = false;
-            }
-            // stationary => sprinting = false
-            if (player.playerNetworkManager.isSprinting.Value)
-            {
-                player.playerNetworkManager.currentStamina.Value -= sprintingStaminaCost * Time.deltaTime;
-            }
+            //no stamina = no jump
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+                return;
+            //is jumping = no jump
+            if (player.isJumping)
+                return;   
+            //mid air = no jump
+            if (player.isGrounded)
+                return;
+            player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
+            player.isJumping = true;
+
+            //to handing
+            player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
+
+        }
+
+        public void ApplyJumpingVelocity()
+        {
+            //upward velocity depend on force
+
         }
     }
 }
