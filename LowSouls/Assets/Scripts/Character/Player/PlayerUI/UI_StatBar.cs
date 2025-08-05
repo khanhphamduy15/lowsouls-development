@@ -7,12 +7,16 @@ namespace LS
     {
         //Variable to scale bar size based on stat
         private Slider slider;
-        
-        //Stamina consumes amount indicator bar
+        private RectTransform rectTransform;
+
+        [Header("Bar Options")]
+        [SerializeField] protected bool scaleBarLengthWithStats = true;
+        [SerializeField] protected float widthScaleMultiplier = 1;
 
         protected virtual void Awake()
         {
             slider = GetComponent<Slider>();
+            rectTransform = GetComponent<RectTransform>();
         }
 
         public virtual void SetStat(int newValue)
@@ -24,6 +28,13 @@ namespace LS
         {
             slider.maxValue = maxValue;
             slider.value = maxValue;
+
+            if (scaleBarLengthWithStats)
+            {
+                rectTransform.sizeDelta = new Vector2(maxValue * widthScaleMultiplier, rectTransform.sizeDelta.y);
+                //reset bars pos based on their layout group settings
+                PlayerUIManager.instance.playerUIHudManager.RefreshHud();
+            }
         }
         
     }

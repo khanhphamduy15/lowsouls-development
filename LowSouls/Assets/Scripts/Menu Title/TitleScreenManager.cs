@@ -27,11 +27,6 @@ namespace LS
         [Header("Character Slots")]
         public CharacterSlot currentSelectedSlot = CharacterSlot.NO_SLOT;
 
-
-        [Header("Title Screen Inputs")]
-        [SerializeField] bool deleteCharSlot = false;
-
-
         private void Awake()
         {
             if (instance == null)

@@ -18,12 +18,28 @@ namespace LS
             character = GetComponent<CharacterManager>();
         }
 
-        public int CalculateTotalStaminaBasedOnEnduranceLevel(int endurance)
+        protected virtual void Start()
+        {
+
+        }
+
+        public int CalculateHealthBasedOnVitalityLevel(int vitality)
+        {
+            float health = 0;
+
+            //stamina calc logic
+            health = vitality * 10;
+
+            return Mathf.RoundToInt(health);
+
+        }
+
+        public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
         {
             float stamina = 0;
 
             //stamina calc logic
-            stamina = endurance * 10;
+            stamina = endurance * 15;
 
             return Mathf.RoundToInt(stamina);
 

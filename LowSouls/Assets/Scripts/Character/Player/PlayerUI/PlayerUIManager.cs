@@ -9,6 +9,8 @@ namespace LS {
         [Header("NETWORK JOIN")]
         [SerializeField] bool startGameAsClient;
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
+        [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
+
 
         private void Awake()
         {
@@ -21,6 +23,7 @@ namespace LS {
                 Destroy(gameObject);
             }
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
+            playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
         }
 
         private void Start()

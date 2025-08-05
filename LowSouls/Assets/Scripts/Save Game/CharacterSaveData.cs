@@ -7,7 +7,7 @@ namespace LS
     public class CharacterSaveData
     {
         [Header("Scene Index")]
-        public int sceneIndex;
+        public int sceneIndex = 1;
 
         [Header("Character Name")]
         public string characterName = "Character";
@@ -19,6 +19,14 @@ namespace LS
         public float xPos;
         public float yPos;
         public float zPos;
+
+        [Header("Stats")]
+        public int vitality;
+        public int endurance;
+
+        [Header("Resources")]
+        public int currentHealth;
+        public float currentStamina;
 
     }
 }

@@ -18,10 +18,14 @@ namespace LS
         private Vector3 moveDirection;
         private Vector3 targetRotationDirection;
 
+        [Header("Jump")]
+        [SerializeField] float jumpHeight = 3;
+        [SerializeField] int jumpStaminaCost = 8;
+        private Vector3 jumpDirection;
+
         [Header("Dodge")]
         private Vector3 rollDirection;
         [SerializeField] float rollStaminaCost = 12;
-        [SerializeField] int jumpStaminaCost = 8;
         protected override void Awake()
         {
             base.Awake();
@@ -54,7 +58,8 @@ namespace LS
             //Rotation
             HandleRotation();
 
-            //Aerial movements
+            //Jumping 
+            HandleJumpingMovement();
             
         }
 
@@ -96,6 +101,13 @@ namespace LS
             }
         }
 
+        private void HandleJumpingMovement()
+        {
+            if (player.isJumping)
+            {
+                player.characterController.Move(jumpDirection * runningSpeed * Time.deltaTime);
+            }
+        }
         private void HandleRotation()
         {
             if (!player.canRotate) return; 
@@ -186,7 +198,7 @@ namespace LS
             if (player.isJumping)
                 return;   
             //mid air = no jump
-            if (player.isGrounded)
+            if (!player.isGrounded)
                 return;
             player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
             player.isJumping = true;
@@ -194,11 +206,32 @@ namespace LS
             //to handing
             player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
 
+            jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
+            jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
+            jumpDirection.y = 0;
+
+            if (jumpDirection != Vector3.zero)
+            {
+                //calc jump length base on movement speed
+                if (player.playerNetworkManager.isSprinting.Value)
+                {
+                    jumpDirection *= 2;
+                }
+                else if (PlayerInputManager.instance.moveAmount > 0.5f)
+                {
+                    jumpDirection *= 1;
+                }
+                else if (PlayerInputManager.instance.moveAmount < 0.5f)
+                {
+                    jumpDirection *= 0.5f;
+                }
+            }
         }
 
         public void ApplyJumpingVelocity()
         {
             //upward velocity depend on force
+            yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
 
         }
     }

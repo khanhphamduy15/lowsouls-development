@@ -16,4 +16,10 @@ namespace LS
         CharacterSlot_05,
         NO_SLOT
     }
+
+    public enum WeaponModelSlot
+    {
+        RightHand,
+        LeftHand
+    }
 }

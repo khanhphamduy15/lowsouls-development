@@ -97,6 +97,7 @@ namespace LS
             HandlePlayerMovementInput();
             HandleDodgeInput();
             HandleSprintingInput();
+            HandleJumpInput();
         }
 
         //Movements
@@ -163,10 +164,6 @@ namespace LS
                 //Attempt to Jump
 
                 player.playerLocomotionManager.AttemptToPerformJump();
-            }
-            else
-            {
-                player.playerNetworkManager.isSprinting.Value = false;
             }
         }
         private void OnApplicationFocus(bool focus)
