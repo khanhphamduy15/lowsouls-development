@@ -5,6 +5,9 @@ namespace LS
 {
     public class DamageCollider : MonoBehaviour
     {
+        [Header("Collider")]
+        protected Collider damageCollider;
+
         [Header("Damage")]
         public float physicalDamage = 0;
         public float fireDamage = 0;
@@ -43,6 +46,17 @@ namespace LS
             damageEffect.contactPoint = contactPoint;
 
             dmgTarget.characterEffectsManager.ProcessInstantEffects(damageEffect);
+        }
+
+        public virtual void EnableDamageCollider()
+        {
+            damageCollider.enabled = true;
+        }
+
+        public virtual void DisableDamageCollider()
+        {
+            damageCollider.enabled = false;
+            characterDamaged.Clear();       //reset the characters that have been hit when reset collider, so they can be hit again 
         }
 
     }

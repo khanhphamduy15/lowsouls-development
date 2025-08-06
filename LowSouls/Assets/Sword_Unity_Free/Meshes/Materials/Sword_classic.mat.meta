@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6eaa4101114e634489cca021964ea707
+timeCreated: 1526881622
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119130
+  packageName: 3D Classic Sword
+  packageVersion: 1.0
+  assetPath: Assets/Sword_Unity_Free/Meshes/Materials/Sword_classic.mat
+  uploadId: 248943
