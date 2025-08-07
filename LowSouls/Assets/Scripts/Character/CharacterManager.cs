@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
+using System.Collections.Generic;
 namespace LS
 {
     public class CharacterManager : NetworkBehaviour
@@ -17,7 +18,6 @@ namespace LS
         [Header("Flags")]
         public bool isPerformingAction = false;
         public bool isGrounded = true;
-        public bool isJumping = false;
         public bool canRotate = true;
         public bool canMove = true;
 
@@ -30,6 +30,11 @@ namespace LS
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+        }
+
+        protected virtual void Start()
+        {
+            IgnoreMyOwnColliders();
         }
 
         protected virtual void Update()
@@ -86,6 +91,30 @@ namespace LS
         protected virtual void ReviveCharacter()
         {
 
+        }
+
+        protected virtual void IgnoreMyOwnColliders()
+        {
+            Collider characterControllerColliders = GetComponent<Collider>();
+            Collider[] damageableCharacterColliders = GetComponentsInChildren<Collider>();
+
+            List<Collider> ignoreColliders = new List<Collider>();
+
+            //add all damageable character colliders to a list that will be used to ignore collisions
+            foreach (var collider in damageableCharacterColliders)
+            {
+                ignoreColliders.Add(collider);
+            }
+            ignoreColliders.Add(characterControllerColliders);
+            
+            //ignore collisions
+            foreach (var collider in ignoreColliders)
+            {
+                foreach (var otherCollider in ignoreColliders)
+                {
+                    Physics.IgnoreCollision(collider, otherCollider, true);
+                }
+            }
         }
     }
 }

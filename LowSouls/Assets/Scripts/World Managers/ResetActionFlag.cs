@@ -15,7 +15,10 @@ namespace LS
             character.isPerformingAction = false;
             character.canMove = true;
             character.canRotate = true;
-            character.isJumping = false;
+            if (character.IsOwner)
+            {
+                character.characterNetworkManager.isJumping.Value = false;
+            }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

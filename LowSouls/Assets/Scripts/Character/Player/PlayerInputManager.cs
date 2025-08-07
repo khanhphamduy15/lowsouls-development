@@ -65,6 +65,11 @@ namespace LS
             if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
             {
                 instance.enabled = true;
+
+                if (playerControls != null)
+                {
+                    playerControls.Enable();
+                }
             }
             else
             {
@@ -78,6 +83,10 @@ namespace LS
             SceneManager.activeSceneChanged += OnSceneChange;
 
             instance.enabled = false;
+            if (playerControls != null)
+            {
+                playerControls.Disable();
+            }
         }
 
         private void OnDestroy()

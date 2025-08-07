@@ -23,7 +23,7 @@ namespace LS
 
         private void OnTriggerEnter(Collider other)
         {
-            CharacterManager dmgTarget = other.GetComponent<CharacterManager>();
+            CharacterManager dmgTarget = other.GetComponentInParent<CharacterManager>();
             if (dmgTarget != null)
             {
                 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);

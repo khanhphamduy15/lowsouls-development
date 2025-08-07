@@ -72,6 +72,12 @@ namespace LS
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
 
+            //upon connecting, if we are not the server
+            if (IsOwner && !IsServer)
+            {
+                LoadGameDataFromCurrentCharData(ref WorldSaveGameManager.instance.currentCharacterData);
+            }
+
         }
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)

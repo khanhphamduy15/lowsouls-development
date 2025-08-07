@@ -103,7 +103,7 @@ namespace LS
 
         private void HandleJumpingMovement()
         {
-            if (player.isJumping)
+            if (player.characterNetworkManager.isJumping.Value)
             {
                 player.characterController.Move(jumpDirection * runningSpeed * Time.deltaTime);
             }
@@ -195,13 +195,13 @@ namespace LS
             if (player.playerNetworkManager.currentStamina.Value <= 0)
                 return;
             //is jumping = no jump
-            if (player.isJumping)
+            if (player.characterNetworkManager.isJumping.Value)
                 return;   
             //mid air = no jump
             if (!player.isGrounded)
                 return;
             player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
-            player.isJumping = true;
+            player.characterNetworkManager.isJumping.Value = true;
 
             //to handing
             player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
