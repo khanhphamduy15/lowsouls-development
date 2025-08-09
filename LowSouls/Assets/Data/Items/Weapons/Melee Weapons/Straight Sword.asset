@@ -29,3 +29,4 @@ MonoBehaviour:
   lightningDmg: 0
   poiseDmg: 25
   baseStaminaCost: 20
+  oh_RB_Action: {fileID: 11400000, guid: acdacef3e65e6e64bb69ceeea2151e9c, type: 2}

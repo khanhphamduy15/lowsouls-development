@@ -29,7 +29,8 @@ namespace LS
         [Header("Stamina Costs")]
         public int baseStaminaCost = 20;
 
-        
+        [Header("Actions")]
+        public WeaponItemAction oh_RB_Action; //one handed action
 
 
 

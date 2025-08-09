@@ -25,6 +25,7 @@ namespace LS
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool RB_Input = false;
 
         private void OnEnable()
         {
@@ -36,6 +37,7 @@ namespace LS
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
                 //Hold => bool = true
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -107,6 +109,7 @@ namespace LS
             HandleDodgeInput();
             HandleSprintingInput();
             HandleJumpInput();
+            HandleRBInput();
         }
 
         //Movements
@@ -187,6 +190,21 @@ namespace LS
                 {
                     playerControls.Disable(); 
                 }
+            }
+        }
+
+        private void HandleRBInput()
+        {
+            if (RB_Input)
+            {
+                RB_Input = false;
+
+                //ui window open => do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+
             }
         }
     }
