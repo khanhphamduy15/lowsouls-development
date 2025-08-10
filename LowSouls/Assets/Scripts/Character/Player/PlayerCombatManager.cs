@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace LS 
@@ -18,7 +19,7 @@ namespace LS
         {
             //perform action
             weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
-
+            player.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
         }
     }
 }

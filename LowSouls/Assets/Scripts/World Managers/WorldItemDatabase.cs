@@ -37,7 +37,7 @@ namespace LS
             }
         }
         
-        public WeaponItem getWeaponByID(int ID)
+        public WeaponItem GetWeaponByID(int ID)
         {
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
         }
