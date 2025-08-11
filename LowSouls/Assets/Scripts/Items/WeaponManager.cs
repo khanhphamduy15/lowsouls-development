@@ -4,7 +4,7 @@ namespace LS
 {
     public class WeaponManager : MonoBehaviour
     {
-        [SerializeField] MeleeWeaponDamageCollider meleeDamageCollider;
+        public MeleeWeaponDamageCollider meleeDamageCollider;
 
         private void Awake()
         {
@@ -17,8 +17,10 @@ namespace LS
             meleeDamageCollider.physicalDamage = weapon.physDmg;
             meleeDamageCollider.magicDamage = weapon.magicDmg;
             meleeDamageCollider.fireDamage = weapon.fireDmg;
-            meleeDamageCollider.lightningDamage = weapon.lightningDmg;
             meleeDamageCollider.holyDamage = weapon.holyDmg;
+            meleeDamageCollider.lightningDamage = weapon.lightningDmg;
+
+            meleeDamageCollider.light_Attack_01_Modifier = weapon.light_Attack_01_Modifier;
         }
     }   
 }

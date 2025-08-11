@@ -26,8 +26,14 @@ namespace LS
         [Header("Weapon Base Poise Damage")]
         public float poiseDmg = 10;
 
-        [Header("Stamina Costs")]
+        [Header("Attack Modifier")]
+        //Weapon Modifier
+        public float light_Attack_01_Modifier = 1.2f;
+
+
+        [Header("Stamina Costs Modifier")]
         public int baseStaminaCost = 20;
+        public float lightAttackStaminaCostMultiplier = 0.8f;
 
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; //one handed action

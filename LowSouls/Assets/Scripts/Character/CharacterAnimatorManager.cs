@@ -49,7 +49,8 @@ namespace LS
         }
 
         public virtual void PlayTargetAttackActionAnimation
-            (string targetAnimation,
+            (AttackType attackType,
+            string targetAnimation,
             bool isPerformingAction,
             bool applyRootMotion = true,
             bool canRotate = false,
@@ -57,6 +58,7 @@ namespace LS
         {
             //keep track of last attack performed (for combos)
             //keep track of current attack type (light heavy etc)
+            character.characterCombatManager.currentAttackType = attackType;
             //update animation set to current weapon animation
             character.animator.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);

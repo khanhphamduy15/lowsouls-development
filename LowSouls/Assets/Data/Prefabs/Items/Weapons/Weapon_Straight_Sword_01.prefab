@@ -66,12 +66,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e698a6e1ef1cc2a479d7da6b69ce9723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageCollider: {fileID: 5658534667016868440}
   physicalDamage: 0
   fireDamage: 0
   magicDamage: 0
   lightningDamage: 0
   holyDamage: 0
   characterCausingDamage: {fileID: 0}
+  light_Attack_01_Modifier: 0
 --- !u!1 &4658017781101852013
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +186,7 @@ Transform:
   m_GameObject: {fileID: 5608978368665365683}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0042919004, y: 0.6197282, z: -0.7763482, w: 0.11490021}
-  m_LocalPosition: {x: 0.103, y: 0.034, z: 0.014}
+  m_LocalPosition: {x: 0.086, y: 0.028, z: 0.127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -236,4 +238,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489f434d50e220448a56e3b664170b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDamageCollider: {fileID: 0}
+  meleeDamageCollider: {fileID: 8898638086146003538}

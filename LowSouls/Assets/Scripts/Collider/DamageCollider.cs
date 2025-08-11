@@ -6,14 +6,14 @@ namespace LS
     public class DamageCollider : MonoBehaviour
     {
         [Header("Collider")]
-        protected Collider damageCollider;
+        [SerializeField] protected Collider damageCollider;
 
         [Header("Damage")]
         public float physicalDamage = 0;
-        public float fireDamage = 0;
         public float magicDamage = 0;
-        public float lightningDamage = 0;
+        public float fireDamage = 0;
         public float holyDamage = 0;
+        public float lightningDamage = 0;
 
         [Header("Contact Point")]
         protected Vector3 contactPoint;
@@ -21,7 +21,12 @@ namespace LS
         [Header("Character Damaged")]
         protected List<CharacterManager> characterDamaged = new List<CharacterManager>();
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void Awake()
+        {
+            
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
         {
             CharacterManager dmgTarget = other.GetComponentInParent<CharacterManager>();
             if (dmgTarget != null)
