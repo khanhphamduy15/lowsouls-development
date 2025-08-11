@@ -47,6 +47,7 @@ namespace LS
             damageEffect.holyDamage = holyDamage;
             damageEffect.lightningDamage = lightningDamage;
             damageEffect.contactPoint = contactPoint;
+            damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, dmgTarget.transform.forward, Vector3.up);
 
             switch (characterCausingDamage.characterCombatManager.currentAttackType)
             {

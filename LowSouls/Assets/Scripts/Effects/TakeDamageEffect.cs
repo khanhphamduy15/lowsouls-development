@@ -42,14 +42,21 @@ namespace LS
 
             //if is dead, no additional dmg fx is processed
             if (character.isDead.Value) return;
-                //check for "invulnerability"
-                //calc dmg
-                CalculateDamage(character);
-                //check dmg taken direction
-                //play dmg animation
-                //build ups dmg check
-                //play dmg sfx
-                //play dmg vfx
+            //check for "invulnerability"
+            //calc dmg
+            CalculateDamage(character);
+            //check dmg taken direction
+
+            //play dmg animation
+            PlayDirectionalBasedDamageAnimation(character);
+
+            //build ups dmg check
+
+            //play dmg sfx
+            PlayDamageSFX(character);
+
+            //play dmg vfx (blood particle)
+            PlayDamageVFX(character);
         }
 
         private void CalculateDamage(CharacterManager character)
@@ -74,6 +81,54 @@ namespace LS
             //calc poise dmg to determine character state (stunned or not)
         }
 
+        private void PlayDamageVFX(CharacterManager character)
+        {
+            //fire dmg => fire particles
+            character.characterEffectsManager.PlayBloodSplatterVFX(contactPoint);
+        }
 
+        private void PlayDamageSFX(CharacterManager character)
+        {
+            AudioClip physDmgSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physDmgSFX);
+            character.characterSoundFXManager.PlaySoundFX(physDmgSFX);
+        }
+
+        private void PlayDirectionalBasedDamageAnimation(CharacterManager character)
+        {
+            if (!character.IsOwner) return;
+
+            //calc if poise is broken
+            poiseIsBroken = true;
+            if (angleHitFrom >= 145 && angleHitFrom <= 180)
+            {
+                //play front animation
+                damageAnimation = character.characterAnimatorManager.hit_Forward_Medium_01;
+            }
+            else if (angleHitFrom <= -145 && angleHitFrom >= -180)
+            {
+                //play front animation
+                damageAnimation = character.characterAnimatorManager.hit_Forward_Medium_01;
+            }
+            else if (angleHitFrom >= -45 && angleHitFrom <= 45)
+            {
+                //play back animation
+                damageAnimation = character.characterAnimatorManager.hit_Backward_Medium_01;
+            }
+            else if (angleHitFrom >= -144 && angleHitFrom <= -45)
+            {
+                //play left animation
+                damageAnimation = character.characterAnimatorManager.hit_Left_Medium_01;
+            }
+            else if (angleHitFrom >= 45 && angleHitFrom <= 144)
+            {
+                //play right animation
+                damageAnimation = character.characterAnimatorManager.hit_Right_Medium_01;
+            }
+            //if poise is broken, play this animation
+            if (poiseIsBroken)
+            {
+                character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
+            }
+        }
     }
 }

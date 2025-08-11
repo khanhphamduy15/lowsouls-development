@@ -10,6 +10,12 @@ namespace LS
         int vertical;
         int horizontal;
 
+        [Header("Damage Animations")]
+        public string hit_Forward_Medium_01 = "Hit_Forward_Medium_01";
+        public string hit_Backward_Medium_01 = "Hit_Backward_Medium_01";
+        public string hit_Left_Medium_01 = "Hit_Left_Medium_01";
+        public string hit_Right_Medium_01 = "Hit_Right_Medium_01";
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -56,6 +62,7 @@ namespace LS
             bool canRotate = false,
             bool canMove = false)
         {
+            Debug.Log("Playing " + targetAnimation);
             //keep track of last attack performed (for combos)
             //keep track of current attack type (light heavy etc)
             character.characterCombatManager.currentAttackType = attackType;
