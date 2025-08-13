@@ -72,6 +72,9 @@ namespace LS
             //stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
 
+            //lock on
+            playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
+
             //equipments
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
@@ -115,6 +118,7 @@ namespace LS
             base.ReviveCharacter();
             if (IsOwner)
             {
+                isDead.Value = false;
                 playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
                 playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
 
@@ -162,6 +166,11 @@ namespace LS
 
             //sync armor
 
+            //lock on
+            if (playerNetworkManager.isLockedOn.Value)
+            {
+                playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+            }
         }
 
         private void DebugMenu()

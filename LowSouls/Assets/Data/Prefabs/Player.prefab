@@ -479,6 +479,37 @@ CapsuleCollider:
   m_Height: 0.29
   m_Direction: 0
   m_Center: {x: 0.13, y: 0, z: 0}
+--- !u!1 &3019927947157954237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2549427753092961519}
+  m_Layer: 11
+  m_Name: Lock On Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2549427753092961519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3019927947157954237}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.147, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8648526063566482006}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3221946664489935606
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,6 +607,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2549427753092961519}
   - {fileID: 4461970734322517524}
   - {fileID: 7609850552732526545}
   m_Father: {fileID: 4920794528916443373}
@@ -2129,6 +2161,8 @@ MonoBehaviour:
   characterNetworkManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
   isPerformingAction: 0
   isGrounded: 1
   canRotate: 1
@@ -2179,6 +2213,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4cf30e2f032a24fb76760b2b556480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastDamageAnimationPlayed: 
+  hit_Forward_Medium_01: Hit_Forward_Medium_01
+  hit_Forward_Medium_02: Hit_Forward_Medium_02
+  hit_Backward_Medium_01: Hit_Backward_Medium_01
+  hit_Backward_Medium_02: Hit_Backward_Medium_02
+  hit_Left_Medium_01: Hit_Left_Medium_01
+  hit_Left_Medium_02: Hit_Left_Medium_02
+  hit_Right_Medium_01: Hit_Right_Medium_01
+  hit_Right_Medium_02: Hit_Right_Medium_02
+  forward_Medium_Damage: []
+  backward_Medium_Damage: []
+  left_Medium_Damage: []
+  right_Medium_Damage: []
 --- !u!82 &-753524711139794093
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2328,6 +2375,8 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
@@ -2466,6 +2515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1b7a167e7661145b1663a11217d443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplatterVFX: {fileID: 0}
   effectsToTest: {fileID: 11400000, guid: 006b28a47e0efe74d82a8de6bfb8f37f, type: 2}
   processEffect: 0
 --- !u!114 &6925295538053929906
@@ -2549,6 +2599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968cb5953eaef2542a60bfd9a94447ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAttackType: 0
+  currentTarget: {fileID: 0}
+  lockOnTransform: {fileID: 2549427753092961519}
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!1 &7834922625750181496
 GameObject:

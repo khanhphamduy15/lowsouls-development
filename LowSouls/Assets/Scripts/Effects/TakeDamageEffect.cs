@@ -102,31 +102,32 @@ namespace LS
             if (angleHitFrom >= 145 && angleHitFrom <= 180)
             {
                 //play front animation
-                damageAnimation = character.characterAnimatorManager.hit_Forward_Medium_01;
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
             }
             else if (angleHitFrom <= -145 && angleHitFrom >= -180)
             {
                 //play front animation
-                damageAnimation = character.characterAnimatorManager.hit_Forward_Medium_01;
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
             }
             else if (angleHitFrom >= -45 && angleHitFrom <= 45)
             {
                 //play back animation
-                damageAnimation = character.characterAnimatorManager.hit_Backward_Medium_01;
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.backward_Medium_Damage);
             }
             else if (angleHitFrom >= -144 && angleHitFrom <= -45)
             {
                 //play left animation
-                damageAnimation = character.characterAnimatorManager.hit_Left_Medium_01;
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.left_Medium_Damage); 
             }
             else if (angleHitFrom >= 45 && angleHitFrom <= 144)
             {
                 //play right animation
-                damageAnimation = character.characterAnimatorManager.hit_Right_Medium_01;
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.right_Medium_Damage);
             }
             //if poise is broken, play this animation
             if (poiseIsBroken)
             {
+                character.characterAnimatorManager.lastDamageAnimationPlayed = damageAnimation;
                 character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
             }
         }

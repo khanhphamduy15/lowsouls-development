@@ -21,11 +21,14 @@ namespace LS
         public float cameraHorizontalInput;
         public float cameraVerticalInput;
 
+        [Header("Lock On Input")]
+        [SerializeField] bool lockOnInput;
+
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
-        [SerializeField] bool RB_Input = false;
+        [SerializeField] bool RBInput = false;
 
         private void OnEnable()
         {
@@ -37,7 +40,8 @@ namespace LS
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
-                playerControls.PlayerActions.RB.performed += i => RB_Input = true;
+                playerControls.PlayerActions.RB.performed += i => RBInput = true;
+                playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
 
                 //Hold => bool = true
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -110,6 +114,49 @@ namespace LS
             HandleSprintingInput();
             HandleJumpInput();
             HandleRBInput();
+            HandleLockOnInput();
+        }
+
+        //Lock On
+        private void HandleLockOnInput()
+        {
+            //Check for dead target
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                if (player.playerCombatManager.currentTarget == null)
+                    return;
+                
+                    if (player.playerCombatManager.currentTarget.isDead.Value)
+                {
+                    player.playerNetworkManager.isLockedOn.Value = false;
+                }
+            //Find new target/unlock
+
+            }
+
+            if (lockOnInput && player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOnInput = false;
+                PlayerCamera.instance.ClearLockOnTargets();
+                player.playerNetworkManager.isLockedOn.Value = false;
+                //disable lock on
+                return;
+            }
+
+
+            if (lockOnInput && !player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOnInput = false;
+                //enable lock on
+                PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                if (PlayerCamera.instance.nearestLockOnTarget != null)
+                {
+                    //Set the target as our current target
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.nearestLockOnTarget);
+                    player.playerNetworkManager.isLockedOn.Value = true;
+                }
+            }
         }
 
         //Movements
@@ -195,9 +242,9 @@ namespace LS
 
         private void HandleRBInput()
         {
-            if (RB_Input)
+            if (RBInput)
             {
-                RB_Input = false;
+                RBInput = false;
 
                 //ui window open => do nothing
 
