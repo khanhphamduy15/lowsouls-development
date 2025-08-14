@@ -31,7 +31,13 @@ namespace LS
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+
+        [Header("Bumper Input")]
         [SerializeField] bool RBInput = false;
+
+        [Header("Trigger Input")]
+        [SerializeField] bool ChargeRTInput = false;
+        [SerializeField] bool RTInput = false;
 
         private void OnEnable()
         {
@@ -43,7 +49,14 @@ namespace LS
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+
+                // Bumper
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
+
+                //Triggers
+                playerControls.PlayerActions.RT.performed += i => RTInput = true;
+                playerControls.PlayerActions.ChargeRT.performed += i => ChargeRTInput = true;
+                playerControls.PlayerActions.ChargeRT.canceled += i => ChargeRTInput = false;
 
                 //Lock On
                 playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
@@ -123,6 +136,8 @@ namespace LS
             HandleRBInput();
             HandleLockOnInput();
             HandleLockOnSwitchTargetInput();
+            HandleRTInput();
+            HandleChargeRTInput();
         }
 
         //Lock On
@@ -303,6 +318,34 @@ namespace LS
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+
+            }
+        }
+
+        private void HandleRTInput()
+        {
+            if (RTInput)
+            {
+                RTInput = false;
+
+                //ui window open => do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RT_Action, player.playerInventoryManager.currentRightHandWeapon);
+
+            }
+        }
+
+        private void HandleChargeRTInput()
+        {
+            //
+            if (player.isPerformingAction)
+            {
+               if (player.playerNetworkManager.isUsingRightHand.Value)
+               {
+                    player.playerNetworkManager.isChargingAttack.Value = ChargeRTInput;
+               }
 
             }
         }

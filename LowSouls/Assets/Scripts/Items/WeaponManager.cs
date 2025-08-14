@@ -21,6 +21,8 @@ namespace LS
             meleeDamageCollider.lightningDamage = weapon.lightningDmg;
 
             meleeDamageCollider.light_Attack_01_Modifier = weapon.light_Attack_01_Modifier;
+            //meleeDamageCollider.heavy_Attack_01_Modifier;
+            //meleeDamageCollider.charge_Attack_01_Modifier
         }
     }   
 }
