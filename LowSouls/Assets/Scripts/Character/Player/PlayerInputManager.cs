@@ -23,6 +23,9 @@ namespace LS
 
         [Header("Lock On Input")]
         [SerializeField] bool lockOnInput;
+        [SerializeField] bool lockOn_Left_Input;
+        [SerializeField] bool lockOn_Right_Input;
+        private Coroutine lockOnCoroutine;
 
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
@@ -41,7 +44,11 @@ namespace LS
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
+
+                //Lock On
                 playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
+                playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
+                playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
 
                 //Hold => bool = true
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -115,6 +122,7 @@ namespace LS
             HandleJumpInput();
             HandleRBInput();
             HandleLockOnInput();
+            HandleLockOnSwitchTargetInput();
         }
 
         //Lock On
@@ -130,7 +138,11 @@ namespace LS
                 {
                     player.playerNetworkManager.isLockedOn.Value = false;
                 }
-            //Find new target/unlock
+                //Find new target/unlock
+                if (lockOnCoroutine != null)
+                    StopCoroutine(lockOnCoroutine);
+
+                lockOnCoroutine = StartCoroutine(PlayerCamera.instance.WaitThenFindNewTarget());
 
             }
 
@@ -159,6 +171,39 @@ namespace LS
             }
         }
 
+        private void HandleLockOnSwitchTargetInput()
+        {
+            if (lockOn_Left_Input)
+            {
+                lockOn_Left_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if(PlayerCamera.instance.leftLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.leftLockOnTarget);
+                    }
+                }
+            }
+
+            if (lockOn_Right_Input)
+            {
+                lockOn_Right_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.instance.rightLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.rightLockOnTarget);
+                    }
+                }
+            }
+        }
+
         //Movements
         private void HandlePlayerMovementInput()
         {
@@ -176,10 +221,17 @@ namespace LS
                 moveAmount = 1;
             }
             if (player == null)
-            {
                 return;
+
+            //lock on -> strafing
+            if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
             }
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            else
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
+            }
         }
 
         private void HandleCameraMovementInput()
