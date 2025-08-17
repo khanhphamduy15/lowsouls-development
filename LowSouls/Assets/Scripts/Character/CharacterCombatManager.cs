@@ -7,6 +7,9 @@ namespace LS
     {
         CharacterManager character;
 
+        [Header("Last Attack Animation Performed")]
+        public string lastAttackAnimation;
+
         [Header("Attack Type")]
         public AttackType currentAttackType;
 

@@ -9,8 +9,11 @@ namespace LS
 
         [Header("Weapon Attack Modifiers")]
         public float light_Attack_01_Modifier;
+        public float light_Attack_02_Modifier;
         public float heavy_Attack_01_Modifier;
+        public float heavy_Attack_02_Modifier;
         public float charge_Attack_01_Modifier;
+        public float charge_Attack_02_Modifier;
 
         protected override void Awake()
         {
@@ -56,16 +59,26 @@ namespace LS
                 case AttackType.LightAttack01:
                     ApplyAttackDamageModifier(light_Attack_01_Modifier, damageEffect);
                     break;
+                case AttackType.LightAttack02:
+                    ApplyAttackDamageModifier(light_Attack_02_Modifier, damageEffect);
+                    break;
                 case AttackType.HeavyAttack01:
                     ApplyAttackDamageModifier(heavy_Attack_01_Modifier, damageEffect);
+                    break;
+                case AttackType.HeavyAttack02:
+                    ApplyAttackDamageModifier(heavy_Attack_02_Modifier, damageEffect);
                     break;
                 case AttackType.ChargeAttack01:
                     ApplyAttackDamageModifier(charge_Attack_01_Modifier, damageEffect);
                     break;
+                case AttackType.ChargeAttack02:
+                    ApplyAttackDamageModifier(charge_Attack_02_Modifier, damageEffect);
+                    break;
                 default:
                     break;
-            }  
+            }
 
+            Debug.Log("Final Dmg: " + damageEffect.physicalDamage);
             if (characterCausingDamage.IsOwner)
             {
                 dmgTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(

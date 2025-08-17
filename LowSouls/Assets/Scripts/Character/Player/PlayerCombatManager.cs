@@ -8,6 +8,9 @@ namespace LS
         public WeaponItem currentWeaponBeingUsed;
         PlayerManager player;
 
+        [Header("Flags")]
+        public bool canComboWithMainHandWeapon = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -31,6 +34,21 @@ namespace LS
             {
                 case AttackType.LightAttack01:
                     staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.LightAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.HeavyAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.HeavyAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.ChargeAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargeAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.ChargeAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargeAttackStaminaCostMultiplier;
                     break;
                 default:
                     break;

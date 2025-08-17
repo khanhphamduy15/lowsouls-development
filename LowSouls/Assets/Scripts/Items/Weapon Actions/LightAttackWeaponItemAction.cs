@@ -6,6 +6,8 @@ namespace LS
     public class LightAttackWeaponItemAction : WeaponItemAction
     {
         [SerializeField] string light_Attack_01 = "Main_Light_Attack_01"; //right hand
+        [SerializeField] string light_Attack_02 = "Main_Light_Attack_02"; //right hand
+
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
@@ -23,12 +25,24 @@ namespace LS
 
         private void PerformLightAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
-            if (playerPerformingAction.playerNetworkManager.isUsingRightHand.Value)
+            //if can combo and is attacking, do combo
+            if (playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon && playerPerformingAction.isPerformingAction)
             {
-                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01,light_Attack_01, true);
+                playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon = false;
+                //perform attack based on prev attack
+                if (playerPerformingAction.playerCombatManager.lastAttackAnimation == light_Attack_01)
+                {
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack02, light_Attack_02, true);
+                }
+                else
+                {
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
+                }
             }
-            if (playerPerformingAction.playerNetworkManager.isUsingLeftHand.Value)
+            //else do normal attack
+            else if (!playerPerformingAction.isPerformingAction)
             {
+                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
             }
         }
     }

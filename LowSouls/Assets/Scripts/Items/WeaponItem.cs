@@ -28,9 +28,15 @@ namespace LS
 
         [Header("Attack Modifier")]
         //Weapon Modifier
-        public float light_Attack_01_Modifier = 1.2f;
-        public float heavy_Attack_01_Modifier = 1.6f;
-        public float charge_Attack_01_Modifier = 2.2f;
+        public float light_Attack_01_Modifier = 1.0f;
+        public float light_Attack_02_Modifier = 1.2f;
+
+        public float heavy_Attack_01_Modifier = 1.5f;
+        public float heavy_Attack_02_Modifier = 1.7f;
+
+        public float charge_Attack_01_Modifier = 2.0f;
+        public float charge_Attack_02_Modifier = 2.2f;
+
 
         [Header("Stamina Costs Modifier")]
         public int baseStaminaCost = 20;
