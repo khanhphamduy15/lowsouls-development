@@ -31,6 +31,8 @@ namespace LS
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool switchRightWeaponInput = false;
+        [SerializeField] bool switchLeftWeaponInput = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RBInput = false;
@@ -47,10 +49,14 @@ namespace LS
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+                //Actions
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.SwitchRightWeapon.performed += i => switchRightWeaponInput = true;
+                playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switchLeftWeaponInput = true;
 
-                // Bumper
+                //Bumper
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
 
                 //Triggers
@@ -138,6 +144,8 @@ namespace LS
             HandleLockOnSwitchTargetInput();
             HandleRTInput();
             HandleChargeRTInput();
+            HandleSwitchRightWeaponInput();
+            HandleSwitchLeftWeaponInput();
         }
 
         //Lock On
@@ -347,6 +355,23 @@ namespace LS
                     player.playerNetworkManager.isChargingAttack.Value = ChargeRTInput;
                }
 
+            }
+        }
+
+        private void HandleSwitchRightWeaponInput()
+        {
+            if (switchRightWeaponInput)
+            {
+                switchRightWeaponInput = false;
+                player.playerEquipmentManager.SwitchRightWeapon();
+            }
+        }
+        private void HandleSwitchLeftWeaponInput()
+        {
+            if (switchLeftWeaponInput)
+            {
+                switchLeftWeaponInput = false;
+                player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }
     }

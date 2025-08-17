@@ -1,10 +1,16 @@
 using LS;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIHudManager : MonoBehaviour
 {
+    [Header("Stats Bar")]
     [SerializeField] UI_StatBar staminaBar;
     [SerializeField] UI_StatBar healthBar;
+
+    [Header("Quick Slots")]
+    [SerializeField] Image rightWeaponQuickSlotIcon;
+    [SerializeField] Image leftWeaponQuickSlotIcon;
 
     public void RefreshHud()
     {
@@ -32,5 +38,53 @@ public class PlayerUIHudManager : MonoBehaviour
     public void SetMaxHealthValue(int maxHealth)
     {
         healthBar.SetMaxStat(maxHealth);
+    }
+
+    public void SetRightWeaponQuickSlotIcon(int weaponID)
+    {
+        WeaponItem weapon = WorldItemDatabase.instance.GetWeaponByID(weaponID);
+        if (weapon == null)
+        {
+            Debug.Log("Item is null");
+            rightWeaponQuickSlotIcon.enabled = false;
+            rightWeaponQuickSlotIcon.sprite = null;
+            return;
+        }
+
+        if (weapon.itemIcon == null)
+        {
+            Debug.Log("No Icon");
+            rightWeaponQuickSlotIcon.enabled = false;
+            rightWeaponQuickSlotIcon.sprite = null;
+            return;
+        }
+
+        rightWeaponQuickSlotIcon.sprite = weapon.itemIcon;
+        rightWeaponQuickSlotIcon.enabled = true;
+
+    }
+
+    public void SetLeftWeaponQuickSlotIcon(int weaponID)
+    {
+        WeaponItem weapon = WorldItemDatabase.instance.GetWeaponByID(weaponID);
+        if (weapon == null)
+        {
+            Debug.Log("Item is null");
+            leftWeaponQuickSlotIcon.enabled = false;
+            leftWeaponQuickSlotIcon.sprite = null;
+            return;
+        }
+
+        if (weapon.itemIcon == null)
+        {
+            Debug.Log("No Icon");
+            leftWeaponQuickSlotIcon.enabled = false;
+            leftWeaponQuickSlotIcon.sprite = null;
+            return;
+        }
+
+        leftWeaponQuickSlotIcon.sprite = weapon.itemIcon;
+        leftWeaponQuickSlotIcon.enabled = true;
+
     }
 }

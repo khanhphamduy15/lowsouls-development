@@ -7,9 +7,6 @@ namespace LS
 {
     public class PlayerManager : CharacterManager
     {
-        [Header("Debug Menu")]
-        [SerializeField] bool respawnCharacter = false;
-        [SerializeField] bool switchRightWeapon = false;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
@@ -41,8 +38,6 @@ namespace LS
 
             //Regen stamina if < max stamina
             playerStatsManager.RegenerateStamina();
-
-            DebugMenu();
         }
 
         protected override void LateUpdate()
@@ -206,21 +201,6 @@ namespace LS
             if (playerNetworkManager.isLockedOn.Value)
             {
                 playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
-            }
-        }
-
-        private void DebugMenu()
-        {
-            if (respawnCharacter)
-            {
-                respawnCharacter = false;
-                ReviveCharacter();
-            }
-
-            if (switchRightWeapon)
-            {
-                switchRightWeapon = false;
-                playerEquipmentManager.SwitchRightWeapon();
             }
         }
     }
