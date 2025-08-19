@@ -31,6 +31,11 @@ namespace LS
         HeavyAttack02,
         ChargeAttack01,
         ChargeAttack02
+    }
 
+    public enum CharacterGroup
+    {
+        Team01,
+        Team02,
     }
 }

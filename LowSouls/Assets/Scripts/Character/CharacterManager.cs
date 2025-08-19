@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 namespace LS
 {
     public class CharacterManager : NetworkBehaviour
@@ -23,6 +24,9 @@ namespace LS
         public bool isGrounded = true;
         public bool canRotate = true;
         public bool canMove = true;
+
+        [Header("Character Group")]
+        public CharacterGroup characterGroup;
 
         protected virtual void Awake()
         {
@@ -68,6 +72,11 @@ namespace LS
                     characterNetworkManager.networkRotation.Value,
                     characterNetworkManager.networkRotationSmoothTime);
             }
+        }
+
+        protected virtual void FixedUpdate()
+        {
+
         }
 
         protected virtual void LateUpdate()
@@ -121,6 +130,18 @@ namespace LS
                     Physics.IgnoreCollision(collider, otherCollider, true);
                 }
             }
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+            characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
         }
     }
 }
