@@ -146,8 +146,8 @@ namespace LS
             character.animator.CrossFade(targetAnimation, 0.2f);
             //Can be used to stop character from attempting new actions (true if stunned etc,...)
             character.isPerformingAction = isPerformingAction;
-            character.canRotate = canRotate;
-            character.canMove = canMove;
+            character.characterLocomotionManager.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
 
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
@@ -160,7 +160,6 @@ namespace LS
             bool canRotate = false,
             bool canMove = false)
         {
-            Debug.Log("Playing " + targetAnimation);
             //keep track of last attack performed (for combos)
             //keep track of current attack type (light heavy etc)
             character.characterCombatManager.currentAttackType = attackType;
@@ -169,8 +168,8 @@ namespace LS
             character.animator.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
             character.isPerformingAction = isPerformingAction;
-            character.canRotate = canRotate;
-            character.canMove = canMove;
+            character.characterLocomotionManager.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
 
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }

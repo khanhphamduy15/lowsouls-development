@@ -83,7 +83,7 @@ namespace LS
 
         private void HandleGroundedMovement()
         {
-            if (!player.canMove) return;
+            if (!player.playerLocomotionManager.canMove) return;
             GetMovementValues();
             //Move direction based on camera facing perspective (goc cam) & movement input
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
@@ -120,7 +120,7 @@ namespace LS
         private void HandleRotation()
         {
             if (player.isDead.Value) return;
-            if (!player.canRotate) return;
+            if (!player.playerLocomotionManager.canRotate) return;
             if (player.playerNetworkManager.isLockedOn.Value)
             {
                 if (player.playerNetworkManager.isSprinting.Value || player.playerLocomotionManager.isRolling)
@@ -240,7 +240,7 @@ namespace LS
             if (player.characterNetworkManager.isJumping.Value)
                 return;
             //mid air = no jump
-            if (!player.isGrounded)
+            if (!player.playerLocomotionManager.isGrounded)
                 return;
             player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
             player.characterNetworkManager.isJumping.Value = true;

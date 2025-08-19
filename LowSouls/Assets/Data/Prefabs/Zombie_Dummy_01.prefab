@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 942777052613537145}
   - component: {fileID: 7847441461963980965}
   - component: {fileID: 463842917997302716}
+  - component: {fileID: 4528953486948661133}
   m_Layer: 11
   m_Name: Hand_R
   m_TagString: Untagged
@@ -130,6 +131,25 @@ CapsuleCollider:
   m_Height: 0.26
   m_Direction: 0
   m_Center: {x: 0.12, y: 0, z: 0}
+--- !u!114 &4528953486948661133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297931526348798302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cff998632ceade43b7dca601d428684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  holyDamage: 0
+  lightningDamage: 0
+  zombieCharacter: {fileID: 0}
 --- !u!1 &601429310971491104
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,10 +224,10 @@ GameObject:
   - component: {fileID: 1785995110548160578}
   - component: {fileID: 1830947569070368293}
   - component: {fileID: 5468463411185831590}
-  - component: {fileID: 6155942311838205832}
   - component: {fileID: 3927765982016151207}
   - component: {fileID: -980782735192918488}
   - component: {fileID: 880773276701100890}
+  - component: {fileID: 6272058830409197286}
   m_Layer: 8
   m_Name: Zombie_Dummy_01
   m_TagString: Untagged
@@ -529,31 +549,6 @@ MonoBehaviour:
   pursueTarget: {fileID: 11400000, guid: 3bf295d03a95fd94da3baedb380eb1ef, type: 2}
   combatStance: {fileID: 11400000, guid: cbf6857dfbf4d754b8d3e1271a4331ee, type: 2}
   attack: {fileID: 11400000, guid: ca667f6c83d6203438e65e368a45b856, type: 2}
---- !u!114 &6155942311838205832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842103163252997315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1f55b6b5cb0017408a37cb8e47ececf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  lastAttackAnimation: 
-  currentAttackType: 0
-  currentTarget: {fileID: 0}
-  lockOnTransform: {fileID: 3616505081161616030}
-  actionRecoveryTimer: 0
-  detectionRadius: 15
-  minimumFOV: -35
-  maximumFOV: 35
-  distanceFromTarget: 0
-  viewableAngle: 0
-  targetDirection: {x: 0, y: 0, z: 0}
-  attackRotationSpeed: 25
 --- !u!114 &3927765982016151207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +645,37 @@ MonoBehaviour:
   backward_Medium_Damage: []
   left_Medium_Damage: []
   right_Medium_Damage: []
+--- !u!114 &6272058830409197286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842103163252997315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6c66366f17f40439ff8b99f9adb696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  lastAttackAnimation: 
+  currentAttackType: 0
+  currentTarget: {fileID: 0}
+  lockOnTransform: {fileID: 0}
+  actionRecoveryTimer: 0
+  detectionRadius: 15
+  minimumFOV: -35
+  maximumFOV: 35
+  distanceFromTarget: 0
+  viewableAngle: 0
+  targetDirection: {x: 0, y: 0, z: 0}
+  attackRotationSpeed: 25
+  rightHandDamageCollider: {fileID: 5726750383523237047}
+  leftHandDamageCollider: {fileID: 734975651594780422}
+  baseDamage: 25
+  attack01DamageModifier: 1
+  attack02DamageModifier: 1.2
+  attack03DamageModifier: 1.4
 --- !u!1 &886416252126033724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,7 +2459,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7749523479440319180}
-  m_Layer: 8
+  - component: {fileID: 5559815255322143641}
+  - component: {fileID: 734975651594780422}
+  m_Layer: 10
   m_Name: Finger_01_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2456,6 +2484,46 @@ Transform:
   - {fileID: 1759129894406897170}
   m_Father: {fileID: 4284830239452027085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5559815255322143641
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7777226277039921687}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.16
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &734975651594780422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7777226277039921687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cff998632ceade43b7dca601d428684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  holyDamage: 0
+  lightningDamage: 0
+  zombieCharacter: {fileID: 0}
 --- !u!1 &7812838419350072048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,6 +2749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3616505081161616030}
+  - component: {fileID: 5515697443693508680}
   m_Layer: 11
   m_Name: Lock On Target
   m_TagString: Untagged
@@ -2703,6 +2772,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7506413972792980903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5515697443693508680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8469934689417180194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda20add015d66f4fafeddc39d6b2cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8487417517235412051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2747,7 +2828,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7353578295612659121}
-  m_Layer: 8
+  - component: {fileID: 5598386698046649356}
+  - component: {fileID: 5726750383523237047}
+  m_Layer: 10
   m_Name: Finger_01_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2770,6 +2853,46 @@ Transform:
   - {fileID: 8952166667731243084}
   m_Father: {fileID: 942777052613537145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5598386698046649356
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595900323580542889}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.16
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5726750383523237047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595900323580542889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cff998632ceade43b7dca601d428684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  holyDamage: 0
+  lightningDamage: 0
+  zombieCharacter: {fileID: 0}
 --- !u!1 &8637762926231117561
 GameObject:
   m_ObjectHideFlags: 0

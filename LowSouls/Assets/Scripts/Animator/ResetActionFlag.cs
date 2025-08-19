@@ -13,8 +13,8 @@ namespace LS
                 character = animator.GetComponent<CharacterManager>();
             }
             character.isPerformingAction = false;
-            character.canMove = true;
-            character.canRotate = true;
+            character.characterLocomotionManager.canMove = true;
+            character.characterLocomotionManager.canRotate = true;
             character.characterLocomotionManager.isRolling = false;
             character.characterAnimatorManager.DisableCanDoCombo();
             if (character.IsOwner)

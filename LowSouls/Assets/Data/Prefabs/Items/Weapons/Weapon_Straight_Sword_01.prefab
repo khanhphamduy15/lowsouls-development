@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3404, y: 1.079, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5522485110281792072}
@@ -68,12 +68,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageCollider: {fileID: 5658534667016868440}
   physicalDamage: 0
-  fireDamage: 0
   magicDamage: 0
-  lightningDamage: 0
+  fireDamage: 0
   holyDamage: 0
+  lightningDamage: 0
   characterCausingDamage: {fileID: 0}
   light_Attack_01_Modifier: 0
+  light_Attack_02_Modifier: 0
+  heavy_Attack_01_Modifier: 0
+  heavy_Attack_02_Modifier: 0
+  charge_Attack_01_Modifier: 0
+  charge_Attack_02_Modifier: 0
 --- !u!1 &4658017781101852013
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,7 @@ namespace LS
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
             //rotate whilst attacking
+            aiCharacter.aiCharacterCombatManager.RotateTowardsTargetWhilstAttacking(aiCharacter);
 
             aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
 
@@ -39,16 +40,15 @@ namespace LS
                 }
             }
 
+            if (aiCharacter.isPerformingAction)
+                return this;
+
             if (!hasPerformedAttack)
             {
                 if (aiCharacter.aiCharacterCombatManager.actionRecoveryTimer > 0)
                     return this;
 
-                if (aiCharacter.isPerformingAction)
-                    return this;
-
                 PerformAttack(aiCharacter);
-
                 return this;
             }
 

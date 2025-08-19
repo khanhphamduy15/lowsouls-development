@@ -21,9 +21,6 @@ namespace LS
 
         [Header("Flags")]
         public bool isPerformingAction = false;
-        public bool isGrounded = true;
-        public bool canRotate = true;
-        public bool canMove = true;
 
         [Header("Character Group")]
         public CharacterGroup characterGroup;
@@ -49,7 +46,7 @@ namespace LS
 
         protected virtual void Update()
         {
-            animator.SetBool("isGrounded", isGrounded);
+            animator.SetBool("isGrounded", characterLocomotionManager.isGrounded);
             //if char is being controlled from our side => assign its network position to the position of our transform
             if (IsOwner)
             {
