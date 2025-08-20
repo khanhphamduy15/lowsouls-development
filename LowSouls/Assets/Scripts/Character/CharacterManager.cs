@@ -132,6 +132,8 @@ namespace LS
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+
+            animator.SetBool("isMoving", characterNetworkManager.isMoving.Value);
             characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
         }
 
