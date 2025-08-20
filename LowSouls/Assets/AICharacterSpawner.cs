@@ -28,6 +28,10 @@ namespace LS
                 instantiatedGameObject.transform.rotation = transform.rotation;
                 instantiatedGameObject.GetComponent<NetworkObject>().Spawn();
             }
+            else
+            {
+                Debug.LogError($"Spawner {name} has no character prefab assigned!", this);
+            }
         }
     }
 }
