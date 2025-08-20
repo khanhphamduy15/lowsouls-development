@@ -5,6 +5,13 @@ namespace LS
     public class CharacterSoundFXManager : MonoBehaviour
     {
         private AudioSource audioSource;
+
+        [Header("Damage Grunts")]
+        [SerializeField] protected AudioClip[] damageGrunts;
+
+        [Header("Attack Grunts")]
+        [SerializeField] protected AudioClip[] attackGrunts;
+
         protected virtual void Awake()
         {
             audioSource = GetComponent<AudioSource>();  
@@ -24,6 +31,16 @@ namespace LS
             {
                 audioSource.pitch += Random.Range(-pitchRandom, pitchRandom);
             }
+        }
+
+        public virtual void PlayDamageGrunts()
+        {
+            PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(damageGrunts));
+        }
+
+        public virtual void PlayAttackGrunts()
+        {
+            PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(attackGrunts));
         }
     }
 }

@@ -4,6 +4,8 @@ namespace LS
 {
     public class AICharacterCombatManager : CharacterCombatManager
     {
+        protected AICharacterManager aiCharacter;
+
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0;
 
@@ -23,7 +25,8 @@ namespace LS
         protected override void Awake()
         {
             base.Awake();
-
+            
+            aiCharacter = GetComponent<AICharacterManager>();
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
 

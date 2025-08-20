@@ -33,7 +33,7 @@ namespace LS
             //create unique id for every item
             for (int i = 0; i < items.Count; i++)
             {
-                items[i].itemID = i;
+                items[i].itemID = i;    
             }
         }
         

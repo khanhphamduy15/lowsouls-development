@@ -49,7 +49,8 @@ namespace LS
         public WeaponItemAction oh_RB_Action; //one handed right bumper action
         public WeaponItemAction oh_RT_Action; //one handed right trigger action (Charge)
 
-
+        [Header("Whooshes")]
+        public AudioClip[] whooshes;
 
 
     }

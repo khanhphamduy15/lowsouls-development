@@ -91,6 +91,8 @@ namespace LS
         {
             AudioClip physDmgSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physDmgSFX);
             character.characterSoundFXManager.PlaySoundFX(physDmgSFX);
+            character.characterSoundFXManager.PlayDamageGrunts();
+
         }
 
         private void PlayDirectionalBasedDamageAnimation(CharacterManager character)

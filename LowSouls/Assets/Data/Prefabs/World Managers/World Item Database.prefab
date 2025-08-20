@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unarmedWeapon: {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
-  weapons: []
-  items:
+  weapons:
   - {fileID: 11400000, guid: fe9eeb9729040824ab6a2f90d5c58218, type: 2}
-  - {fileID: 11400000, guid: 994fdee244968c341b50c613da5a3094, type: 2}
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
+  items: []
