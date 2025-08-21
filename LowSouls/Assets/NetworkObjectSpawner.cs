@@ -1,12 +1,11 @@
 using Unity.Netcode;
 using UnityEngine;
 
-namespace LS
-{
-    public class AICharacterSpawner : MonoBehaviour
+namespace LS {
+    public class NetworkObjectSpawner : MonoBehaviour
     {
-        [Header("Character")]
-        [SerializeField] GameObject characterGameObject;
+        [Header("Object")]
+        [SerializeField] GameObject networkGameObject;
         [SerializeField] GameObject instantiatedGameObject;
 
         private void Awake()
@@ -15,15 +14,15 @@ namespace LS
 
         private void Start()
         {
-            WorldAIManager.instance.SpawnCharacter(this);
+            WorldObjectManager.instance.SpawnNetworkObject(this);
             gameObject.SetActive(false);
         }
 
         public void AttemptToSpawnCharacter()
         {
-            if (characterGameObject != null)
+            if (networkGameObject != null)
             {
-                instantiatedGameObject = Instantiate(characterGameObject);
+                instantiatedGameObject = Instantiate(networkGameObject);
                 instantiatedGameObject.transform.position = transform.position;
                 instantiatedGameObject.transform.rotation = transform.rotation;
                 instantiatedGameObject.GetComponent<NetworkObject>().Spawn();

@@ -297,10 +297,10 @@ PrefabInstance:
       addedObject: {fileID: 3815577585450404457}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9198554808448523392}
+      addedObject: {fileID: -5738251285677839138}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5738251285677839138}
+      addedObject: {fileID: 4251821880482984038}
     - targetCorrespondingSourceObject: {fileID: 4575353127508647185, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1119950120154198649}
@@ -1141,42 +1141,6 @@ MonoBehaviour:
   viewableAngle: 0
   targetDirection: {x: 0, y: 0, z: 0}
   attackRotationSpeed: 25
---- !u!114 &9198554808448523392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8796499245278644270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a61a2db5e9fdf404d87b47659c8a0440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  isDead:
-    m_InternalValue: 0
-  characterController: {fileID: 0}
-  animator: {fileID: 0}
-  characterNetworkManager: {fileID: 0}
-  characterEffectsManager: {fileID: 0}
-  characterAnimatorManager: {fileID: 0}
-  characterCombatManager: {fileID: 0}
-  characterSoundFXManager: {fileID: 0}
-  characterLocomotionManager: {fileID: 0}
-  isPerformingAction: 0
-  characterGroup: 0
-  aiCharacterNetworkManager: {fileID: 0}
-  aiCharacterCombatManager: {fileID: 0}
-  aICharacterLocomotionManager: {fileID: 0}
-  currentState: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
-  navMeshAgent: {fileID: 0}
-  idle: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
-  pursueTarget: {fileID: 11400000, guid: 3bf295d03a95fd94da3baedb380eb1ef, type: 2}
-  combatStance: {fileID: 11400000, guid: cbf6857dfbf4d754b8d3e1271a4331ee, type: 2}
-  attack: {fileID: 11400000, guid: ca667f6c83d6203438e65e368a45b856, type: 2}
-  bossID: 0
-  hasBeenDefeated: 0
 --- !u!114 &-5738251285677839138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1229,3 +1193,43 @@ MonoBehaviour:
     m_InternalValue: 0
   maxStamina:
     m_InternalValue: 0
+--- !u!114 &4251821880482984038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796499245278644270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61a2db5e9fdf404d87b47659c8a0440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  isDead:
+    m_InternalValue: 0
+  characterController: {fileID: 0}
+  animator: {fileID: 0}
+  characterNetworkManager: {fileID: 0}
+  characterEffectsManager: {fileID: 0}
+  characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
+  characterLocomotionManager: {fileID: 0}
+  isPerformingAction: 0
+  characterGroup: 1
+  aiCharacterNetworkManager: {fileID: 0}
+  aiCharacterCombatManager: {fileID: 0}
+  aICharacterLocomotionManager: {fileID: 0}
+  currentState: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
+  navMeshAgent: {fileID: 0}
+  idle: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
+  pursueTarget: {fileID: 11400000, guid: 3bf295d03a95fd94da3baedb380eb1ef, type: 2}
+  combatStance: {fileID: 11400000, guid: cbf6857dfbf4d754b8d3e1271a4331ee, type: 2}
+  attack: {fileID: 11400000, guid: ca667f6c83d6203438e65e368a45b856, type: 2}
+  bossID: 0
+  hasBeenDefeated: 0
+  hasBeenAwakened: 0
+  fogWalls:
+  - {fileID: 0}
+  wakeBossUp: 0
