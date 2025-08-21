@@ -33,7 +33,7 @@ namespace LS
 
         private void OnIsActiveChanged(bool oldStatus, bool newStatus)
         {
-            if (newStatus)
+            if (isActive.Value)
             {
                 foreach (var fogObj in fogWallObjects)
                 {
