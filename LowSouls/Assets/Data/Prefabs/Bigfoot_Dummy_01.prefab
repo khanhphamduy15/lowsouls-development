@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476845846108270427}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.98930556, z: -0, w: 0.14585821}
-  m_LocalPosition: {x: 0.06, y: 0, z: -0.36}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51,7 +51,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &2180806938001031522
@@ -294,13 +294,13 @@ PrefabInstance:
       addedObject: {fileID: 5004244984652757995}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3815577585450404457}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -5738251285677839138}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4251821880482984038}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3800677704898002882}
     - targetCorrespondingSourceObject: {fileID: 4575353127508647185, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1119950120154198649}
@@ -871,13 +871,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 3
-  m_Radius: 0.6
+  m_Height: 2.7
+  m_Radius: 0.57
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.27, z: 0}
+  m_Center: {x: 0, y: 1.41, z: 0}
 --- !u!82 &4255339108902461108
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1116,31 +1116,6 @@ MonoBehaviour:
   backward_Medium_Damage: []
   left_Medium_Damage: []
   right_Medium_Damage: []
---- !u!114 &3815577585450404457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8796499245278644270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 060d3a18347ac214eb2a4d7d4ec67513, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  lastAttackAnimation: 
-  currentAttackType: 0
-  currentTarget: {fileID: 0}
-  lockOnTransform: {fileID: 0}
-  actionRecoveryTimer: 0
-  detectionRadius: 15
-  minimumFOV: -35
-  maximumFOV: 35
-  distanceFromTarget: 0
-  viewableAngle: 0
-  targetDirection: {x: 0, y: 0, z: 0}
-  attackRotationSpeed: 25
 --- !u!114 &-5738251285677839138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,3 +1208,34 @@ MonoBehaviour:
   fogWalls:
   - {fileID: 0}
   wakeBossUp: 0
+--- !u!114 &-3800677704898002882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796499245278644270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6c66366f17f40439ff8b99f9adb696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  lastAttackAnimation: 
+  currentAttackType: 0
+  currentTarget: {fileID: 0}
+  lockOnTransform: {fileID: 0}
+  actionRecoveryTimer: 0
+  detectionRadius: 15
+  minimumFOV: -35
+  maximumFOV: 35
+  distanceFromTarget: 0
+  viewableAngle: 0
+  targetDirection: {x: 0, y: 0, z: 0}
+  attackRotationSpeed: 25
+  rightHandDamageCollider: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
+  baseDamage: 25
+  attack01DamageModifier: 1
+  attack02DamageModifier: 1.2
+  attack03DamageModifier: 1.4
