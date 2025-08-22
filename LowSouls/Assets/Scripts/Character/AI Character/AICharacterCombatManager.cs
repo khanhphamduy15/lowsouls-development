@@ -9,6 +9,9 @@ namespace LS
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0;
 
+        [Header("Pivot")]
+        public bool enablePivot = true;
+
         [Header("Detection")]
         [SerializeField] float detectionRadius = 15;
         public float minimumFOV = -35;
@@ -25,7 +28,7 @@ namespace LS
         protected override void Awake()
         {
             base.Awake();
-            
+
             aiCharacter = GetComponent<AICharacterManager>();
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
@@ -58,7 +61,7 @@ namespace LS
                     {
                         //check environment block
                         if (Physics.Linecast(aiCharacter.characterCombatManager.lockOnTransform.position,
-                            targetCharacter.characterCombatManager.lockOnTransform.position, 
+                            targetCharacter.characterCombatManager.lockOnTransform.position,
                             WorldUtilityManager.instance.GetEnvironmentLayers()))
                         {
                             Debug.DrawLine(aiCharacter.characterCombatManager.lockOnTransform.position,
@@ -69,7 +72,8 @@ namespace LS
                             targetDirection = targetCharacter.transform.position - transform.position;
                             viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, targetDirection);
                             aiCharacter.characterCombatManager.SetTarget(targetCharacter);
-                            PivotTowardsTarget(aiCharacter);
+                            if (enablePivot)
+                                PivotTowardsTarget(aiCharacter);
                         }
                     }
                 }
@@ -77,21 +81,26 @@ namespace LS
             }
         }
 
-        public void PivotTowardsTarget(AICharacterManager aiCharacter)
+        public virtual void PivotTowardsTarget(AICharacterManager aiCharacter)
         {
             if (aiCharacter.isPerformingAction) return;
 
             if (viewableAngle >= 61 && viewableAngle <= 110)
+            {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_90", true);
-
-            if (viewableAngle <= -61 && viewableAngle >= -110)
+            }
+            else if (viewableAngle <= -61 && viewableAngle >= -110)
+            {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_90", true);
-
-            if (viewableAngle >= 146 && viewableAngle <= 180)
+            }
+            else if (viewableAngle >= 146 && viewableAngle <= 180)
+            {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_180", true);
-
-            if (viewableAngle <= -146 && viewableAngle >= -180)
+            }
+            else if (viewableAngle <= -146 && viewableAngle >= -180)
+            {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_180", true);
+            }
         }
 
         public void RotateTowardsAgent(AICharacterManager aiCharacter)
@@ -119,7 +128,7 @@ namespace LS
             if (targetDirection == Vector3.zero)
                 targetDirection = aiCharacter.transform.forward;
 
-            Quaternion targetRotation =  Quaternion.LookRotation(targetDirection);
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
 
             aiCharacter.transform.rotation = Quaternion.Slerp(aiCharacter.transform.rotation, targetRotation, attackRotationSpeed * Time.deltaTime);
         }

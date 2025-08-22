@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3db1d66da308f4d4ca7969ef1e80e202, type: 3}
-  m_Name: Combat Stance State
+  m_Name: Bigfoot Combat Stance State
   m_EditorClassIdentifier: 
   aiCharacterAttacks:
-  - {fileID: 11400000, guid: 6c294b7534c56f6479b6ed67b04dd63a, type: 2}
-  - {fileID: 11400000, guid: 007242d6daebac54ba67172ba0e2b413, type: 2}
-  - {fileID: 11400000, guid: fd91e4fc458e43041a0c45055a814f96, type: 2}
+  - {fileID: 11400000, guid: e95e06cac2863bc45a6767496afc9b03, type: 2}
+  - {fileID: 11400000, guid: f3e61cc8fe7153945849646835b86f43, type: 2}
+  - {fileID: 11400000, guid: 255978d1dd27a454b9d0528c6678ffb9, type: 2}
+  - {fileID: 11400000, guid: 7d6d366956b1aa24cb0eefa966ba5ec4, type: 2}
+  - {fileID: 11400000, guid: 6b6a35cf6746e7f4fa69c27d954720d0, type: 2}
   canPerformCombo: 0
   chanceToPerformCombo: 25
+  enablePivot: 1
   maximumEngagementDistance: 5

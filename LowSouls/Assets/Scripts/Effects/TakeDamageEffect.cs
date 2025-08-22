@@ -38,13 +38,17 @@ namespace LS
 
         public override void ProcessEffect(CharacterManager character)
         {
+            //check for "invulnerability"
+            if (character.characterNetworkManager.isInvulnerable.Value) return;
+
             base.ProcessEffect(character);
 
             //if is dead, no additional dmg fx is processed
             if (character.isDead.Value) return;
-            //check for "invulnerability"
+
             //calc dmg
             CalculateDamage(character);
+
             //check dmg taken direction
 
             //play dmg animation

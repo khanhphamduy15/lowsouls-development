@@ -35,6 +35,7 @@ namespace LS
             if (dmgTarget != null)
             {
                 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
                 DamageTarget(dmgTarget);
             }
         }
