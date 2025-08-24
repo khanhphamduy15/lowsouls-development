@@ -33,5 +33,20 @@ namespace LS
             int index = Random.Range(0, array.Length);
             return array[index];
         }
+        /*
+        public AudioClip ChooseRandomFootstepSoundBasedOnGround(GameObject steppedOnObject, CharacterManager character)
+        {
+            if (steppedOnObject.tag == "Dirt")
+            {
+                return ChooseRandomSFXFromArray(character.characterSoundFXManager.footstepsDirt);
+            }
+            else if (steppedOnObject.tag == "Stone")
+            {
+                return ChooseRandomSFXFromArray(character.characterSoundFXManager.footstepsStone);
+            }
+
+            return null;
+        }
+        */
     }
 }

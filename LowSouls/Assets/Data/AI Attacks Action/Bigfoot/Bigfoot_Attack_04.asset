@@ -17,7 +17,7 @@ MonoBehaviour:
   attackType: 0
   attackWeight: 50
   actionRecoveryTime: 1.25
-  minimumAttackAngle: -360
-  maximumAttackAngle: 350
+  minimumAttackAngle: -180
+  maximumAttackAngle: -150
   minimumAttackDistance: 0
   maximumAttackDistance: 2

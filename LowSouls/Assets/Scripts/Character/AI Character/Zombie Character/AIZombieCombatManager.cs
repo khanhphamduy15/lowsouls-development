@@ -34,7 +34,7 @@ namespace LS
 
         public void OpenRightHandCollider()
         {
-            aiCharacter.characterSoundFXManager.PlayAttackGrunts();
+            aiCharacter.characterSoundFXManager.PlayAttackGruntsSFX();
             rightHandDamageCollider.EnableDamageCollider(); 
         }
 
@@ -45,7 +45,7 @@ namespace LS
 
         public void OpenLeftHandCollider()
         {
-            aiCharacter.characterSoundFXManager.PlayAttackGrunts();
+            aiCharacter.characterSoundFXManager.PlayAttackGruntsSFX();
             leftHandDamageCollider.EnableDamageCollider();
         }
         public void CloseLeftHandCollider()

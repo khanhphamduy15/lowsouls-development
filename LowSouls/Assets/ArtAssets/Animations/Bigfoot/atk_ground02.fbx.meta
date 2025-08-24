@@ -79,6 +79,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.2574385
+        functionName: OpenLeftHandCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.26261318
         functionName: OpenRightHandCollider
         data: 
@@ -86,8 +93,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.2574385
-        functionName: OpenLeftHandCollider
+      - time: 0.34900075
+        functionName: PlayGroundImpactSFX
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.34967178
+        functionName: ActivateGroundAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

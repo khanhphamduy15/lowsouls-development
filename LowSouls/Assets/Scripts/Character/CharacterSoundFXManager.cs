@@ -12,6 +12,9 @@ namespace LS
         [Header("Attack Grunts")]
         [SerializeField] protected AudioClip[] attackGrunts;
 
+        [Header("Footstep")]
+        [SerializeField] protected AudioClip[] footsteps;
+
         protected virtual void Awake()
         {
             audioSource = GetComponent<AudioSource>();  
@@ -33,16 +36,22 @@ namespace LS
             }
         }
 
-        public virtual void PlayDamageGrunts()
+        public virtual void PlayDamageGruntsSFX()
         {
             if (damageGrunts.Length > 0) 
             PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(damageGrunts));
         }
 
-        public virtual void PlayAttackGrunts()
+        public virtual void PlayAttackGruntsSFX()
         {
             if (attackGrunts.Length > 0)
                 PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(attackGrunts));
+        }
+
+        public virtual void PlayFootstepsSFX()
+        {
+            if (footsteps.Length > 0)
+                PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(footsteps));
         }
     }
 }
