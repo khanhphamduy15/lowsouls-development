@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
+using System.Linq;
 
 namespace LS
 {
@@ -12,8 +12,10 @@ namespace LS
 
         [Header("Characters")]
         [SerializeField] List<AICharacterSpawner> aiCharacterSpawners;
-        [SerializeField] List<GameObject> spawnedInCharacters;
+        [SerializeField] List<AICharacterManager> spawnedInCharacters;
 
+        [Header("Bosses")]
+        [SerializeField] List<AIBossCharacterManager> spawnedInBosses;
 
         private void Awake()
         {
@@ -34,6 +36,28 @@ namespace LS
                 aiCharacterSpawners.Add(aiCharacterSpawner);
                 aiCharacterSpawner.AttemptToSpawnCharacter();
             }
+        }
+
+        public void AddCharacterToSpawnedCharactersList(AICharacterManager character)
+        {
+            if (spawnedInCharacters.Contains(character))
+                return;
+
+            spawnedInCharacters.Add(character);
+
+            AIBossCharacterManager bossCharacter = character as AIBossCharacterManager;
+
+            if (bossCharacter != null)
+            {
+                if (spawnedInBosses.Contains(bossCharacter))
+                    return;
+                spawnedInBosses.Add(bossCharacter);
+            }
+        }
+
+        public AIBossCharacterManager GetBossCharacterByID(int id)
+        {
+            return spawnedInBosses.FirstOrDefault(boss => boss.bossID == id);
         }
 
         private void DespawnAllCharacters()

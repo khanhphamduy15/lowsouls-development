@@ -303,7 +303,7 @@ PrefabInstance:
       addedObject: {fileID: 7756793668297967249}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1905330409180715327}
+      addedObject: {fileID: 5212905436104396540}
     - targetCorrespondingSourceObject: {fileID: 4575353127508647185, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1119950120154198649}
@@ -1514,13 +1514,13 @@ MonoBehaviour:
   endurance:
     m_InternalValue: 5
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 1000
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 1000
   currentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 500
   maxStamina:
-    m_InternalValue: 0
+    m_InternalValue: 500
 --- !u!114 &3464844174409120874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1683,7 +1683,7 @@ MonoBehaviour:
   groundImpacts:
   - {fileID: 8300000, guid: 7cc424fa08d7c8e4688c2237862ba5b0, type: 3}
   - {fileID: 8300000, guid: 1fa2a0c8b3ce9d847a978cab884c256c, type: 3}
---- !u!114 &1905330409180715327
+--- !u!114 &5212905436104396540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1708,6 +1708,7 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   isPerformingAction: 0
   characterGroup: 1
+  characterName: Great Ape
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aICharacterLocomotionManager: {fileID: 0}
@@ -1718,9 +1719,15 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 8bdee191cabe5b7458b7ee5cd6a469c5, type: 2}
   attack: {fileID: 11400000, guid: 9e20d06e0967fb143a673fc1c48c03ca, type: 2}
   bossID: 0
-  hasBeenDefeated: 0
-  hasBeenAwakened: 0
+  bossFightIsActive:
+    m_InternalValue: 0
+  hasBeenDefeated:
+    m_InternalValue: 0
+  hasBeenAwakened:
+    m_InternalValue: 0
   fogWalls: []
-  wakeBossUp: 0
+  sleepAnimation: Sleep_01
+  awakeAnimation: Awaken_01
+  sleepState: {fileID: 11400000, guid: 63c116a0a974e9b45aaed28670dc3c09, type: 2}
   bigfootSoundFXManager: {fileID: 0}
   bigfootCombatManager: {fileID: 0}

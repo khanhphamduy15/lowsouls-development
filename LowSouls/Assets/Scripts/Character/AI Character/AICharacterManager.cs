@@ -4,12 +4,15 @@ using UnityEngine.AI;
 namespace LS {
     public class AICharacterManager : CharacterManager
     {
+        [Header("Character Name")]
+        public string characterName = "";
+
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
         [HideInInspector] public AICharacterLocomotionManager aICharacterLocomotionManager;
 
         [Header("Current State")]
-        [SerializeField] AIState currentState;
+        [SerializeField] protected AIState currentState;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;
@@ -33,11 +36,19 @@ namespace LS {
             aiCharacterCombatManager = GetComponent<AICharacterCombatManager>();
             aICharacterLocomotionManager = GetComponent <AICharacterLocomotionManager>();
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
-             
-            idle = Instantiate(idle);
-            pursueTarget = Instantiate(pursueTarget);
+        }
 
-            currentState = idle;
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            if (IsOwner)
+            {
+                idle = Instantiate(idle);
+                pursueTarget = Instantiate(pursueTarget);
+
+                currentState = idle;
+            }
         }
 
         private void ProcessStateMachine()
