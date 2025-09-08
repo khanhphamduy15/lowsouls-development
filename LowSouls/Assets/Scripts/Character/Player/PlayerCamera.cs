@@ -14,7 +14,7 @@ namespace LS
 
         //Tweak camera perfomance
         [Header("Camera Settings")]
-        private float cameraSmoothSpeed = 1;
+        [SerializeField] private float cameraSmoothSpeed = 1;
         [SerializeField] float leftAndRightRotationSpeed = 220;
         [SerializeField] float upAndDownRotationSpeed = 220;
         [SerializeField] float minimumPivot = -30; //Lowest point to look down
@@ -67,7 +67,7 @@ namespace LS
             if (player != null)
             {
                 //player follow
-                FollowTarget();
+                HandleFollowTarget();
 
                 //rotate around
                 HandleRotations();
@@ -77,9 +77,9 @@ namespace LS
             }
         }
 
-        private void FollowTarget()
+        private void HandleFollowTarget()
         {
-            Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
+            Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed);
             transform.position = targetCameraPosition;
         }
 

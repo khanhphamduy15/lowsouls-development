@@ -41,6 +41,13 @@ namespace LS
         [SerializeField] bool ChargeRTInput = false;
         [SerializeField] bool RTInput = false;
 
+        [Header("Queue Input")]
+        [SerializeField] private bool input_Que_Is_Active = false;
+        [SerializeField] float default_Que_Input_Time = 0.35f;
+        [SerializeField] float que_Input_Timer = 0;
+        [SerializeField] bool que_RB_Input = false;
+        [SerializeField] bool que_RT_Input = false;
+
         private void OnEnable()
         {
             if (playerControls == null)
@@ -74,6 +81,9 @@ namespace LS
                 //Release => bool = false
                 playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
 
+                //Qued Inputs
+                playerControls.PlayerActions.QueRB.performed += i => QueInput(ref que_RB_Input);
+                playerControls.PlayerActions.QueRT.performed += i => QueInput(ref que_RT_Input);
 
             }
             playerControls.Enable();
@@ -146,6 +156,7 @@ namespace LS
             HandleChargeRTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
+            HandleQuedInputs();
         }
 
         //Lock On
@@ -381,6 +392,53 @@ namespace LS
             {
                 switchLeftWeaponInput = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void QueInput(ref bool quedInput)
+        {
+            que_RB_Input = false;
+            que_RT_Input = true;
+            if (player.isPerformingAction || player.playerNetworkManager.isJumping.Value)
+            {
+                quedInput = true;
+                //Attempt this input for x amount of time
+                que_Input_Timer = default_Que_Input_Time;
+                input_Que_Is_Active = true;
+
+            }
+        }
+
+        private void ProcessQuedInputs()
+        {
+            if (player.isDead.Value) return;
+
+            if (que_RB_Input)
+                RBInput = true;
+
+            if (que_RT_Input)
+                RTInput = true;
+        }
+
+        private void HandleQuedInputs()
+        {
+            if (input_Que_Is_Active)
+            {
+                //keep trying to press the input while timer > 0
+                if (que_Input_Timer > 0)
+                {
+                    que_Input_Timer -= Time.deltaTime;
+                    ProcessQuedInputs();
+                }
+                else
+                {
+                    //Reset all qued inputs
+                    que_RB_Input = false;
+                    que_RT_Input = false;
+
+                    input_Que_Is_Active = false;
+                    que_Input_Timer = 0;
+                }
             }
         }
     }

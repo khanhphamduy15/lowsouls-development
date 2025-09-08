@@ -288,6 +288,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Que RB",
+                    "type": "Button",
+                    "id": "3556c5e3-f467-48fb-99a5-a25aa2bdf7b2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Switch Right Weapon",
                     "type": "Button",
                     "id": "4dda8e7c-b0c9-458e-a35b-bc70999fbc6d",
@@ -309,6 +318,15 @@
                     "name": "RT",
                     "type": "Button",
                     "id": "536911cb-af25-4e38-b261-da49f6174ae1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Que RT",
+                    "type": "Button",
+                    "id": "a708c8ce-9cd1-4369-bfd8-a8cbaeb99f95",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -429,6 +447,28 @@
                 },
                 {
                     "name": "",
+                    "id": "c9532314-a300-424d-9427-90a19a52505c",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a711312-7115-44dd-8d9a-97990d5423ea",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "788ca0ab-9b30-440e-9361-eb30f661e9ac",
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
@@ -490,6 +530,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "17dd9545-a271-4898-a9c1-146be8b28e99",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "990fae2e-7fc7-41c0-bd11-235f3565a1bc",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
