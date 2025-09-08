@@ -83,7 +83,13 @@ namespace LS
 
         private void HandleGroundedMovement()
         {
-            if (!player.playerLocomotionManager.canMove) return;
+            if (player.playerLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
+            {
+                GetMovementValues();
+            }
+            if (!player.playerLocomotionManager.canMove)
+            return;
+
             GetMovementValues();
             //Move direction based on camera facing perspective (goc cam) & movement input
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;

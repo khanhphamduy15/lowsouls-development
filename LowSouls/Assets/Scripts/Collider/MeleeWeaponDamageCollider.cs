@@ -14,6 +14,8 @@ namespace LS
         public float heavy_Attack_02_Modifier;
         public float charge_Attack_01_Modifier;
         public float charge_Attack_02_Modifier;
+        public float running_Attack_01_Modifier;
+        public float rolling_Attack_01_Modifier;
 
         protected override void Awake()
         {
@@ -74,6 +76,12 @@ namespace LS
                     break;
                 case AttackType.ChargeAttack02:
                     ApplyAttackDamageModifier(charge_Attack_02_Modifier, damageEffect);
+                    break;
+                case AttackType.RunningAttack01:
+                    ApplyAttackDamageModifier(running_Attack_01_Modifier, damageEffect);
+                    break;
+                case AttackType.RollingAttack01:
+                    ApplyAttackDamageModifier(rolling_Attack_01_Modifier, damageEffect);
                     break;
                 default:
                     break;

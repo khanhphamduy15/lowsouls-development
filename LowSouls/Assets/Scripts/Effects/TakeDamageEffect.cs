@@ -80,7 +80,14 @@ namespace LS
             {
                 finalDamageDealt = 1;
             }
-            character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
+            float currentHp = character.characterNetworkManager.currentHealth.Value;
+            if (currentHp > finalDamageDealt)
+            {
+                character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
+            } else if (currentHp <= finalDamageDealt)
+            {
+                character.characterNetworkManager.currentHealth.Value = 0;
+            }
             
             //calc poise dmg to determine character state (stunned or not)
         }

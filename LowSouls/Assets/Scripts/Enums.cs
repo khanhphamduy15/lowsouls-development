@@ -30,7 +30,9 @@ namespace LS
         HeavyAttack01,
         HeavyAttack02,
         ChargeAttack01,
-        ChargeAttack02
+        ChargeAttack02,
+        RunningAttack01,
+        RollingAttack01
     }
 
     public enum CharacterGroup

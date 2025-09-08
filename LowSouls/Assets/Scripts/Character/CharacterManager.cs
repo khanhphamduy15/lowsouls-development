@@ -1,8 +1,9 @@
-using UnityEngine;
-using Unity.Netcode;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.TextCore.Text;
 namespace LS
 {
     public class CharacterManager : NetworkBehaviour
@@ -83,6 +84,8 @@ namespace LS
 
         public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
+            Debug.Log("ProcessDeathEvent called!");
+
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;
@@ -92,6 +95,7 @@ namespace LS
 
                 if (!manuallySelectDeathAnimation)
                 {
+                    yield return new WaitForSeconds(0.1f);
                     characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
                 }
             }

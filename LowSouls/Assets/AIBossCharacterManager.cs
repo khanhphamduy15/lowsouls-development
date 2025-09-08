@@ -1,8 +1,9 @@
-using UnityEngine;
-using Unity.Netcode;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace LS
 {
@@ -21,6 +22,10 @@ namespace LS
         [Header("States")]
         [SerializeField] BossSleepingState sleepState;
 
+        [Header("Phase Shift")]
+        public float minimumHPPercentToShift = 50;
+        [SerializeField] string phaseShiftAnimation = "Attack_03";
+        [SerializeField] CombatStanceState phase2CombatStanceState;
         protected override void Awake()
         {
             base.Awake();
@@ -89,17 +94,23 @@ namespace LS
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
+            PlayerUIManager.instance.playerUIPopUpManager.SendBossDefeatedPopUp("GREAT FOE FELLED");
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;
                 isDead.Value = true;
-
                 bossFightIsActive.Value = false;
+
+                foreach (var fogWall in fogWalls)
+                {
+                    fogWall.isActive.Value = false;
+                }
 
                 //not grounded = aerial death animation
 
                 if (!manuallySelectDeathAnimation)
                 {
+                    yield return new WaitForSeconds(0.1f);
                     characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
                 }
 
@@ -179,6 +190,13 @@ namespace LS
                 UI_Boss_HP_Bar bossHPBar = bossHealthBar.GetComponentInChildren<UI_Boss_HP_Bar>();
                 bossHPBar.EnableBossHPBar(this);
             }
+        }
+
+        public void PhaseShift()
+        {
+            characterAnimatorManager.PlayTargetActionAnimation(phaseShiftAnimation, true);
+            combatStance = Instantiate(phase2CombatStanceState);
+            currentState = combatStance;
         }
     }
 }

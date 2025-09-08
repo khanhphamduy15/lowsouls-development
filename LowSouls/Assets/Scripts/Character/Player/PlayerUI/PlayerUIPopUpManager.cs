@@ -12,6 +12,12 @@ namespace LS
         [SerializeField] TextMeshProUGUI youDiedPopUpText;
         [SerializeField] CanvasGroup youDiedPopUpCanvasGroup ;          //Set alpha fades over time
 
+        [Header("Boss Defeated Pop Up")]
+        [SerializeField] GameObject bossDefeatedPopUpGameObject;
+        [SerializeField] TextMeshProUGUI bossDefeatedPopUpBackgroundText;
+        [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
+        [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup;          //Set alpha fades over time
+
         public void SendDeathPopUp()
         {
             deathPopUpGameObject.SetActive(true);
@@ -26,6 +32,23 @@ namespace LS
             //fade out after wait
             StartCoroutine(WaitThenFadeOutPopUpOverTime(youDiedPopUpCanvasGroup, 2, 5));
         }
+        public void SendBossDefeatedPopUp(string bossDefeatedMessage)
+        {
+            bossDefeatedPopUpText.text = bossDefeatedMessage;
+            bossDefeatedPopUpBackgroundText.text = bossDefeatedMessage;
+            bossDefeatedPopUpGameObject.SetActive(true);
+            bossDefeatedPopUpBackgroundText.characterSpacing = 0;
+
+            //stretch out the pop up
+            StartCoroutine(StretchPopUpTextOverTime(bossDefeatedPopUpBackgroundText, 8, 19));
+
+            //fade in the pop up
+            StartCoroutine(FadeInPopUpOverTime(bossDefeatedPopUpCanvasGroup, 5));
+
+            //fade out after wait
+            StartCoroutine(WaitThenFadeOutPopUpOverTime(bossDefeatedPopUpCanvasGroup, 2, 5));
+        }
+
 
         private IEnumerator StretchPopUpTextOverTime(TextMeshProUGUI text, float duration, float stretchAmount)
         {

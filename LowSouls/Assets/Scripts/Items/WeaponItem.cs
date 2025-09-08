@@ -37,12 +37,19 @@ namespace LS
         public float charge_Attack_01_Modifier = 2.0f;
         public float charge_Attack_02_Modifier = 2.2f;
 
+        public float running_Attack_01_Modifier = 1.5f;
+
+        public float rolling_Attack_01_Modifier = 2.5f;
+
+
 
         [Header("Stamina Costs Modifier")]
         public int baseStaminaCost = 20;
         public float lightAttackStaminaCostMultiplier = 0.8f;
         public float heavyAttackStaminaCostMultiplier = 1.2f;
         public float chargeAttackStaminaCostMultiplier = 2f;
+        public float runningAttackStaminaCostMultiplier = 1;
+        public float rollingAttackStaminaCostMultiplier = 1.5f;
 
 
         [Header("Actions")]

@@ -49,9 +49,9 @@ namespace LS
             character = GetComponent<CharacterManager>();
         }
 
-        public void CheckHP(int oldValue, int newValue)
+        public virtual void CheckHP(int oldValue, int newValue)
         {
-            if (currentHealth.Value <= 0)
+            if (currentHealth.Value <= 0 && !character.isDead.Value )
             {
                 StartCoroutine(character.ProcessDeathEvent());
             }
@@ -63,6 +63,8 @@ namespace LS
                     currentHealth.Value = maxHealth.Value;
                 }
             }
+            Debug.Log($"{character.name} CheckHP: {oldValue} , {newValue}, isDead = {character.isDead.Value}");
+
         }
 
         public void OnLockOnTargetIDChange(ulong oldID, ulong newID)

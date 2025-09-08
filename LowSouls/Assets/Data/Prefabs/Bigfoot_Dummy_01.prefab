@@ -1729,5 +1729,8 @@ MonoBehaviour:
   sleepAnimation: Sleep_01
   awakeAnimation: Awaken_01
   sleepState: {fileID: 11400000, guid: 63c116a0a974e9b45aaed28670dc3c09, type: 2}
+  minimumHPPercentToShift: 50
+  phaseShiftAnimation: Attack_03
+  phase2CombatStanceState: {fileID: 11400000, guid: b5d74fb768595d3468fba6975d231e70, type: 2}
   bigfootSoundFXManager: {fileID: 0}
   bigfootCombatManager: {fileID: 0}

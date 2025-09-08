@@ -50,6 +50,12 @@ namespace LS
                 case AttackType.ChargeAttack02:
                     staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargeAttackStaminaCostMultiplier;
                     break;
+                case AttackType.RunningAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.runningAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.RollingAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.rollingAttackStaminaCostMultiplier;
+                    break;  
                 default:
                     break;
             }
@@ -65,6 +71,24 @@ namespace LS
             {
                 PlayerCamera.instance.SetLockCameraHeight();
             }
+        }
+
+        public override void EnableCanDoCombo()
+        {
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                player.playerCombatManager.canComboWithMainHandWeapon = true;
+            }
+            else
+            {
+
+            }
+        }
+
+        public override void DisableCanDoCombo()
+        {
+            player.playerCombatManager.canComboWithMainHandWeapon = false;
+
         }
     }
 }

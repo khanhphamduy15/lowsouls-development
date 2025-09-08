@@ -19,6 +19,8 @@ namespace LS
         [Header("Lock On Transform")]
         public Transform lockOnTransform;
 
+        [Header("Attack Flags")]
+        public bool canPerformRollAttack = false;
 
         protected virtual void Awake()
         {
@@ -52,6 +54,25 @@ namespace LS
         {
             if (character.IsOwner)
                 character.characterNetworkManager.isInvulnerable.Value = false;
+
+        }
+        public void EnableCanDoRollingAttack()
+        {
+            canPerformRollAttack = true;
+        }
+
+        public void DisableCanDoRollingAttack()
+        {
+            canPerformRollAttack = false;
+        }
+
+        public virtual void EnableCanDoCombo()
+        {
+
+        }
+
+        public virtual void DisableCanDoCombo()
+        {
 
         }
     }
