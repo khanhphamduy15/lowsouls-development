@@ -5332,6 +5332,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6774182300087335798, guid: 37bfc457906187b41a90c86fb94c1d63, type: 3}
+      propertyPath: cameraSmoothSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774182300087335798, guid: 37bfc457906187b41a90c86fb94c1d63, type: 3}
       propertyPath: cameraPivotTransform
       value: 
       objectReference: {fileID: 1666153957}

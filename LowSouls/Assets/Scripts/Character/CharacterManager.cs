@@ -19,6 +19,7 @@ namespace LS
         [HideInInspector] public CharacterCombatManager characterCombatManager;
         [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
         [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
+        [HideInInspector] public CharacterUIManager characterUIManager;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -38,6 +39,7 @@ namespace LS
             characterCombatManager = GetComponent<CharacterCombatManager>();
             characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
             characterLocomotionManager = GetComponent<CharacterLocomotionManager>();
+            characterUIManager = GetComponent<CharacterUIManager>();
         }
 
         protected virtual void Start()
@@ -131,6 +133,16 @@ namespace LS
                     Physics.IgnoreCollision(collider, otherCollider, true);
                 }
             }
+        }
+
+        protected virtual void OnEnable()
+        {
+
+        }
+
+        protected virtual void OnDisable()
+        {
+
         }
 
         public override void OnNetworkSpawn()

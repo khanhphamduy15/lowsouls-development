@@ -60,6 +60,22 @@ namespace LS {
 
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            if (characterUIManager.hasFloatingHPBar)
+                characterNetworkManager.currentHealth.OnValueChanged += characterUIManager.OnHPChanged;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            if (characterUIManager.hasFloatingHPBar)
+                characterNetworkManager.currentHealth.OnValueChanged -= characterUIManager.OnHPChanged;
+        }
+
         private void ProcessStateMachine()
         {
             AIState nextState = currentState?.Tick(this);
