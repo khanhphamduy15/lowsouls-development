@@ -29,6 +29,16 @@ namespace LS
             }
         }
 
+        public void ResetAllCharacters()
+        {
+            DespawnAllCharacters();
+            
+            foreach (var spawner in aiCharacterSpawners)
+            {
+                spawner.AttemptToSpawnCharacter();
+            }
+        }
+
         public void SpawnCharacter(AICharacterSpawner aiCharacterSpawner)
         {
             if (NetworkManager.Singleton.IsServer)
@@ -66,6 +76,8 @@ namespace LS
             {
                 character.GetComponent<NetworkObject>().Despawn();
             }
+
+            spawnedInCharacters.Clear();
         }
 
         private void DisableAllCharacters()

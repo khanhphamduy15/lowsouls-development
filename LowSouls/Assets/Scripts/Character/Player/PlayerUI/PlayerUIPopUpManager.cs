@@ -22,6 +22,12 @@ namespace LS
         [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
         [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup;          //Set alpha fades over time
 
+        [Header("Grace Restored Pop Up")]
+        [SerializeField] GameObject graceRestoredPopUpGameObject;
+        [SerializeField] TextMeshProUGUI graceRestoredPopUpBackgroundText;
+        [SerializeField] TextMeshProUGUI graceRestoredPopUpText;
+        [SerializeField] CanvasGroup graceRestoredPopUpCanvasGroup;
+
         public void SendPlayerMessagePopUp(string messageText)
         {
             PlayerUIManager.instance.popupWindowIsOpen = true;
@@ -57,6 +63,23 @@ namespace LS
 
             //fade out after wait
             StartCoroutine(WaitThenFadeOutPopUpOverTime(bossDefeatedPopUpCanvasGroup, 2, 5));
+        }
+
+        public void SendGraceRestoredPopUp(string graceRestoredMessage)
+        {
+            graceRestoredPopUpText.text = graceRestoredMessage;
+            graceRestoredPopUpBackgroundText.text = graceRestoredMessage;
+            graceRestoredPopUpGameObject.SetActive(true);
+            graceRestoredPopUpBackgroundText.characterSpacing = 0;
+
+            //stretch out the pop up
+            StartCoroutine(StretchPopUpTextOverTime(graceRestoredPopUpBackgroundText, 8, 19));
+
+            //fade in the pop up
+            StartCoroutine(FadeInPopUpOverTime(graceRestoredPopUpCanvasGroup, 5));
+
+            //fade out after wait
+            StartCoroutine(WaitThenFadeOutPopUpOverTime(graceRestoredPopUpCanvasGroup, 2, 5));
         }
 
 
