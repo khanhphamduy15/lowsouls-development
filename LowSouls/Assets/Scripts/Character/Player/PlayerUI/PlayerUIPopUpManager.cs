@@ -6,6 +6,10 @@ namespace LS
 {
     public class PlayerUIPopUpManager : MonoBehaviour
     {
+        [Header("Message Pop UP")]
+        [SerializeField] TextMeshProUGUI popUpMessageText;
+        [SerializeField] GameObject popUpMessageGameObject;
+
         [Header("Death Pop Up")]
         [SerializeField] GameObject deathPopUpGameObject;
         [SerializeField] TextMeshProUGUI youDiedPopUpBackgroundText;
@@ -18,6 +22,12 @@ namespace LS
         [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
         [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup;          //Set alpha fades over time
 
+        public void SendPlayerMessagePopUp(string messageText)
+        {
+            PlayerUIManager.instance.popupWindowIsOpen = true;
+            popUpMessageText.text = messageText;
+            popUpMessageGameObject.SetActive(true);
+        }
         public void SendDeathPopUp()
         {
             deathPopUpGameObject.SetActive(true);
@@ -109,6 +119,13 @@ namespace LS
             canvas.alpha = 0;
 
             yield return null;
+        }
+
+        public void CloseAllPopUpWindows()
+        {
+            popUpMessageGameObject.SetActive(false);
+
+            PlayerUIManager.instance.popupWindowIsOpen = false;
         }
     }
 }

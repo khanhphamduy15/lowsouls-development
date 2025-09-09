@@ -33,6 +33,8 @@ namespace LS
         [SerializeField] bool jumpInput = false;
         [SerializeField] bool switchRightWeaponInput = false;
         [SerializeField] bool switchLeftWeaponInput = false;
+        [SerializeField] bool interactInput = false;
+
 
         [Header("Bumper Input")]
         [SerializeField] bool RBInput = false;
@@ -62,6 +64,7 @@ namespace LS
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switchRightWeaponInput = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switchLeftWeaponInput = true;
+                playerControls.PlayerActions.Interact.performed += i => interactInput = true;
 
                 //Bumper
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
@@ -157,6 +160,7 @@ namespace LS
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
             HandleQuedInputs();
+            HandleInteractionInput();
         }
 
         //Lock On
@@ -392,6 +396,16 @@ namespace LS
             {
                 switchLeftWeaponInput = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void HandleInteractionInput()
+        {
+            if (interactInput)
+            {
+                interactInput = false;
+
+                player.playerInteractionManager.Interact();
             }
         }
 
