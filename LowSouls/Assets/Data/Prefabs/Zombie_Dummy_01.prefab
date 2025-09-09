@@ -227,8 +227,8 @@ GameObject:
   - component: {fileID: -980782735192918488}
   - component: {fileID: 880773276701100890}
   - component: {fileID: 6272058830409197286}
-  - component: {fileID: -4098508323756272399}
   - component: {fileID: 3962196009318446680}
+  - component: {fileID: -7841259178689256174}
   m_Layer: 8
   m_Name: Zombie_Dummy_01
   m_TagString: Untagged
@@ -644,7 +644,21 @@ MonoBehaviour:
   attack01DamageModifier: 1
   attack02DamageModifier: 1.2
   attack03DamageModifier: 1.4
---- !u!114 &-4098508323756272399
+--- !u!114 &3962196009318446680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842103163252997315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98171e6471f6eb41bb795e49b2ef4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasFloatingHPBar: 1
+  characterHPBar: {fileID: 1563583624905984665}
+--- !u!114 &-7841259178689256174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -691,27 +705,13 @@ MonoBehaviour:
   endurance:
     m_InternalValue: 5
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 150
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 150
   currentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 150
   maxStamina:
-    m_InternalValue: 0
---- !u!114 &3962196009318446680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842103163252997315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98171e6471f6eb41bb795e49b2ef4cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasFloatingHPBar: 1
-  characterHPBar: {fileID: 1563583624905984665}
+    m_InternalValue: 150
 --- !u!1 &886416252126033724
 GameObject:
   m_ObjectHideFlags: 0

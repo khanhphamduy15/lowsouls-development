@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
+
 namespace LS
 {
     public class WorldSaveGameManager : MonoBehaviour
@@ -155,7 +157,7 @@ namespace LS
             player.playerNetworkManager.endurance.Value = 10;
 
             SaveGame();
-            StartCoroutine(LoadWorldScene());
+            LoadWorldScene(worldSceneIndex);
         }
 
         public void LoadGame()
@@ -169,7 +171,7 @@ namespace LS
             saveFileDataWriter.saveFileName = saveFileName;
             currentCharacterData = saveFileDataWriter.LoadSaveFile();
 
-            StartCoroutine(LoadWorldScene());
+            LoadWorldScene(worldSceneIndex);
         }
 
         //preload all saves
@@ -215,16 +217,14 @@ namespace LS
             saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(characterSlot);
             saveFileDataWriter.DeleteSaveFile();
         }
-        public IEnumerator LoadWorldScene()
+        public void LoadWorldScene(int buildIndex)
         {
-            //use for just 1 world scene
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+            string worldScene = SceneUtility.GetScenePathByBuildIndex(buildIndex);
+            NetworkManager.Singleton.SceneManager.LoadScene(worldScene, LoadSceneMode.Single);
 
             //use for different scenes for levels
             //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
             player.LoadGameDataFromCurrentCharData(ref currentCharacterData);
-
-            yield return null;
         }
 
         public int GetWorldSceneIndex()

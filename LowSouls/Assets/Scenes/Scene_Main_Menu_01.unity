@@ -5364,6 +5364,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 407036705201720737, guid: b9bac31f2ebcced4f88e662b54750c95, type: 3}
+      propertyPath: NetworkConfig.EnableSceneManagement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 996683286798877580, guid: b9bac31f2ebcced4f88e662b54750c95, type: 3}
       propertyPath: m_Name
       value: World Network Manager

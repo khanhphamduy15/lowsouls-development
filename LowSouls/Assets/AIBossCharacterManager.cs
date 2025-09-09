@@ -82,7 +82,7 @@ namespace LS
 
             if (!hasBeenAwakened.Value)
             {
-                characterAnimatorManager.PlayTargetActionAnimation(sleepAnimation, true);
+                animator.Play(sleepAnimation);
             }
         }
 

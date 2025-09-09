@@ -3,7 +3,7 @@ using Unity.Netcode;
 
 namespace LS
 {
-    public class Interactable : MonoBehaviour
+    public class Interactable : NetworkBehaviour
     {
         public string interactableText; //interact text prompt
         [SerializeField] protected Collider interactableCollider; //check for player interaction
