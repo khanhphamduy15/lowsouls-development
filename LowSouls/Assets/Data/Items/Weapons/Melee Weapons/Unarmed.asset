@@ -45,6 +45,7 @@ MonoBehaviour:
   rollingAttackStaminaCostMultiplier: 1.5
   oh_RB_Action: {fileID: 11400000, guid: 553415bcbbc859945aa74b7ada780cde, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: f774ec8823a885e46b5be7b782a9e3c4, type: 2}
+  oh_LB_Action: {fileID: 11400000, guid: 85068c4433ac9884f9d110884b91aea8, type: 2}
   whooshes:
   - {fileID: 8300000, guid: f2a65aaad00addb49b5373ce38d337c3, type: 3}
   - {fileID: 8300000, guid: 6a7c8a2e52e9fe1468e896908ee7c399, type: 3}

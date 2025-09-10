@@ -4850,7 +4850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1956141220989372903, guid: 54dac27c10c06104f865ecf8edf90a65, type: 3}
       propertyPath: weapons.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1956141220989372903, guid: 54dac27c10c06104f865ecf8edf90a65, type: 3}
       propertyPath: 'items.Array.data[0]'
@@ -4876,6 +4876,10 @@ PrefabInstance:
       propertyPath: 'weapons.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: 942ad15331bff404e84fa3a65e87eb64, type: 2}
+    - target: {fileID: 1956141220989372903, guid: 54dac27c10c06104f865ecf8edf90a65, type: 3}
+      propertyPath: 'weapons.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 033296c33a02622418d968d3b95afdb5, type: 2}
     - target: {fileID: 2279206278113434917, guid: 54dac27c10c06104f865ecf8edf90a65, type: 3}
       propertyPath: m_Name
       value: World Item Database

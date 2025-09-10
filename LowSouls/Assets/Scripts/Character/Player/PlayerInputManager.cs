@@ -38,6 +38,7 @@ namespace LS
 
         [Header("Bumper Input")]
         [SerializeField] bool RBInput = false;
+        [SerializeField] bool LBInput = false;
 
         [Header("Trigger Input")]
         [SerializeField] bool ChargeRTInput = false;
@@ -68,6 +69,9 @@ namespace LS
 
                 //Bumper
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
+                playerControls.PlayerActions.LB.performed += i => LBInput = true;
+                playerControls.PlayerActions.LB.canceled += i => player.playerNetworkManager.isBlocking.Value = false;
+
 
                 //Triggers
                 playerControls.PlayerActions.RT.performed += i => RTInput = true;
@@ -153,6 +157,7 @@ namespace LS
             HandleSprintingInput();
             HandleJumpInput();
             HandleRBInput();
+            HandleLBInput();
             HandleLockOnInput();
             HandleLockOnSwitchTargetInput();
             HandleRTInput();
@@ -350,6 +355,21 @@ namespace LS
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+
+            }
+        }
+
+        private void HandleLBInput()
+        {
+            if (LBInput)
+            {
+                LBInput = false;
+
+                //ui window open => do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(false);
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
 
             }
         }

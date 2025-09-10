@@ -10,26 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1997b61aa5f752419c4b4795d8dd232, type: 3}
-  m_Name: Straight Sword
+  m_Name: Medium Shield
   m_EditorClassIdentifier: 
-  itemName: Straight Sword
+  itemName: Medium Shield
   itemIcon: {fileID: 0}
   itemDescription: 
-  itemID: 1
-  weaponAnimator: {fileID: 22100000, guid: 5b0c005481598db4ab3131901d2fe2f7, type: 2}
-  weaponModel: {fileID: 8356629166756568642, guid: dcca6309bf294454990528314dc3a055, type: 3}
+  itemID: 3
+  weaponAnimator: {fileID: 22100000, guid: 97cc29811b23818478b136719990ac12, type: 2}
+  weaponModelType: 1
+  weaponModel: {fileID: 3216235260147742545, guid: ac9edd0f9aff5a44ba2f10fa0fb63a31, type: 3}
   strengthREQ: 10
-  dexREQ: 10
+  dexREQ: 0
   faithREQ: 0
   intelREQ: 0
-  hpREQ: 0
-  physDmg: 50
+  hpREQ: 15
+  physDmg: 15
   magicDmg: 0
   fireDmg: 0
   holyDmg: 0
   lightningDmg: 0
-  poiseDmg: 25
-  light_Attack_01_Modifier: 1.2
+  poiseDmg: 10
+  light_Attack_01_Modifier: 1
   light_Attack_02_Modifier: 1.2
   heavy_Attack_01_Modifier: 1.5
   heavy_Attack_02_Modifier: 1.7
@@ -43,6 +44,12 @@ MonoBehaviour:
   chargeAttackStaminaCostMultiplier: 2
   runningAttackStaminaCostMultiplier: 1
   rollingAttackStaminaCostMultiplier: 1.5
+  physicalDmgAbsorption: 50
+  fireDmgAbsorption: 36
+  magicDmgAbsorption: 39
+  holyDmgAbsorption: 18
+  lightningDmgAbsorption: 42
+  stability: 37
   oh_RB_Action: {fileID: 11400000, guid: 553415bcbbc859945aa74b7ada780cde, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: f774ec8823a885e46b5be7b782a9e3c4, type: 2}
   oh_LB_Action: {fileID: 11400000, guid: 85068c4433ac9884f9d110884b91aea8, type: 2}

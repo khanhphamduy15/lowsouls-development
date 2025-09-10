@@ -7,6 +7,10 @@ namespace LS
         // Animator controller overrides (change attack animation based on weapons)
         [Header("Animations")]
         public AnimatorOverrideController weaponAnimator;
+
+        [Header("Model Instantiation")]
+        public WeaponModelType weaponModelType;
+
         [Header("Weapon Model")]
         public GameObject weaponModel;
 
@@ -53,10 +57,20 @@ namespace LS
         public float runningAttackStaminaCostMultiplier = 1;
         public float rollingAttackStaminaCostMultiplier = 1.5f;
 
+        [Header("Blocking Absorption")]
+        public float physicalDmgAbsorption = 50;
+        public float fireDmgAbsorption = 50;
+        public float magicDmgAbsorption = 50;
+        public float holyDmgAbsorption = 50;
+        public float lightningDmgAbsorption = 50;
+        public float stability = 50; //reduce stamina loss from blocking
 
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; //one handed right bumper action
         public WeaponItemAction oh_RT_Action; //one handed right trigger action (Charge)
+
+        public WeaponItemAction oh_LB_Action; //one handed left bumper action
+
 
         [Header("Whooshes")]
         public AudioClip[] whooshes;

@@ -17,6 +17,9 @@ namespace LS {
 
             if (!playerPerformingAction.playerLocomotionManager.isGrounded) return;
 
+            if (playerPerformingAction.IsOwner)
+                playerPerformingAction.playerNetworkManager.isAttacking.Value = true;
+
             PerformHeavyAttack(playerPerformingAction, weaponPerformingAction);
 
 

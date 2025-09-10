@@ -22,6 +22,19 @@ namespace LS
             player = GetComponent<PlayerManager>();
         }
 
+        public override void OnIsBlockingChanged(bool oldStatus, bool newStatus)
+        {
+            base.OnIsBlockingChanged(oldStatus, newStatus);
+
+            if (IsOwner)
+            {
+                player.playerStatsManager.blockingPhysicalAbsorption = player.playerCombatManager.currentWeaponBeingUsed.physicalDmgAbsorption;
+                player.playerStatsManager.blockingFireAbsorption = player.playerCombatManager.currentWeaponBeingUsed.fireDmgAbsorption;
+                player.playerStatsManager.blockingMagicAbsorption = player.playerCombatManager.currentWeaponBeingUsed.magicDmgAbsorption;
+                player.playerStatsManager.blockingHolyAbsorption = player.playerCombatManager.currentWeaponBeingUsed.holyDmgAbsorption;
+                player.playerStatsManager.blockingLightningAbsorption = player.playerCombatManager.currentWeaponBeingUsed.lightningDmgAbsorption;
+            }
+        }
         public void SetCharacterActionHand(bool rightHandAction)
         {
             if (rightHandAction)

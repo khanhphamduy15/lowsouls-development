@@ -21,6 +21,7 @@ namespace LS
 
         [Header("Attack Flags")]
         public bool canPerformRollAttack = false;
+        public bool canBlock = true;
 
         protected virtual void Awake()
         {

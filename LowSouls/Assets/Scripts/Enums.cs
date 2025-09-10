@@ -20,7 +20,14 @@ namespace LS
     public enum WeaponModelSlot
     {
         RightHand,
-        LeftHand
+        LeftHandWeaponSlot,
+        LeftHandShieldSlot
+    }
+
+    public enum WeaponModelType
+    {
+        Weapon,
+        Shield
     }
 
     public enum AttackType

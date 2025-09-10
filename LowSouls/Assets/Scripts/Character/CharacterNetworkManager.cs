@@ -33,6 +33,7 @@ namespace LS
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isChargingAttack = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isAttacking = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Stats")]
         public NetworkVariable<int> vitality = new NetworkVariable<int>(5, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -97,6 +98,11 @@ namespace LS
         public virtual void OnIsActiveChanged(bool oldStatus, bool newStatus)
         {
             gameObject.SetActive(isActive.Value);
+        }
+
+        public virtual void OnIsBlockingChanged(bool oldStatus, bool newStatus)
+        {
+            character.animator.SetBool("isBlocking", isBlocking.Value);
         }
 
         [ServerRpc]
