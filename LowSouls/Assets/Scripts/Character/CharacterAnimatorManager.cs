@@ -153,7 +153,8 @@ namespace LS
         }
 
         public virtual void PlayTargetAttackActionAnimation
-            (AttackType attackType,
+            (WeaponItem weapon,
+            AttackType attackType,
             string targetAnimation,
             bool isPerformingAction,
             bool applyRootMotion = true,
@@ -164,7 +165,10 @@ namespace LS
             //keep track of current attack type (light heavy etc)
             character.characterCombatManager.currentAttackType = attackType;
             character.characterCombatManager.lastAttackAnimation = targetAnimation;
+
             //update animation set to current weapon animation
+            UpdateAnimatorController(weapon.weaponAnimator); 
+
             character.animator.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
             character.isPerformingAction = isPerformingAction;
@@ -172,6 +176,11 @@ namespace LS
             character.characterLocomotionManager.canMove = canMove;
 
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
+
+        public void UpdateAnimatorController(AnimatorOverrideController weaponController)
+        {
+            character.animator.runtimeAnimatorController = weaponController;
         }
     }
 }

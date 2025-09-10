@@ -5,6 +5,8 @@ namespace LS
     public class WeaponItem : Item
     {
         // Animator controller overrides (change attack animation based on weapons)
+        [Header("Animations")]
+        public AnimatorOverrideController weaponAnimator;
         [Header("Weapon Model")]
         public GameObject weaponModel;
 
