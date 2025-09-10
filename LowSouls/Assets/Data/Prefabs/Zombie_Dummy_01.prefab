@@ -502,6 +502,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRegenerationAmount: 0.5
   staminaRegenerationDelay: 2
+  blockingPhysicalAbsorption: 0
+  blockingMagicAbsorption: 0
+  blockingLightningAbsorption: 0
+  blockingFireAbsorption: 0
+  blockingHolyAbsorption: 0
 --- !u!114 &1830947569070368293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,6 +552,7 @@ MonoBehaviour:
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterStatsManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
   characterUIManager: {fileID: 0}
@@ -689,6 +695,8 @@ MonoBehaviour:
   moveAmount:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isBlocking:
     m_InternalValue: 0
   isInvulnerable:
     m_InternalValue: 0
@@ -2741,7 +2749,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.19
   m_Height: 0.44
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -3014,7 +3022,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.2
   m_Height: 0.35
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}

@@ -16,7 +16,7 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemDescription: 
   itemID: 2
-  weaponAnimator: {fileID: 22100000, guid: 5b0c005481598db4ab3131901d2fe2f7, type: 2}
+  weaponAnimator: {fileID: 22100000, guid: a43c623d473a3ab48b1c00d82964670f, type: 2}
   weaponModel: {fileID: 4522433441981415866, guid: 93ac689af1e82a7468b8efd5f9e01c6c, type: 3}
   strengthREQ: 20
   dexREQ: 5
