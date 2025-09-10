@@ -12,6 +12,7 @@ namespace LS
 
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;
+        public TakeBlockedDamageEffect takeBlockedDamageEffect;
 
         [SerializeField] List<InstantCharacterEffects> instantEffects;
 

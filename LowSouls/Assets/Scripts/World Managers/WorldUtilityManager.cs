@@ -66,5 +66,29 @@ namespace LS
             if (cross.y < 0) viewableAngle = -viewableAngle;
             return viewableAngle;
         }
+
+        public DamageIntensity GetDamageIntensityBasedOnPoiseDamage(float poiseDamage)
+        {
+            //throwing items
+            DamageIntensity damageIntensity = DamageIntensity.Ping;
+
+            //small weapons/ light attacks
+            if (poiseDamage >= 10)
+                damageIntensity = DamageIntensity.Light;
+
+            //standard weapons/ medium attacks
+            if (poiseDamage >= 30)
+                damageIntensity = DamageIntensity.Medium;
+
+            //great weapons/ heavy attacks
+            if (poiseDamage >= 70)
+                damageIntensity = DamageIntensity.Heavy;
+
+            //ultra weapons/ colossal attacks
+            if (poiseDamage >= 120)
+                damageIntensity = DamageIntensity.Colossal;
+
+            return damageIntensity;
+        }
     }
 }

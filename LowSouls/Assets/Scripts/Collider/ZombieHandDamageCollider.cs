@@ -13,6 +13,12 @@ namespace LS {
             zombieCharacter = GetComponentInParent<AICharacterManager>();
         }
 
+        protected override void GetBlockingDotValues(CharacterManager dmgTarget)
+        {
+            directionFromAttackToDamageTarget = zombieCharacter.transform.position - dmgTarget.transform.position;
+            dotValueFromAttackToDamageTarget = Vector3.Dot(directionFromAttackToDamageTarget, dmgTarget.transform.forward);
+        }
+
         protected override void DamageTarget(CharacterManager dmgTarget)
         {
             //no more than 1 dmg per single atk

@@ -17,6 +17,7 @@ namespace LS
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
         [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
         [HideInInspector] public CharacterCombatManager characterCombatManager;
+        [HideInInspector] public CharacterStatsManager characterStatsManager;
         [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
         [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
         [HideInInspector] public CharacterUIManager characterUIManager;
@@ -37,6 +38,7 @@ namespace LS
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
             characterCombatManager = GetComponent<CharacterCombatManager>();
+            characterStatsManager = GetComponent<CharacterStatsManager>();
             characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
             characterLocomotionManager = GetComponent<CharacterLocomotionManager>();
             characterUIManager = GetComponent<CharacterUIManager>();

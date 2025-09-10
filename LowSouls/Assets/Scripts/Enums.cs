@@ -35,6 +35,15 @@ namespace LS
         RollingAttack01
     }
 
+    public enum DamageIntensity
+    {
+        Ping,
+        Light,
+        Medium,
+        Heavy,
+        Colossal
+    }
+
     public enum CharacterGroup
     {
         Team01,

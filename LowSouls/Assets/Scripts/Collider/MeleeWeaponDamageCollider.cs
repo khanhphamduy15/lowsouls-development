@@ -42,6 +42,12 @@ namespace LS
             }
         }
 
+        protected override void GetBlockingDotValues(CharacterManager dmgTarget)
+        {
+            directionFromAttackToDamageTarget = characterCausingDamage.transform.position - dmgTarget.transform.position;
+            dotValueFromAttackToDamageTarget = Vector3.Dot(directionFromAttackToDamageTarget, dmgTarget.transform.forward);
+        }
+
         protected override void DamageTarget(CharacterManager dmgTarget)
         {
             //no more than 1 dmg per single atk
@@ -87,7 +93,6 @@ namespace LS
                     break;
             }
 
-            Debug.Log("Final Dmg: " + damageEffect.physicalDamage);
             if (characterCausingDamage.IsOwner)
             {
                 dmgTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(

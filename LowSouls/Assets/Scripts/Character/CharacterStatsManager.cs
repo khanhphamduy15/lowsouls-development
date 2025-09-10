@@ -13,6 +13,14 @@ namespace LS
         private float staminaRegenerationTimer = 0;
         private float staminaTickTimer = 0;
 
+        [Header("Blocking Absorptions")]
+        public float blockingPhysicalAbsorption;
+        public float blockingMagicAbsorption;
+        public float blockingLightningAbsorption;
+        public float blockingFireAbsorption;
+        public float blockingHolyAbsorption;
+
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
