@@ -19,6 +19,7 @@ namespace LS
             meleeDamageCollider.fireDamage = weapon.fireDmg;
             meleeDamageCollider.holyDamage = weapon.holyDmg;
             meleeDamageCollider.lightningDamage = weapon.lightningDmg;
+            meleeDamageCollider.poiseDamage = weapon.poiseDmg;
 
             meleeDamageCollider.light_Attack_01_Modifier = weapon.light_Attack_01_Modifier;
             meleeDamageCollider.light_Attack_02_Modifier = weapon.light_Attack_02_Modifier;

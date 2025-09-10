@@ -19,6 +19,7 @@ namespace LS
         public float blockingLightningAbsorption;
         public float blockingFireAbsorption;
         public float blockingHolyAbsorption;
+        public float blockingStability;
 
 
         protected virtual void Awake()

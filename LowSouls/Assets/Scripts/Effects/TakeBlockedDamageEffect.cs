@@ -23,6 +23,10 @@ namespace LS
         public float poiseDamage = 0;
         public bool poiseIsBroken = false; //broken = stunned
 
+        [Header("Stamina")]
+        public float staminaDamage = 0;
+        public float finalStaminaDamage = 0;
+
         //build ups<to do>
         [Header("Animation")]
         public bool playDamageAnimation = true;
@@ -52,6 +56,9 @@ namespace LS
             //calc dmg
             CalculateDamage(character);
 
+            //calc stamina cost
+            CalculateStaminaDamage(character);
+
             //check dmg taken direction
 
             //play dmg animation
@@ -64,6 +71,9 @@ namespace LS
 
             //play dmg vfx (blood particle)
             PlayDamageVFX(character);
+
+            //guard break check
+            CheckForGuardBreak(character);
         }
 
         private void CalculateDamage(CharacterManager character)
@@ -97,6 +107,31 @@ namespace LS
             //calc poise dmg to determine character state (stunned or not)
         }
 
+        private void CalculateStaminaDamage(CharacterManager character)
+        {
+            if (!character.IsOwner) 
+                return;
+
+            finalStaminaDamage = staminaDamage;
+
+            float staminaDamageAbsorption = finalStaminaDamage * (character.characterStatsManager.blockingStability / 100);
+            float staminaDamageAfterAbsorption = finalStaminaDamage - staminaDamageAbsorption;
+
+            character.characterNetworkManager.currentStamina.Value -= staminaDamageAfterAbsorption;
+        }
+        
+        private void CheckForGuardBreak(CharacterManager character)
+        {
+            if (!character.IsOwner)
+                return;
+
+            if (character.characterNetworkManager.currentStamina.Value <= 0)
+            {
+                character.characterAnimatorManager.PlayTargetActionAnimation("Guard_Break_01", true);
+                character.characterNetworkManager.isBlocking.Value = false;
+            }
+        }
+
         private void PlayDamageVFX(CharacterManager character)
         {
             //fire dmg => fire particles
@@ -106,7 +141,7 @@ namespace LS
         private void PlayDamageSFX(CharacterManager character)
         {
 
-
+            character.characterSoundFXManager.PlayBlockSFX();
         }
 
         private void PlayDirectionalBasedBlockedDamageAnimation(CharacterManager character)

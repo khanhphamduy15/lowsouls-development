@@ -53,5 +53,10 @@ namespace LS
             if (footsteps.Length > 0)
                 PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(footsteps));
         }
+
+        public virtual void PlayBlockSFX()
+        {
+
+        }
     }
 }

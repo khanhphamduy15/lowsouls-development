@@ -15,6 +15,9 @@ namespace LS
         public float holyDamage = 0;
         public float lightningDamage = 0;
 
+        [Header("Poise")]
+        public float poiseDamage = 0;
+
         [Header("Contact Point")]
         protected Vector3 contactPoint;
 
@@ -64,6 +67,8 @@ namespace LS
                 damageEffect.magicDamage = magicDamage;
                 damageEffect.holyDamage = holyDamage;
                 damageEffect.lightningDamage = lightningDamage;
+                damageEffect.poiseDamage = poiseDamage;
+                damageEffect.staminaDamage = poiseDamage;
                 damageEffect.contactPoint = contactPoint;
 
                 //apply blocked character damage to target
@@ -91,6 +96,7 @@ namespace LS
             damageEffect.magicDamage = magicDamage;
             damageEffect.holyDamage = holyDamage;
             damageEffect.lightningDamage = lightningDamage;
+            damageEffect.poiseDamage = poiseDamage;
             damageEffect.contactPoint = contactPoint;
 
             dmgTarget.characterEffectsManager.ProcessInstantEffects(damageEffect);

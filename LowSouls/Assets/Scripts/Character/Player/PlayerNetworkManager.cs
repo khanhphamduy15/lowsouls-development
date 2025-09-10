@@ -33,6 +33,7 @@ namespace LS
                 player.playerStatsManager.blockingMagicAbsorption = player.playerCombatManager.currentWeaponBeingUsed.magicDmgAbsorption;
                 player.playerStatsManager.blockingHolyAbsorption = player.playerCombatManager.currentWeaponBeingUsed.holyDmgAbsorption;
                 player.playerStatsManager.blockingLightningAbsorption = player.playerCombatManager.currentWeaponBeingUsed.lightningDmgAbsorption;
+                player.playerStatsManager.blockingStability = player.playerCombatManager.currentWeaponBeingUsed.stability;
             }
         }
         public void SetCharacterActionHand(bool rightHandAction)

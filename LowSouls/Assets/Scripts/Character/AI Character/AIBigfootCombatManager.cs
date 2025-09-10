@@ -15,6 +15,7 @@ namespace LS
 
         [Header("Damage")]
         [SerializeField] int baseDamage = 25;
+        [SerializeField] int basePoiseDamage = 25;
         [SerializeField] float attack01DamageModifier = 1.0f;
         [SerializeField] float attack02DamageModifier = 1.2f;
         [SerializeField] float attack03DamageModifier = 1.4f;
@@ -35,6 +36,8 @@ namespace LS
         {
             aiCharacter.characterSoundFXManager.PlayAttackGruntsSFX();
             leftHandDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
+            leftHandDamageCollider.poiseDamage = basePoiseDamage * attack01DamageModifier;
+
         }
 
         public void SetAttack02Damage()
@@ -42,6 +45,9 @@ namespace LS
             aiCharacter.characterSoundFXManager.PlayAttackGruntsSFX();
             rightHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
             leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
+            rightHandDamageCollider.poiseDamage = basePoiseDamage * attack02DamageModifier;
+            leftHandDamageCollider.poiseDamage = basePoiseDamage * attack02DamageModifier;
+
         }
 
         public void SetAttack03Damage()
@@ -49,6 +55,8 @@ namespace LS
             aiCharacter.characterSoundFXManager.PlayAttackGruntsSFX();
             rightHandDamageCollider.physicalDamage = baseDamage * attack03DamageModifier;
             leftHandDamageCollider.physicalDamage = baseDamage * attack03DamageModifier;
+            rightHandDamageCollider.poiseDamage = basePoiseDamage * attack03DamageModifier;
+            leftHandDamageCollider.poiseDamage = basePoiseDamage * attack03DamageModifier;
         }
 
         public void SetAttack04Damage()
@@ -56,6 +64,8 @@ namespace LS
             aiCharacter.characterSoundFXManager.PlayAttackGruntsSFX();
             rightHandDamageCollider.physicalDamage = baseDamage * attack04DamageModifier;
             leftHandDamageCollider.physicalDamage = baseDamage * attack04DamageModifier;
+            rightHandDamageCollider.poiseDamage = basePoiseDamage * attack03DamageModifier;
+            leftHandDamageCollider.poiseDamage = basePoiseDamage * attack03DamageModifier;
         }
 
         public void SetAttackGroundDamage()
@@ -63,6 +73,8 @@ namespace LS
             aiCharacter.characterSoundFXManager.PlayAttackGruntsSFX();
             rightHandDamageCollider.physicalDamage = baseDamage * attackGroundDamageModifier;
             leftHandDamageCollider.physicalDamage = baseDamage * attackGroundDamageModifier;
+            rightHandDamageCollider.poiseDamage = basePoiseDamage * attackGroundDamageModifier;
+            leftHandDamageCollider.poiseDamage = basePoiseDamage * attackGroundDamageModifier;
         }
 
         public void OpenRightHandCollider()

@@ -72,8 +72,10 @@ namespace LS
         public WeaponItemAction oh_LB_Action; //one handed left bumper action
 
 
-        [Header("Whooshes")]
+        [Header("SFX")]
         public AudioClip[] whooshes;
+        public AudioClip[] blocking;
+
 
 
     }
