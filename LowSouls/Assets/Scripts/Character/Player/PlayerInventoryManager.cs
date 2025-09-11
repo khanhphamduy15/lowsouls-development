@@ -6,6 +6,8 @@ namespace LS
     {
         public WeaponItem currentRightHandWeapon;
         public WeaponItem currentLeftHandWeapon;
+        public WeaponItem currentTwoHandWeapon;
+
 
         [Header("Quick Slots")]
         public WeaponItem[] weaponInRightHandSlots = new WeaponItem[3];

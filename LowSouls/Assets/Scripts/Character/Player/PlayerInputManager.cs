@@ -40,6 +40,11 @@ namespace LS
         [SerializeField] bool RBInput = false;
         [SerializeField] bool LBInput = false;
 
+        [Header("Two Handing Input")]
+        [SerializeField] bool twoHandInput = false;
+        [SerializeField] bool twoHandRightInput = false;
+        [SerializeField] bool twoHandLeftInput = false;
+
         [Header("Trigger Input")]
         [SerializeField] bool ChargeRTInput = false;
         [SerializeField] bool RTInput = false;
@@ -71,6 +76,16 @@ namespace LS
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
                 playerControls.PlayerActions.LB.performed += i => LBInput = true;
                 playerControls.PlayerActions.LB.canceled += i => player.playerNetworkManager.isBlocking.Value = false;
+
+                //Two Handing
+                playerControls.PlayerActions.TwoHandWeapon.performed += i => twoHandInput = true;
+                playerControls.PlayerActions.TwoHandWeapon.canceled += i => twoHandInput = false;
+
+                playerControls.PlayerActions.TwoHandRightWeapon.performed += i => twoHandRightInput = true;
+                playerControls.PlayerActions.TwoHandRightWeapon.canceled += i => twoHandRightInput = false;
+
+                playerControls.PlayerActions.TwoHandLeftWeapon.performed += i => twoHandLeftInput = true;
+                playerControls.PlayerActions.TwoHandLeftWeapon.canceled += i => twoHandLeftInput = false;
 
 
                 //Triggers
@@ -151,6 +166,7 @@ namespace LS
 
         private void HandleAllInputs()
         {
+            HandleTwoHandInput();
             HandleCameraMovementInput();
             HandlePlayerMovementInput();
             HandleDodgeInput();
@@ -166,6 +182,48 @@ namespace LS
             HandleSwitchLeftWeaponInput();
             HandleQuedInputs();
             HandleInteractionInput();
+        }
+
+        //Two Handing 
+        private void HandleTwoHandInput()
+        {
+            if (!twoHandInput)
+                return;
+
+            if (twoHandRightInput)
+            {
+                RBInput = false;
+                twoHandRightInput = false;
+                player.playerNetworkManager.isBlocking.Value = false;
+
+                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
+                {
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                    return;
+                }
+                else
+                {
+                    player.playerNetworkManager.isTwoHandingRightWeapon.Value = true;
+                    return;
+                }
+            }
+            else if (twoHandLeftInput)
+            {
+                LBInput = false;
+                twoHandLeftInput = false;
+                player.playerNetworkManager.isBlocking.Value = false;
+
+                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
+                {
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                    return;
+                }
+                else
+                {
+                    player.playerNetworkManager.isTwoHandingLeftWeapon.Value = true;
+                    return;
+                }
+            }
         }
 
         //Lock On
@@ -346,6 +404,9 @@ namespace LS
 
         private void HandleRBInput()
         {
+            if (twoHandInput)
+                return;
+
             if (RBInput)
             {
                 RBInput = false;
@@ -361,6 +422,9 @@ namespace LS
 
         private void HandleLBInput()
         {
+            if (twoHandInput)
+                return;
+
             if (LBInput)
             {
                 LBInput = false;

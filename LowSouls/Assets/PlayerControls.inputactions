@@ -270,15 +270,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "ebe8fe0c-2da9-43c4-8d31-7c733a026dd6",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Tap",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "8f8ac871-f739-4378-86b1-d5c347111920",
@@ -306,12 +297,39 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Que RB",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "3556c5e3-f467-48fb-99a5-a25aa2bdf7b2",
+                    "id": "ebe8fe0c-2da9-43c4-8d31-7c733a026dd6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Two Hand Right Weapon",
+                    "type": "Button",
+                    "id": "ff695c06-4a61-4d4b-b545-f44657c35332",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Two Hand Left Weapon",
+                    "type": "Button",
+                    "id": "5b9d792a-0be8-4d36-a185-cbea862b42ba",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Two Hand Weapon",
+                    "type": "PassThrough",
+                    "id": "c942e5f8-8dc6-4685-81ae-51d4e7f7018e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -333,9 +351,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RT",
+                    "name": "Que RB",
                     "type": "Button",
-                    "id": "536911cb-af25-4e38-b261-da49f6174ae1",
+                    "id": "3556c5e3-f467-48fb-99a5-a25aa2bdf7b2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -345,6 +363,15 @@
                     "name": "Que RT",
                     "type": "Button",
                     "id": "a708c8ce-9cd1-4369-bfd8-a8cbaeb99f95",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RT",
+                    "type": "Button",
+                    "id": "536911cb-af25-4e38-b261-da49f6174ae1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -443,6 +470,28 @@
                 },
                 {
                     "name": "",
+                    "id": "f18e29b7-4b57-4c62-9a40-57658cfd7621",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74b9acdf-d592-43a2-aee3-9324467a462e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a1f17a73-dc83-4c7a-879b-5eab8837d23e",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -482,6 +531,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12856191-1c06-4bcc-9a43-d32f90646aac",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9a41cce2-a310-4fe1-a07f-34b36427c402",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Right Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -724,6 +795,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "LB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1070d5f0-e688-4a19-854b-3876a7e0a3b6",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Left Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d53e01d-8e93-45ff-8552-3dc10f70fff2",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Left Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

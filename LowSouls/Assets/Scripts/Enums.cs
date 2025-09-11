@@ -21,7 +21,8 @@ namespace LS
     {
         RightHand,
         LeftHandWeaponSlot,
-        LeftHandShieldSlot
+        LeftHandShieldSlot,
+        BackSlot
     }
 
     public enum WeaponModelType

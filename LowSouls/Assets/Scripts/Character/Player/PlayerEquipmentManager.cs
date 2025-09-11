@@ -6,13 +6,18 @@ namespace LS
     {
         PlayerManager player;
 
+        [Header("Weapon Model Instantiation Slots")]
         public WeaponModelInstantiationSlot rightHandSlot;
         public WeaponModelInstantiationSlot leftHandWeaponSlot;
         public WeaponModelInstantiationSlot leftHandShieldSlot;
+        public WeaponModelInstantiationSlot backSlot;
 
+
+        [Header("Weapon Managers")]
         [SerializeField] WeaponManager rightWeaponManager;
         [SerializeField] WeaponManager leftWeaponManager;
 
+        [Header("Weapon Models")]
         public GameObject rightHandWeaponModel;
         public GameObject leftHandWeaponModel;
 
@@ -46,6 +51,10 @@ namespace LS
                 else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandShieldSlot)
                 {
                     leftHandShieldSlot = weaponSlot;
+                }
+                else if (weaponSlot.weaponSlot == WeaponModelSlot.BackSlot)
+                {
+                    backSlot = weaponSlot;
                 }
             }
         }
@@ -162,6 +171,25 @@ namespace LS
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }
+        }
+
+        //Two Hand
+        public void UnTwoHandWeapon()
+        {
+            //update animator controller
+            //remove strength bonus
+            //un-two hand
+        }
+
+        public void TwoHandRightWeapon()
+        {
+            //check untwohandable weapon
+
+        }
+
+        public void TwoHandLeftWeapon()
+        {
+
         }
 
         public void SwitchLeftWeapon()
