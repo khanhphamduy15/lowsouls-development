@@ -17,7 +17,9 @@ MonoBehaviour:
   itemDescription: 
   itemID: 0
   weaponAnimator: {fileID: 22100000, guid: 5b0c005481598db4ab3131901d2fe2f7, type: 2}
+  weaponModelType: 0
   weaponModel: {fileID: 484281689929515919, guid: da0e82b2dced5fe46b17af0558537424, type: 3}
+  weaponClass: 3
   strengthREQ: 10
   dexREQ: 0
   faithREQ: 0
@@ -43,6 +45,12 @@ MonoBehaviour:
   chargeAttackStaminaCostMultiplier: 2
   runningAttackStaminaCostMultiplier: 1
   rollingAttackStaminaCostMultiplier: 1.5
+  physicalDmgAbsorption: 50
+  fireDmgAbsorption: 50
+  magicDmgAbsorption: 50
+  holyDmgAbsorption: 50
+  lightningDmgAbsorption: 50
+  stability: 50
   oh_RB_Action: {fileID: 11400000, guid: 553415bcbbc859945aa74b7ada780cde, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: f774ec8823a885e46b5be7b782a9e3c4, type: 2}
   oh_LB_Action: {fileID: 11400000, guid: 85068c4433ac9884f9d110884b91aea8, type: 2}
@@ -51,3 +59,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a7c8a2e52e9fe1468e896908ee7c399, type: 3}
   - {fileID: 8300000, guid: 21ab5cfe0049fd145bf34f5b53a3cd1a, type: 3}
   - {fileID: 8300000, guid: 9eaee2af6956dd647b5106e06df1b942, type: 3}
+  blocking: []

@@ -45,7 +45,16 @@ namespace LS
         public void OnIsTwoHandingWeaponChanged(bool oldStatus, bool newStatus)
         {
             if (!isTwoHandingWeapon.Value)
+            {
+                if (IsOwner)
+                {
+                    isTwoHandingWeapon.Value = false;
+                    isTwoHandingRightWeapon.Value = false;
+                }
+
                 player.playerEquipmentManager.UnTwoHandWeapon();
+            }
+            player.animator.SetBool("isTwoHanding", isTwoHandingWeapon.Value);
         }
 
         public void OnIsTwoHandingRightWeaponChanged(bool oldStatus, bool newStatus)

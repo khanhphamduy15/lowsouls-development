@@ -31,6 +31,14 @@ namespace LS
         Shield
     }
 
+    public enum WeaponClass
+    {
+        StraightSword,
+        Claymore,
+        MediumShield,
+        Fist
+    }
+
     public enum AttackType
     {
         LightAttack01,

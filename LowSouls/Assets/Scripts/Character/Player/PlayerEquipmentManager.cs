@@ -7,11 +7,10 @@ namespace LS
         PlayerManager player;
 
         [Header("Weapon Model Instantiation Slots")]
-        public WeaponModelInstantiationSlot rightHandSlot;
+        public WeaponModelInstantiationSlot rightHandWeaponSlot;
         public WeaponModelInstantiationSlot leftHandWeaponSlot;
         public WeaponModelInstantiationSlot leftHandShieldSlot;
         public WeaponModelInstantiationSlot backSlot;
-
 
         [Header("Weapon Managers")]
         [SerializeField] WeaponManager rightWeaponManager;
@@ -42,7 +41,7 @@ namespace LS
             {
                 if (weaponSlot.weaponSlot == WeaponModelSlot.RightHand)
                 {
-                    rightHandSlot = weaponSlot;
+                    rightHandWeaponSlot = weaponSlot;
                 }
                 else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandWeaponSlot)
                 {
@@ -70,10 +69,10 @@ namespace LS
             if (player.playerInventoryManager.currentRightHandWeapon != null)
             {
                 //remove old weapon clone
-                rightHandSlot.UnloadWeapon();
+                rightHandWeaponSlot.UnloadWeapon();
                 //get new weapon clone
                 rightHandWeaponModel = Instantiate(player.playerInventoryManager.currentRightHandWeapon.weaponModel);
-                rightHandSlot.LoadWeapon(rightHandWeaponModel);
+                rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
@@ -159,10 +158,10 @@ namespace LS
                 switch (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType)
                 {
                     case WeaponModelType.Weapon:
-                        leftHandWeaponSlot.LoadWeapon(leftHandWeaponModel);
+                        leftHandWeaponSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
                         break;
                     case WeaponModelType.Shield:
-                        leftHandShieldSlot.LoadWeapon(leftHandWeaponModel);
+                        leftHandShieldSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
                         break;
                     default:
                         break;
@@ -177,19 +176,75 @@ namespace LS
         public void UnTwoHandWeapon()
         {
             //update animator controller
+            player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
+
             //remove strength bonus
+
             //un-two hand
+
+            //Left hand
+            if (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType == WeaponModelType.Weapon)
+            {
+                leftHandWeaponSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+            }
+            else if (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType == WeaponModelType.Shield)
+            {
+                leftHandShieldSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+
+            }
+
+            //Right hand
+            rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
+
+            //refresh dmg collider
+            rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+            leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
         }
 
         public void TwoHandRightWeapon()
         {
             //check untwohandable weapon
+            if (player.playerInventoryManager.currentRightHandWeapon == WorldItemDatabase.instance.unarmedWeapon)
+            {
+                if (player.IsOwner)
+                {
+                    player.playerNetworkManager.isTwoHandingRightWeapon.Value = false;
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                }
+                return;
+            }
+            //update animator
+            player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
+            backSlot.PlaceWeaponModelInUnequippedSlot(leftHandWeaponModel, player.playerInventoryManager.currentLeftHandWeapon.weaponClass, player);
 
+            //add strength bonus
+            rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
+
+            rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+            leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
         }
 
         public void TwoHandLeftWeapon()
         {
+            //check untwohandable weapon
+            if (player.playerInventoryManager.currentLeftHandWeapon == WorldItemDatabase.instance.unarmedWeapon)
+            {
+                if (player.IsOwner)
+                {
+                    player.playerNetworkManager.isTwoHandingLeftWeapon.Value = false;
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                }
+                return;
+            }
+            //update animator
+            player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentLeftHandWeapon.weaponAnimator);
+            backSlot.PlaceWeaponModelInUnequippedSlot(rightHandWeaponModel, player.playerInventoryManager.currentRightHandWeapon.weaponClass, player);
 
+            //add strength bonus
+            rightHandWeaponSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+
+            rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+            leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
         }
 
         public void SwitchLeftWeapon()

@@ -1959,6 +1959,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: 1
   currentWeaponModel: {fileID: 0}
+--- !u!1 &7137433647367198174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6818607112055797393}
+  - component: {fileID: 7988232884281291270}
+  m_Layer: 11
+  m_Name: Back Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6818607112055797393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137433647367198174}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.237, y: 0.181, z: 0.195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4461970734322517524}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7988232884281291270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137433647367198174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6579a6155ba8c49b2ecbda37c754cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlot: 3
+  currentWeaponModel: {fileID: 0}
 --- !u!1 &7230039333023863621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,6 +2357,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 
+  hit_Forward_Ping_01: Hit_Forward_Ping_01
+  hit_Forward_Ping_02: Hit_Forward_Ping_02
+  hit_Backward_Ping_01: Hit_Backward_Ping_01
+  hit_Backward_Ping_02: Hit_Backward_Ping_02
+  hit_Left_Ping_01: Hit_Left_Ping_01
+  hit_Left_Ping_02: Hit_Left_Ping_02
+  hit_Right_Ping_01: Hit_Right_Ping_01
+  hit_Right_Ping_02: Hit_Right_Ping_02
+  forward_Ping_Damage: []
+  backward_Ping_Damage: []
+  left_Ping_Damage: []
+  right_Ping_Damage: []
   hit_Forward_Medium_01: Hit_Forward_Medium_01
   hit_Forward_Medium_02: Hit_Forward_Medium_02
   hit_Backward_Medium_01: Hit_Backward_Medium_01
@@ -2462,6 +2520,12 @@ MonoBehaviour:
   blockingLightningAbsorption: 0
   blockingFireAbsorption: 0
   blockingHolyAbsorption: 0
+  blockingStability: 0
+  totalPoiseDamage: 0
+  offensivePoiseBonus: 0
+  basePoiseDefense: 0
+  defaultPoiseResetTimer: 8
+  poiseResetTimer: 0
 --- !u!114 &4113623230920652389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2526,6 +2590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRightHandWeapon: {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
   currentLeftHandWeapon: {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
+  currentTwoHandWeapon: {fileID: 0}
   weaponInRightHandSlots:
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
@@ -2548,9 +2613,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a327ebe2075be45a1e547162ed6e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandSlot: {fileID: 0}
+  rightHandWeaponSlot: {fileID: 0}
   leftHandWeaponSlot: {fileID: 0}
   leftHandShieldSlot: {fileID: 0}
+  backSlot: {fileID: 0}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightHandWeaponModel: {fileID: 0}
@@ -2740,6 +2806,14 @@ MonoBehaviour:
     m_InternalValue: 0
   isUsingLeftHand:
     m_InternalValue: 0
+  currentWeaponBeingTwoHanded:
+    m_InternalValue: 0
+  isTwoHandingWeapon:
+    m_InternalValue: 0
+  isTwoHandingRightWeapon:
+    m_InternalValue: 0
+  isTwoHandingLeftWeapon:
+    m_InternalValue: 0
 --- !u!114 &7628160118075793484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2893,6 +2967,7 @@ Transform:
   - {fileID: 9008927521282022618}
   - {fileID: 3300393617623214962}
   - {fileID: 9200991383244907858}
+  - {fileID: 6818607112055797393}
   m_Father: {fileID: 8648526063566482006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2380841947714542283
