@@ -21,6 +21,13 @@ namespace LS
         public float blockingHolyAbsorption;
         public float blockingStability;
 
+        [Header("Poise")]
+        public float totalPoiseDamage;
+        public float offensivePoiseBonus;
+        public float basePoiseDefense;
+        public float defaultPoiseResetTimer = 8;
+        public float poiseResetTimer = 0;
+
 
         protected virtual void Awake()
         {
@@ -30,6 +37,11 @@ namespace LS
         protected virtual void Start()
         {
 
+        }
+
+        protected virtual void Update()
+        {
+            HandlePoiseResetTimer();
         }
 
         public int CalculateHealthBasedOnVitalityLevel(int vitality)
@@ -90,6 +102,18 @@ namespace LS
             if (curStaminaAmount < prevStaminaAmount)
             {
                 staminaRegenerationTimer = 0;
+            }
+        }
+
+        protected virtual void HandlePoiseResetTimer()
+        {
+            if (poiseResetTimer > 0)
+            {
+                poiseResetTimer -= Time.deltaTime;
+            }
+            else
+            {
+                totalPoiseDamage = 0;
             }
         }
     }

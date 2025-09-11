@@ -65,8 +65,6 @@ namespace LS
                     currentHealth.Value = maxHealth.Value;
                 }
             }
-            Debug.Log($"{character.name} CheckHP: {oldValue} , {newValue}, isDead = {character.isDead.Value}");
-
         }
 
         public void OnLockOnTargetIDChange(ulong oldID, ulong newID)

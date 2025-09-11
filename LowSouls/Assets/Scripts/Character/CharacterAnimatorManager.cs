@@ -15,6 +15,25 @@ namespace LS
 
         public string lastDamageAnimationPlayed;
 
+        //Ping Hit Reactions
+        [SerializeField] string hit_Forward_Ping_01 = "Hit_Forward_Ping_01";
+        [SerializeField] string hit_Forward_Ping_02 = "Hit_Forward_Ping_02";
+
+        [SerializeField] string hit_Backward_Ping_01 = "Hit_Backward_Ping_01";
+        [SerializeField] string hit_Backward_Ping_02 = "Hit_Backward_Ping_02";
+
+        [SerializeField] string hit_Left_Ping_01 = "Hit_Left_Ping_01";
+        [SerializeField] string hit_Left_Ping_02 = "Hit_Left_Ping_02";
+
+        [SerializeField] string hit_Right_Ping_01 = "Hit_Right_Ping_01";
+        [SerializeField] string hit_Right_Ping_02 = "Hit_Right_Ping_02";
+
+        public List<string> forward_Ping_Damage = new List<string>();
+        public List<string> backward_Ping_Damage = new List<string>();
+        public List<string> left_Ping_Damage = new List<string>();
+        public List<string> right_Ping_Damage = new List<string>();
+
+        //Medium Hit Reactions
         [SerializeField] string hit_Forward_Medium_01 = "Hit_Forward_Medium_01";
         [SerializeField] string hit_Forward_Medium_02 = "Hit_Forward_Medium_02";
 
@@ -43,6 +62,20 @@ namespace LS
 
         protected virtual void Start()
         {
+            //Ping Hit List Generator
+            forward_Ping_Damage.Add(hit_Forward_Ping_01);
+            forward_Ping_Damage.Add(hit_Forward_Ping_02);
+
+            backward_Ping_Damage.Add(hit_Backward_Ping_01);
+            backward_Ping_Damage.Add(hit_Backward_Ping_02);
+
+            left_Ping_Damage.Add(hit_Left_Ping_01);
+            left_Ping_Damage.Add(hit_Left_Ping_02);
+
+            right_Ping_Damage.Add(hit_Right_Ping_01);
+            right_Ping_Damage.Add(hit_Right_Ping_02);
+
+            //Medium Hit List Generator
             forward_Medium_Damage.Add(hit_Forward_Medium_01);
             forward_Medium_Damage.Add(hit_Forward_Medium_02);
 
