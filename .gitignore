@@ -101,4 +101,9 @@ ServerData
 # Skip clone test folder
 LowSouls_clone_0/
 
+# Skip private
+Assets/PrivateAssets/*
+Assets/ArtAssets/*
+
+
 

@@ -5369,6 +5369,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 407036705201720737, guid: b9bac31f2ebcced4f88e662b54750c95, type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 4783500512845751772, guid: baae5523f1800cd45a8fe50b2a50386a, type: 3}
+    - target: {fileID: 407036705201720737, guid: b9bac31f2ebcced4f88e662b54750c95, type: 3}
       propertyPath: NetworkConfig.EnableSceneManagement
       value: 1
       objectReference: {fileID: 0}

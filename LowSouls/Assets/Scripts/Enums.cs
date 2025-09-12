@@ -34,8 +34,9 @@ namespace LS
     public enum EquipmentModelType
     {
         FullHelmet,
-        OpenHelmet,
+        HalfHelmet,
         HelmetAccessories,
+        Hood,
         FaceCover,
         Torso,
         Back,
@@ -55,6 +56,14 @@ namespace LS
         RightKnee,
         LeftLeg,
         LeftKnee
+    }
+
+    public enum HeadEquipmentType
+    {
+        FullHelmet,
+        HalfHelmet,
+        Hood,
+        FaceCover
     }
 
     public enum WeaponClass

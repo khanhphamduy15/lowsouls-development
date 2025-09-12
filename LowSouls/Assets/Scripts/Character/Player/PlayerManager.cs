@@ -16,7 +16,7 @@ namespace LS
         [HideInInspector] public PlayerCombatManager playerCombatManager;
         [HideInInspector] public PlayerInteractionManager playerInteractionManager;
         [HideInInspector] public PlayerEffectsManager playerEffectsManager;
-
+        [HideInInspector] public PlayerBodyManager playerBodyManager;
 
         protected override void Awake()
         {
@@ -29,7 +29,8 @@ namespace LS
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             playerCombatManager = GetComponent<PlayerCombatManager>();
             playerInteractionManager = GetComponent<PlayerInteractionManager>();
-            playerEffectsManager = GetComponent<PlayerEffectsManager>();    
+            playerEffectsManager = GetComponent<PlayerEffectsManager>();
+            playerBodyManager = GetComponent<PlayerBodyManager>();
         }
 
         protected override void Update()
