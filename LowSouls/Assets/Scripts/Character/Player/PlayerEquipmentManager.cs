@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LS
@@ -23,6 +24,10 @@ namespace LS
         [Header("Debug")]
         [SerializeField] bool equipmentItem = false;
 
+        [Header("Equipment Models")]
+        public GameObject fullHelmetObject;
+        public GameObject[] fullHelmetObjects;
+
         protected override void Start()
         {
             base.Start();
@@ -35,6 +40,15 @@ namespace LS
             base.Awake();
             player = GetComponent<PlayerManager>();
             InitializeWeaponSlots();
+
+            List<GameObject> fullHelmetList = new List<GameObject>();
+
+            foreach (Transform child in fullHelmetObject.transform)
+            {
+                fullHelmetList.Add(child.gameObject);
+            }
+
+            fullHelmetObjects = fullHelmetList.ToArray();
         }
 
         private void Update()
@@ -47,25 +61,55 @@ namespace LS
         }
 
         //Equipment
-        public void LoadHeadEquipment(HeadEquipmentItem headEquipmentItem)
+        public void LoadHeadEquipment(HeadEquipmentItem equipment)
+        {
+            //unload old models
+            UnloadHeadEquipmentModels();
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.headEquipmentID.Value = -1;
+
+                player.playerInventoryManager.headEquipment = null;
+                return;
+            }
+
+            player.playerInventoryManager.headEquipment = equipment;
+
+            foreach (var model in equipment.equipmentModels)
+            {
+                model.LoadModel(player);
+            }
+
+            //calc total armor absorption
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+
+            if (player.IsOwner)
+                player.playerNetworkManager.headEquipmentID.Value = equipment.itemID;
+        }
+
+        public void UnloadHeadEquipmentModels()
+        {
+            foreach (var model in fullHelmetObjects)
+            {
+                model.SetActive(false);
+            }
+        }
+
+        public void LoadBodyEquipment(BodyEquipmentItem equipment)
         {
             //calc total armor absorption
             player.playerStatsManager.CalculateTotalArmorAbsorption();
         }
 
-        public void LoadBodyEquipment(BodyEquipmentItem bodyEquipmentItem)
+        public void LoadLegEquipment(LegEquipmentItem equipment)
         {
             //calc total armor absorption
             player.playerStatsManager.CalculateTotalArmorAbsorption();
         }
 
-        public void LoadLegEquipment(LegEquipmentItem legEquipmentItem)
-        {
-            //calc total armor absorption
-            player.playerStatsManager.CalculateTotalArmorAbsorption();
-        }
-
-        public void LoadHandEquipment(HandEquipmentItem handEquipmentItem)
+        public void LoadHandEquipment(HandEquipmentItem equipment)
         {
             //calc total armor absorption
             player.playerStatsManager.CalculateTotalArmorAbsorption();
@@ -75,8 +119,7 @@ namespace LS
         {
             Debug.Log("equipping new item");
 
-            if (player.playerInventoryManager.headEquipment != null)
-                LoadHeadEquipment(player.playerInventoryManager.headEquipment);
+            LoadHeadEquipment(player.playerInventoryManager.headEquipment);
 
             if (player.playerInventoryManager.bodyEquipment != null)
                 LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);

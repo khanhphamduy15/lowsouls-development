@@ -31,6 +31,32 @@ namespace LS
         Shield
     }
 
+    public enum EquipmentModelType
+    {
+        FullHelmet,
+        OpenHelmet,
+        HelmetAccessories,
+        FaceCover,
+        Torso,
+        Back,
+        RightShoulder,
+        RightUpperArm,
+        RightElbow,
+        RightLowerArm,
+        RightHand,
+        LeftShoulder,
+        LeftUpperArm,
+        LeftElbow,
+        LeftLowerArm,
+        LeftHand,
+        Hips,
+        HipsAttachment,
+        RightLeg,
+        RightKnee,
+        LeftLeg,
+        LeftKnee
+    }
+
     public enum WeaponClass
     {
         StraightSword,

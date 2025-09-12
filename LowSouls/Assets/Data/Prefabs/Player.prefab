@@ -125,6 +125,7 @@ Transform:
   - {fileID: 1338644750419041062}
   - {fileID: 3569981942484095378}
   - {fileID: 4075311793347889373}
+  - {fileID: 6179808349390864205}
   m_Father: {fileID: 9200991383244907858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6111325863717340141
@@ -2036,6 +2037,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 542356322650132965}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7289288603342613224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6179808349390864205}
+  m_Layer: 11
+  m_Name: Helmet Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6179808349390864205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289288603342613224}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.052, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2206431943061725414}
+  m_Father: {fileID: 3326301886632531406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7325917929254410541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,6 +2352,7 @@ MonoBehaviour:
   playerEquipmentManager: {fileID: 0}
   playerCombatManager: {fileID: 0}
   playerInteractionManager: {fileID: 0}
+  playerEffectsManager: {fileID: 0}
 --- !u!143 &-7875021588539770521
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2337,13 +2371,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.6
+  m_Height: 1.78
   m_Radius: 0.23
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &-7579761659635329869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2521,6 +2555,15 @@ MonoBehaviour:
   blockingFireAbsorption: 0
   blockingHolyAbsorption: 0
   blockingStability: 0
+  armorPhysicalDamageAbsoprtion: 0
+  armorMagicDamageAbsoprtion: 0
+  armorFireDamageAbsoprtion: 0
+  armorLightningDamageAbsoprtion: 0
+  armorHolyDamageAbsoprtion: 0
+  armorImmunity: 0
+  armorRobustness: 0
+  armorFocus: 0
+  armorVitality: 0
   totalPoiseDamage: 0
   offensivePoiseBonus: 0
   basePoiseDefense: 0
@@ -2574,6 +2617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 0}
+  staticEffects: []
   effectsToTest: {fileID: 11400000, guid: 006b28a47e0efe74d82a8de6bfb8f37f, type: 2}
   processEffect: 0
 --- !u!114 &6925295538053929906
@@ -2601,6 +2645,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
   leftHandWeaponIndex: 0
+  headEquipment: {fileID: 0}
+  bodyEquipment: {fileID: 0}
+  legEquipment: {fileID: 0}
+  handEquipment: {fileID: 0}
 --- !u!114 &459622003869578303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2621,6 +2669,9 @@ MonoBehaviour:
   leftWeaponManager: {fileID: 0}
   rightHandWeaponModel: {fileID: 0}
   leftHandWeaponModel: {fileID: 0}
+  equipmentItem: 0
+  fullHelmetObject: {fileID: 7289288603342613224}
+  fullHelmetObjects: []
 --- !u!54 &-102400752348575442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2719,6 +2770,10 @@ MonoBehaviour:
     m_InternalValue: 5
   endurance:
     m_InternalValue: 5
+  strength:
+    m_InternalValue: 1
+  strengthModifier:
+    m_InternalValue: 1
   currentHealth:
     m_InternalValue: 0
   maxHealth:
@@ -2813,6 +2868,14 @@ MonoBehaviour:
   isTwoHandingRightWeapon:
     m_InternalValue: 0
   isTwoHandingLeftWeapon:
+    m_InternalValue: 0
+  headEquipmentID:
+    m_InternalValue: 0
+  bodyEquipmentID:
+    m_InternalValue: 0
+  legEquipmentID:
+    m_InternalValue: 0
+  handEquipmentID:
     m_InternalValue: 0
 --- !u!114 &7628160118075793484
 MonoBehaviour:
@@ -3318,6 +3381,114 @@ Transform:
   - {fileID: 4557255001454790037}
   m_Father: {fileID: 8674768919321411465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8945440741876860934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2206431943061725414}
+  - component: {fileID: 2526310780452294298}
+  - component: {fileID: 9042904289095271699}
+  - component: {fileID: 8693414098711861760}
+  m_Layer: 11
+  m_Name: Sphere Helmet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2206431943061725414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945440741876860934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -0}
+  m_LocalScale: {x: 0.36661983, y: 0.36661983, z: 0.36661983}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6179808349390864205}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2526310780452294298
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945440741876860934}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &9042904289095271699
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945440741876860934}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &8693414098711861760
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945440741876860934}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7898275124966881219
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 033296c33a02622418d968d3b95afdb5, type: 2}
   headEquipments:
   - {fileID: 11400000, guid: 0ced3ab647e59a04fab5697987a19de5, type: 2}
+  - {fileID: 11400000, guid: 19c26d008fa891049a2eaa608f51f9d0, type: 2}
   bodyEquipments:
   - {fileID: 11400000, guid: afdeab2185b97f041954fcf9d115af56, type: 2}
   legEquipments:

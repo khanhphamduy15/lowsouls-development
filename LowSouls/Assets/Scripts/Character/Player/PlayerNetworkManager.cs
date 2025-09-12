@@ -21,6 +21,14 @@ namespace LS
         public NetworkVariable<bool> isTwoHandingWeapon = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isTwoHandingRightWeapon = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isTwoHandingLeftWeapon = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+        [Header("Armor")]
+        public NetworkVariable<int> headEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> bodyEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> legEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> handEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -91,6 +99,74 @@ namespace LS
 
             player.playerInventoryManager.currentTwoHandWeapon = player.playerInventoryManager.currentLeftHandWeapon;
             player.playerEquipmentManager.TwoHandLeftWeapon();
+        }
+
+        public void OnHeadEquipmentChanged(int oldStatus, int newStatus)
+        {
+            if (IsOwner)
+                return;
+
+            HeadEquipmentItem equipment = WorldItemDatabase.instance.GetHeadEquipmentByID(headEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadHeadEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadHeadEquipment(null);
+            }
+        }
+
+        public void OnBodyEquipmentChanged(int oldStatus, int newStatus)
+        {
+            if (IsOwner)
+                return;
+
+            BodyEquipmentItem equipment = WorldItemDatabase.instance.GetBodyEquipmentByID(bodyEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadBodyEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadBodyEquipment(null);
+            }
+        }
+
+        public void OnLegEquipmentChanged(int oldStatus, int newStatus)
+        {
+            if (IsOwner)
+                return;
+
+            LegEquipmentItem equipment = WorldItemDatabase.instance.GetLegEquipmentByID(legEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadLegEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadLegEquipment(null);
+            }
+        }
+
+        public void OnHandEquipmentChanged(int oldStatus, int newStatus)
+        {
+            if (IsOwner)
+                return;
+
+            HandEquipmentItem equipment = WorldItemDatabase.instance.GetHandEquipmentByID(handEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadHandEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadHandEquipment(null);
+            }
         }
 
         public void SetCharacterActionHand(bool rightHandAction)

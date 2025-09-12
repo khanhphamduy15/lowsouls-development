@@ -20,6 +20,7 @@ namespace LS {
         public float poise;
 
         //Armor Models
+        public EquipmentModel[] equipmentModels;
 
     }
 }

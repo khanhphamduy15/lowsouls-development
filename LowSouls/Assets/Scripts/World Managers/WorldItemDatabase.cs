@@ -72,22 +72,22 @@ namespace LS
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
         }
 
-        public HeadEquipmentItem GetHeadEquipmentItem(int ID)
+        public HeadEquipmentItem GetHeadEquipmentByID(int ID)
         {
             return headEquipments.FirstOrDefault(item => item.itemID == ID);
         }
 
-        public BodyEquipmentItem GetBodyEquipmentItem(int ID)
+        public BodyEquipmentItem GetBodyEquipmentByID(int ID)
         {
             return bodyEquipments.FirstOrDefault(item => item.itemID == ID);
         }
 
-        public LegEquipmentItem GetLegEquipmentItem(int ID)
+        public LegEquipmentItem GetLegEquipmentByID(int ID)
         {
             return legEquipments.FirstOrDefault(item => item.itemID == ID);
         }
 
-        public HandEquipmentItem GetHandEquipmentItem(int ID)
+        public HandEquipmentItem GetHandEquipmentByID(int ID)
         {
             return handEquipments.FirstOrDefault(item => item.itemID == ID);
         }
