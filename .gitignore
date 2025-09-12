@@ -102,8 +102,8 @@ ServerData
 LowSouls_clone_0/
 
 # Skip private
-Assets/PrivateAssets/*
-Assets/ArtAssets/*
+LowSouls/Assets/PrivateAssets/*
+LowSouls/Assets/ArtAssets/*
 
 
 
