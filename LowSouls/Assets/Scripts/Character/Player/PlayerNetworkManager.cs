@@ -53,6 +53,12 @@ namespace LS
                 }
 
                 player.playerEquipmentManager.UnTwoHandWeapon();
+                player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.instance.twoHandingEffect.staticEffectID);
+            }
+            else
+            {
+                StaticCharacterEffect twoHandingEffect = Instantiate(WorldCharacterEffectsManager.instance.twoHandingEffect);
+                player.playerEffectsManager.AddStaticEffect(twoHandingEffect);
             }
             player.animator.SetBool("isTwoHanding", isTwoHandingWeapon.Value);
         }

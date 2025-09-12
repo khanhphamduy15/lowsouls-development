@@ -20,6 +20,9 @@ namespace LS
         public GameObject rightHandWeaponModel;
         public GameObject leftHandWeaponModel;
 
+        [Header("Debug")]
+        [SerializeField] bool equipmentItem = false;
+
         protected override void Start()
         {
             base.Start();
@@ -32,6 +35,57 @@ namespace LS
             base.Awake();
             player = GetComponent<PlayerManager>();
             InitializeWeaponSlots();
+        }
+
+        private void Update()
+        {
+            if (equipmentItem)
+            {
+                equipmentItem = false;
+                DebugEquipNewItem();
+            }
+        }
+
+        //Equipment
+        public void LoadHeadEquipment(HeadEquipmentItem headEquipmentItem)
+        {
+            //calc total armor absorption
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+        }
+
+        public void LoadBodyEquipment(BodyEquipmentItem bodyEquipmentItem)
+        {
+            //calc total armor absorption
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+        }
+
+        public void LoadLegEquipment(LegEquipmentItem legEquipmentItem)
+        {
+            //calc total armor absorption
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+        }
+
+        public void LoadHandEquipment(HandEquipmentItem handEquipmentItem)
+        {
+            //calc total armor absorption
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+        }
+
+        private void DebugEquipNewItem()
+        {
+            Debug.Log("equipping new item");
+
+            if (player.playerInventoryManager.headEquipment != null)
+                LoadHeadEquipment(player.playerInventoryManager.headEquipment);
+
+            if (player.playerInventoryManager.bodyEquipment != null)
+                LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
+
+            if (player.playerInventoryManager.legEquipment != null)
+                LoadLegEquipment(player.playerInventoryManager.legEquipment);
+
+            if (player.playerInventoryManager.handEquipment != null)
+                LoadHandEquipment(player.playerInventoryManager.handEquipment);
         }
 
         private void InitializeWeaponSlots()

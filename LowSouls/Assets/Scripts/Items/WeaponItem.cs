@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LS
 {
-    public class WeaponItem : Item
+    public class WeaponItem : EquipmentItem
     {
         // Animator controller overrides (change attack animation based on weapons)
         [Header("Animations")]

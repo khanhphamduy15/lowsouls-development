@@ -13,7 +13,21 @@ namespace LS
         [Header("Weapons")]
         [SerializeField] List<WeaponItem> weapons = new List<WeaponItem>();
 
+        [Header("Head Equipments")]
+        [SerializeField] List<HeadEquipmentItem> headEquipments = new List<HeadEquipmentItem>();
+
+        [Header("Body Equipments")]
+        [SerializeField] List<BodyEquipmentItem> bodyEquipments = new List<BodyEquipmentItem>();
+
+        [Header("Leg Equipments")]
+        [SerializeField] List<LegEquipmentItem> legEquipments = new List<LegEquipmentItem>();
+
+        [Header("Hand Equipments")]
+        [SerializeField] List<HandEquipmentItem> handEquipments = new List<HandEquipmentItem>();
+
+
         //item list
+        [Header("Items")]
         [SerializeField] List<Item> items = new List<Item>();
         private void Awake()
         {
@@ -30,6 +44,22 @@ namespace LS
             {
                 items.Add(weapon);
             }
+            foreach (var item in headEquipments)
+            {
+                items.Add(item);
+            }
+            foreach (var item in bodyEquipments)
+            {
+                items.Add(item);
+            }
+            foreach (var item in legEquipments)
+            {
+                items.Add(item);
+            }
+            foreach (var item in handEquipments)
+            {
+                items.Add(item);
+            }
             //create unique id for every item
             for (int i = 0; i < items.Count; i++)
             {
@@ -40,6 +70,26 @@ namespace LS
         public WeaponItem GetWeaponByID(int ID)
         {
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
+        }
+
+        public HeadEquipmentItem GetHeadEquipmentItem(int ID)
+        {
+            return headEquipments.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public BodyEquipmentItem GetBodyEquipmentItem(int ID)
+        {
+            return bodyEquipments.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public LegEquipmentItem GetLegEquipmentItem(int ID)
+        {
+            return legEquipments.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public HandEquipmentItem GetHandEquipmentItem(int ID)
+        {
+            return handEquipments.FirstOrDefault(item => item.itemID == ID);
         }
     }
 }

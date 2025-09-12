@@ -21,6 +21,19 @@ namespace LS
         public float blockingHolyAbsorption;
         public float blockingStability;
 
+        [Header("Armor Absorption")]
+        public float armorPhysicalDamageAbsoprtion;
+        public float armorMagicDamageAbsoprtion;
+        public float armorFireDamageAbsoprtion;
+        public float armorLightningDamageAbsoprtion;
+        public float armorHolyDamageAbsoprtion;
+
+        [Header("Armor Resistances")]
+        public float armorImmunity;
+        public float armorRobustness;
+        public float armorFocus;
+        public float armorVitality;
+
         [Header("Poise")]
         public float totalPoiseDamage;
         public float offensivePoiseBonus;
