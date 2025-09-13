@@ -56,6 +56,11 @@ namespace LS
         [SerializeField] bool que_RB_Input = false;
         [SerializeField] bool que_RT_Input = false;
 
+        [Header("UI Input")]
+        [SerializeField] bool openMenuInput = false;
+        [SerializeField] bool closeMenuInput = false;
+
+
         private void OnEnable()
         {
             if (playerControls == null)
@@ -107,6 +112,15 @@ namespace LS
                 playerControls.PlayerActions.QueRB.performed += i => QueInput(ref que_RB_Input);
                 playerControls.PlayerActions.QueRT.performed += i => QueInput(ref que_RT_Input);
 
+                //UI input
+                playerControls.PlayerActions.Dodge.performed += i => closeMenuInput = true;
+                playerControls.PlayerActions.OpenMenu.performed += i =>
+                {
+                    if (PlayerUIManager.instance.menuWindowIsOpen)
+                        closeMenuInput = true;
+                    else
+                        openMenuInput = true;
+                };
             }
             playerControls.Enable();
         }
@@ -182,6 +196,8 @@ namespace LS
             HandleSwitchLeftWeaponInput();
             HandleQuedInputs();
             HandleInteractionInput();
+            HandleOpenUIInput();
+            HandleCloseUIInput();
         }
 
         //Two Handing 
@@ -357,8 +373,10 @@ namespace LS
             {
                 dodgeInput = false;
                 //Return if menu or ui window is open
-                //Dodge
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
 
+                //Dodge
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
         }
@@ -536,6 +554,31 @@ namespace LS
 
                     input_Que_Is_Active = false;
                     que_Input_Timer = 0;
+                }
+            }
+        }
+
+        private void HandleOpenUIInput()
+        {
+            if (openMenuInput)
+            {
+                openMenuInput = false;
+
+                PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopUpWindows();
+                PlayerUIManager.instance.CloseAllMenuWindows();
+                PlayerUIManager.instance.playerUICharacterMenuManager.OpenCharacterMenu();
+            }
+        }
+
+        private void HandleCloseUIInput()
+        {
+            if (closeMenuInput)
+            {
+                closeMenuInput = false;
+
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                {
+                    PlayerUIManager.instance.CloseAllMenuWindows();
                 }
             }
         }

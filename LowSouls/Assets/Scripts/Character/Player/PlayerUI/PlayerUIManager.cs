@@ -10,6 +10,8 @@ namespace LS {
         [SerializeField] bool startGameAsClient;
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
         [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
+        [HideInInspector] public PlayerUICharacterMenuManager playerUICharacterMenuManager;
+        [HideInInspector] public PlayerUIEquipmentMenuManager playerUIEquipmentMenuManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -27,6 +29,8 @@ namespace LS {
             }
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
             playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
+            playerUICharacterMenuManager = GetComponentInChildren<PlayerUICharacterMenuManager>();
+            playerUIEquipmentMenuManager = GetComponentInChildren<PlayerUIEquipmentMenuManager>();
         }
 
         private void Start()
@@ -43,6 +47,12 @@ namespace LS {
                 NetworkManager.Singleton.Shutdown();
                 NetworkManager.Singleton.StartClient();
             }
+        }
+
+        public void CloseAllMenuWindows()
+        {
+            playerUICharacterMenuManager.CloseCharacterMenu();
+            playerUIEquipmentMenuManager.CloseEquipmentManagerMenu();
         }
     }
 }

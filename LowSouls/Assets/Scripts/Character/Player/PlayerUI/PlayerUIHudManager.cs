@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class PlayerUIHudManager : MonoBehaviour
 {
+    [SerializeField] CanvasGroup[] canvasGroup;
+
     [Header("Stats Bar")]
     [SerializeField] UI_StatBar staminaBar;
     [SerializeField] UI_StatBar healthBar;
@@ -15,6 +17,25 @@ public class PlayerUIHudManager : MonoBehaviour
     [Header("Boss Health Bar")]
     public Transform bossHealthBarParent;
     public GameObject bossHealthBarObject;
+
+    public void ToggleHUD(bool status)
+    {
+        //to do transition
+        if (status)
+        {
+            foreach (var canvas in canvasGroup)
+            {
+                canvas.alpha = 1;
+            }
+        }
+        else
+        {
+            foreach (var canvas in canvasGroup)
+            {
+                canvas.alpha = 0;
+            }
+        }
+    }
 
     public void RefreshHud()
     {
