@@ -4628,6 +4628,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 111788956398038532, guid: 0ba64a54f4dda3044a60632e4b886916, type: 3}
+      propertyPath: rollSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ae7e5987222295c4eb26db290bf603df, type: 3}
+    - target: {fileID: 111788956398038532, guid: 0ba64a54f4dda3044a60632e4b886916, type: 3}
       propertyPath: physDmgSFX.Array.size
       value: 2
       objectReference: {fileID: 0}
