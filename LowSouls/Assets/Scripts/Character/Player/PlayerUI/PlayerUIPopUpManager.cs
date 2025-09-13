@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LS
 {
@@ -9,6 +10,13 @@ namespace LS
         [Header("Message Pop UP")]
         [SerializeField] TextMeshProUGUI popUpMessageText;
         [SerializeField] GameObject popUpMessageGameObject;
+
+        [Header("Item Pop Up")]
+        [SerializeField] GameObject itemPopUpGameObject;
+        [SerializeField] Image itemIcon;
+        [SerializeField] TextMeshProUGUI itemName;
+        [SerializeField] TextMeshProUGUI itemAmount;
+
 
         [Header("Death Pop Up")]
         [SerializeField] GameObject deathPopUpGameObject;
@@ -48,6 +56,22 @@ namespace LS
             //fade out after wait
             StartCoroutine(WaitThenFadeOutPopUpOverTime(youDiedPopUpCanvasGroup, 2, 5));
         }
+
+        public void SendItemPopUp(Item item, int amount)
+        {
+            itemAmount.enabled = false;
+            itemIcon.sprite = item.itemIcon;
+            itemName.text = item.itemName;
+
+            if (amount > 1)
+            {
+                itemAmount.enabled = true;
+                itemAmount.text = "x" + amount.ToString();
+            }
+            itemPopUpGameObject.SetActive(true);
+            PlayerUIManager.instance.popupWindowIsOpen = true;
+        }
+
         public void SendBossDefeatedPopUp(string bossDefeatedMessage)
         {
             bossDefeatedPopUpText.text = bossDefeatedMessage;
@@ -147,6 +171,7 @@ namespace LS
         public void CloseAllPopUpWindows()
         {
             popUpMessageGameObject.SetActive(false);
+            itemPopUpGameObject.SetActive(false);
 
             PlayerUIManager.instance.popupWindowIsOpen = false;
         }

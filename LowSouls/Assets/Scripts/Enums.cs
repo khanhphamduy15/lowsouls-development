@@ -100,4 +100,10 @@ namespace LS
         Team01,
         Team02,
     }
+
+    public enum ItemPickUpType
+    {
+        WorldSpawn,
+        CharacterDrop
+    }
 }

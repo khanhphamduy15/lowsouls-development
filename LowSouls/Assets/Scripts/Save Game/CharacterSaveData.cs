@@ -36,6 +36,9 @@ namespace LS
         public SerializableDictionary<int, bool> bossesAwakened;
         public SerializableDictionary<int, bool> bossesDefeated;
 
+        [Header("World Items")]
+        public SerializableDictionary<int, bool> worldItemsLooted;
+
         [Header("Equipment")]
         public int headEquipmentID;
         public int bodyEquipmentID;
@@ -57,6 +60,7 @@ namespace LS
             sitesOfGrace = new SerializableDictionary<int, bool>();
             bossesAwakened = new SerializableDictionary<int, bool>();
             bossesDefeated = new SerializableDictionary<int, bool>();
+            worldItemsLooted = new SerializableDictionary<int, bool>();
         }
 
     }

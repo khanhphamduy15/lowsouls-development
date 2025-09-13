@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LS {
+namespace LS
+{
     public class PlayerInteractionManager : MonoBehaviour
     {
         PlayerManager player;
@@ -44,7 +45,7 @@ namespace LS {
 
         public void RefreshInteractionList()
         {
-            for (int i =currentInteractableActions.Count - 1; i > -1 ; i--)
+            for (int i = currentInteractableActions.Count - 1; i > -1; i--)
             {
                 if (currentInteractableActions[i] == null)
                     currentInteractableActions.RemoveAt(i);
@@ -68,10 +69,12 @@ namespace LS {
 
         public void Interact()
         {
+            PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopUpWindows();
+
             if (currentInteractableActions.Count == 0)
                 return;
 
-                if (currentInteractableActions[0] != null)
+            if (currentInteractableActions[0] != null)
             {
                 currentInteractableActions[0].Interact(player);
                 RefreshInteractionList();

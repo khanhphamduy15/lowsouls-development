@@ -11,6 +11,7 @@ namespace LS
 
         [Header("Action Sounds")]
         public AudioClip rollSFX;
+        public AudioClip pickUpItemSFX;
 
         private void Awake()
         {
