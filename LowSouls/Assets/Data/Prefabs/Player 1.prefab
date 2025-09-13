@@ -2261,7 +2261,7 @@ Transform:
   m_GameObject: {fileID: 7671385893040799921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8209361, y: 0.6373146, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 857399330
+  GlobalObjectIdHash: 2902962598
   InScenePlacedSourceGlobalObjectIdHash: 857399330
   DeferredDespawnTick: 0
   Ownership: 1
@@ -2353,6 +2353,7 @@ MonoBehaviour:
   playerCombatManager: {fileID: 0}
   playerInteractionManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
+  playerBodyManager: {fileID: 0}
 --- !u!143 &-7875021588539770521
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2665,13 +2666,55 @@ MonoBehaviour:
   leftHandWeaponSlot: {fileID: 0}
   leftHandShieldSlot: {fileID: 0}
   backSlot: {fileID: 0}
-  rightWeaponManager: {fileID: 0}
-  leftWeaponManager: {fileID: 0}
   rightHandWeaponModel: {fileID: 0}
   leftHandWeaponModel: {fileID: 0}
   equipmentItem: 0
+  halfHelmetObject: {fileID: 0}
+  halfHelmets: []
+  hoodObject: {fileID: 0}
+  hoods: []
+  faceCoverObject: {fileID: 0}
+  faceCovers: []
+  helmetAccessoriesObject: {fileID: 0}
+  helmetAccessories: []
+  backAccessoriesObject: {fileID: 0}
+  backAccessories: []
+  hipAccessoriesObject: {fileID: 0}
+  hipAccessories: []
+  rightShoulderObject: {fileID: 0}
+  rightShoulders: []
+  rightElbowObject: {fileID: 0}
+  rightElbows: []
+  rightKneeObject: {fileID: 0}
+  rightKnees: []
+  leftShoulderObject: {fileID: 0}
+  leftShoulders: []
+  leftElbowObject: {fileID: 0}
+  leftElbows: []
+  leftKneeObject: {fileID: 0}
+  leftKnees: []
   fullHelmetObject: {fileID: 7289288603342613224}
-  fullHelmetObjects: []
+  fullHelmets: []
+  fullBodyObject: {fileID: 0}
+  fullBodies: []
+  rightUpperArmObject: {fileID: 0}
+  rightUpperArms: []
+  rightLowerArmObject: {fileID: 0}
+  rightLowerArms: []
+  rightHandObject: {fileID: 0}
+  rightHands: []
+  leftUpperArmObject: {fileID: 0}
+  leftUpperArms: []
+  leftLowerArmObject: {fileID: 0}
+  leftLowerArms: []
+  leftHandObject: {fileID: 0}
+  leftHands: []
+  hipObject: {fileID: 0}
+  hips: []
+  rightLegObject: {fileID: 0}
+  rightLegs: []
+  leftLegObject: {fileID: 0}
+  leftLegs: []
 --- !u!54 &-102400752348575442
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -36,6 +36,22 @@ namespace LS
         public SerializableDictionary<int, bool> bossesAwakened;
         public SerializableDictionary<int, bool> bossesDefeated;
 
+        [Header("Equipment")]
+        public int headEquipmentID;
+        public int bodyEquipmentID;
+        public int legEquipmentID;
+        public int handEquipmentID;
+
+        public int rightWeaponIndex;
+        public int rightWeapon01;
+        public int rightWeapon02;
+        public int rightWeapon03;
+
+        public int leftWeaponIndex;
+        public int leftWeapon01;
+        public int leftWeapon02;
+        public int leftWeapon03;
+
         public CharacterSaveData()
         {
             sitesOfGrace = new SerializableDictionary<int, bool>();

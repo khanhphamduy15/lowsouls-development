@@ -212,6 +212,22 @@ namespace LS
             currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
             currentCharacterData.vitality = playerNetworkManager.vitality.Value;
             currentCharacterData.endurance = playerNetworkManager.endurance.Value;
+
+            //equipment
+            currentCharacterData.headEquipmentID = playerNetworkManager.headEquipmentID.Value;
+            currentCharacterData.bodyEquipmentID = playerNetworkManager.bodyEquipmentID.Value;
+            currentCharacterData.legEquipmentID = playerNetworkManager.legEquipmentID.Value;
+            currentCharacterData.handEquipmentID = playerNetworkManager.handEquipmentID.Value;
+
+            currentCharacterData.rightWeaponIndex = playerInventoryManager.rightHandWeaponIndex;
+            currentCharacterData.rightWeapon01 = playerInventoryManager.weaponInRightHandSlots[0].itemID;
+            currentCharacterData.rightWeapon02 = playerInventoryManager.weaponInRightHandSlots[1].itemID;
+            currentCharacterData.rightWeapon03 = playerInventoryManager.weaponInRightHandSlots[2].itemID;
+
+            currentCharacterData.leftWeaponIndex = playerInventoryManager.leftHandWeaponIndex;
+            currentCharacterData.leftWeapon01 = playerInventoryManager.weaponInLeftHandSlots[0].itemID;
+            currentCharacterData.leftWeapon02 = playerInventoryManager.weaponInLeftHandSlots[1].itemID;
+            currentCharacterData.leftWeapon03 = playerInventoryManager.weaponInLeftHandSlots[2].itemID;
         }
 
         public void LoadGameDataFromCurrentCharData(ref CharacterSaveData currentCharacterData)
@@ -229,6 +245,118 @@ namespace LS
             playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+
+            //equipment 
+            if (WorldItemDatabase.instance.GetHeadEquipmentByID(currentCharacterData.headEquipmentID))
+            {
+                HeadEquipmentItem headEquipment = Instantiate(WorldItemDatabase.instance.GetHeadEquipmentByID(currentCharacterData.headEquipmentID));
+                playerInventoryManager.headEquipment = headEquipment;
+            }
+            else
+            {
+                playerInventoryManager.headEquipment = null;
+            }
+
+            if (WorldItemDatabase.instance.GetBodyEquipmentByID(currentCharacterData.bodyEquipmentID))
+            {
+                BodyEquipmentItem bodyEquipment = Instantiate(WorldItemDatabase.instance.GetBodyEquipmentByID(currentCharacterData.bodyEquipmentID));
+                playerInventoryManager.bodyEquipment = bodyEquipment;
+            }
+            else
+            {
+                playerInventoryManager.bodyEquipment = null;
+            }
+
+            if (WorldItemDatabase.instance.GetLegEquipmentByID(currentCharacterData.legEquipmentID))
+            {
+                LegEquipmentItem legEquipment = Instantiate(WorldItemDatabase.instance.GetLegEquipmentByID(currentCharacterData.legEquipmentID));
+                playerInventoryManager.legEquipment = legEquipment;
+            }
+            else
+            {
+                playerInventoryManager.legEquipment = null;
+            }
+
+            if (WorldItemDatabase.instance.GetHandEquipmentByID(currentCharacterData.handEquipmentID))
+            {
+                HandEquipmentItem handEquipment = Instantiate(WorldItemDatabase.instance.GetHandEquipmentByID(currentCharacterData.handEquipmentID));
+                playerInventoryManager.handEquipment = handEquipment;
+            }
+            else
+            {
+                playerInventoryManager.handEquipment = null;
+            }
+
+            if (WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.rightWeapon01))
+            {
+                WeaponItem rightWeapon01 = Instantiate(WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.rightWeapon01));
+                playerInventoryManager.weaponInRightHandSlots[0] = rightWeapon01;
+            }
+            else
+            {
+                playerInventoryManager.weaponInRightHandSlots[0] = null;
+            }
+
+            if (WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.rightWeapon02))
+            {
+                WeaponItem rightWeapon02 = Instantiate(WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.rightWeapon02));
+                playerInventoryManager.weaponInRightHandSlots[1] = rightWeapon02;
+            }
+            else
+            {
+                playerInventoryManager.weaponInRightHandSlots[1] = null;
+
+            }
+
+            if (WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.rightWeapon03))
+            {
+                WeaponItem rightWeapon03 = Instantiate(WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.rightWeapon03));
+                playerInventoryManager.weaponInRightHandSlots[2] = rightWeapon03;
+            }
+            else
+            {
+                playerInventoryManager.weaponInRightHandSlots[2] = null;
+            }
+
+            if (WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.leftWeapon01))
+            {
+                WeaponItem leftWeapon01 = Instantiate(WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.leftWeapon01));
+                playerInventoryManager.weaponInLeftHandSlots[0] = leftWeapon01;
+            }
+            else
+            {
+                playerInventoryManager.weaponInLeftHandSlots[0] = null;
+            }
+
+            if (WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.leftWeapon02))
+            {
+                WeaponItem leftWeapon02 = Instantiate(WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.leftWeapon02));
+                playerInventoryManager.weaponInLeftHandSlots[1] = leftWeapon02;
+            }
+            else
+            {
+                playerInventoryManager.weaponInLeftHandSlots[1] = null;
+            }
+
+            if (WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.leftWeapon03))
+            {
+                WeaponItem leftWeapon03 = Instantiate(WorldItemDatabase.instance.GetWeaponByID(currentCharacterData.leftWeapon03));
+                playerInventoryManager.weaponInLeftHandSlots[2] = leftWeapon03;
+            }
+            else
+            {
+                playerInventoryManager.weaponInLeftHandSlots[2] = null;
+
+            }
+
+            playerEquipmentManager.EquipArmor();
+
+            playerInventoryManager.rightHandWeaponIndex = currentCharacterData.rightWeaponIndex;
+            playerNetworkManager.currentRightHandWeaponID.Value = playerInventoryManager.weaponInRightHandSlots[currentCharacterData.rightWeaponIndex].itemID; 
+
+            playerInventoryManager.leftHandWeaponIndex = currentCharacterData.leftWeaponIndex;
+            playerNetworkManager.currentLeftHandWeaponID.Value = playerInventoryManager.weaponInLeftHandSlots[currentCharacterData.leftWeaponIndex].itemID;
+
         }
 
         public void LoadOtherPlayerCharacterWhenJoiningServer()

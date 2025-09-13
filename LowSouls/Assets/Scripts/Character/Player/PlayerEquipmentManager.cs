@@ -277,7 +277,7 @@ namespace LS
             if (equipmentItem)
             {
                 equipmentItem = false;
-                DebugEquipNewItem();
+                EquipArmor();
             }
         }
 
@@ -374,6 +374,8 @@ namespace LS
 
             player.playerInventoryManager.bodyEquipment = equipment;
 
+            player.playerBodyManager.DisableBody();
+
             foreach (var model in equipment.equipmentModels)
             {
                 model.LoadModel(player);
@@ -425,29 +427,118 @@ namespace LS
 
         public void LoadLegEquipment(LegEquipmentItem equipment)
         {
+            //unload old models
+            UnloadLegEquipmentModels();
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.legEquipmentID.Value = -1;
+
+                player.playerInventoryManager.legEquipment = null;
+                return;
+            }
+
+            player.playerInventoryManager.legEquipment = equipment;
+
+            player.playerBodyManager.DisableLowerBody();
+
+
+            foreach (var model in equipment.equipmentModels)
+            {
+                model.LoadModel(player);
+            }
+
             //calc total armor absorption
             player.playerStatsManager.CalculateTotalArmorAbsorption();
+
+            if (player.IsOwner)
+                player.playerNetworkManager.legEquipmentID.Value = equipment.itemID;
+        }
+
+        public void UnloadLegEquipmentModels()
+        {
+            foreach (var model in hips)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in rightKnees)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftKnees)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftLegs)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in rightLegs)
+            {
+                model.SetActive(false);
+            }
+            player.playerBodyManager.EnableLowerBody();
         }
 
         public void LoadHandEquipment(HandEquipmentItem equipment)
         {
+            //unload old models
+            UnloadHandEquipmentModels();
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.handEquipmentID.Value = -1;
+
+                player.playerInventoryManager.handEquipment = null;
+                return;
+            }
+
+            player.playerInventoryManager.handEquipment = equipment;
+
+            player.playerBodyManager.DisableArms();
+
+
+            foreach (var model in equipment.equipmentModels)
+            {
+                model.LoadModel(player);
+            }
+
             //calc total armor absorption
             player.playerStatsManager.CalculateTotalArmorAbsorption();
+
+            if (player.IsOwner)
+                player.playerNetworkManager.handEquipmentID.Value = equipment.itemID;
         }
 
-        private void DebugEquipNewItem()
+        public void UnloadHandEquipmentModels()
         {
-            Debug.Log("equipping new item");
+            foreach (var model in rightLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in rightHands)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftHands)
+            {
+                model.SetActive(false);
+            }
+            player.playerBodyManager.EnableArms();
+        }
 
+        public void EquipArmor()
+        {
             LoadHeadEquipment(player.playerInventoryManager.headEquipment);
-
             LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
-
-            if (player.playerInventoryManager.legEquipment != null)
-                LoadLegEquipment(player.playerInventoryManager.legEquipment);
-
-            if (player.playerInventoryManager.handEquipment != null)
-                LoadHandEquipment(player.playerInventoryManager.handEquipment);
+            LoadLegEquipment(player.playerInventoryManager.legEquipment);
+            LoadHandEquipment(player.playerInventoryManager.handEquipment);
         }
 
         private void InitializeWeaponSlots()

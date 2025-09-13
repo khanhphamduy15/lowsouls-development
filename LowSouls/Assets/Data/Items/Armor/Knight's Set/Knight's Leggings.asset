@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Knight's Leggings
   itemIcon: {fileID: 0}
   itemDescription: 
-  itemID: 6
+  itemID: 7
   itemWeight: 6.6
   physicalDamageAbsoprtion: 7.1
   magicDamageAbsoprtion: 6.2
@@ -27,3 +27,9 @@ MonoBehaviour:
   focus: 11
   vitality: 11
   poise: 14
+  equipmentModels:
+  - {fileID: 11400000, guid: 8cb8bec4c10c2c249896a81ab0bc6e64, type: 2}
+  - {fileID: 11400000, guid: db7f69c7f71bc3747ae59ef701d02d22, type: 2}
+  - {fileID: 11400000, guid: fed6dd605a5982e48bc8638e272a9530, type: 2}
+  - {fileID: 11400000, guid: 4d85fc5571546364c82e0a8195ecbebf, type: 2}
+  - {fileID: 11400000, guid: d9d7f04aa2b2fe346adffe7edfb6ebab, type: 2}

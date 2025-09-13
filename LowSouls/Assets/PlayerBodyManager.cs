@@ -61,5 +61,45 @@ namespace LS
                 model.SetActive(true);
             }
         }
+
+        public void DisableBody()
+        {
+            foreach (var model in body)
+            {
+                model.SetActive(false);
+            }
+        }
+
+        public void EnableLowerBody()
+        {
+            foreach(var model in legs)
+            {
+                model.SetActive(true);
+            }
+        }
+
+        public void DisableLowerBody()
+        {
+            foreach(var model in legs)
+            {
+                model.SetActive(false);
+            }
+        }
+
+        public void EnableArms()
+        {
+            foreach (var model in arms)
+            {
+                model.SetActive(true);
+            }
+        }
+
+        public void DisableArms()
+        {
+            foreach (var model in arms)
+            {
+                model.SetActive(false);
+            }
+        }
     }
 }
