@@ -13,8 +13,6 @@ namespace LS
             {
                 playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = weaponPerformingAction.itemID;
             }
-
-            Debug.Log("Action fired");
         }
     }
 }

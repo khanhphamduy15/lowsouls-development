@@ -489,6 +489,9 @@ namespace LS
             if (switchRightWeaponInput)
             {
                 switchRightWeaponInput = false;
+
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
                 player.playerEquipmentManager.SwitchRightWeapon();
             }
         }
@@ -497,6 +500,9 @@ namespace LS
             if (switchLeftWeaponInput)
             {
                 switchLeftWeaponInput = false;
+
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
                 player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }

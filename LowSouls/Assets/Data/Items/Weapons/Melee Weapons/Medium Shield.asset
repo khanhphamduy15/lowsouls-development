@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Medium Shield
   m_EditorClassIdentifier: 
   itemName: Medium Shield
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: be3f3fb57d51be747b132ab4f3d78ab4, type: 3}
   itemDescription: 
   itemID: 3
+  itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: 97cc29811b23818478b136719990ac12, type: 2}
   weaponModelType: 1
   weaponModel: {fileID: 3216235260147742545, guid: ac9edd0f9aff5a44ba2f10fa0fb63a31, type: 3}

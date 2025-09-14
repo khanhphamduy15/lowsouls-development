@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Straight Sword
   m_EditorClassIdentifier: 
   itemName: Straight Sword
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: a2d5e7046e4b19745ad261e2fcd3927d, type: 3}
   itemDescription: 
   itemID: 1
+  itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: 5b0c005481598db4ab3131901d2fe2f7, type: 2}
   weaponModelType: 0
   weaponModel: {fileID: 8356629166756568642, guid: dcca6309bf294454990528314dc3a055, type: 3}
+  weaponClass: 0
   strengthREQ: 10
   dexREQ: 10
   faithREQ: 0
