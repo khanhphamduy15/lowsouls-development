@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knight's Helm
   m_EditorClassIdentifier: 
   itemName: Knight's Helm
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 06485fadd6760424295e74f3ad7775a0, type: 3}
   itemDescription: 
   itemID: 4
   itemWeight: 4.6
@@ -29,3 +29,4 @@ MonoBehaviour:
   poise: 8
   equipmentModels:
   - {fileID: 11400000, guid: 92466581d3bb2bf418b4c146cca3eb6e, type: 2}
+  headEquipmentType: 0

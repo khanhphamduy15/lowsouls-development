@@ -65,7 +65,12 @@ namespace LS
         RightWeapon03,
         LeftWeapon01,
         LeftWeapon02,
-        LeftWeapon03
+        LeftWeapon03,
+        Head,
+        Body,
+        Legs,
+        Hands
+        
     }
 
     public enum HeadEquipmentType

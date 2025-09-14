@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Claymore
   m_EditorClassIdentifier: 
   itemName: Claymore
-  itemIcon: {fileID: 21300000, guid: 38ec66e7008131b459354c6f7e996b85, type: 3}
+  itemIcon: {fileID: 21300000, guid: 572691319f2ae1a4e9c7057e91cad1e0, type: 3}
   itemDescription: 
   itemID: 2
   itemWeight: 0
