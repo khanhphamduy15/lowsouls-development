@@ -13,6 +13,7 @@ namespace LS
         public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentLeftHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> currentQuickSlotItemID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingLeftHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -229,6 +230,22 @@ namespace LS
 
             if (player.playerCombatManager.currentWeaponBeingUsed != null)
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerCombatManager.currentWeaponBeingUsed.weaponAnimator);
+        }
+
+        public void OnCurrentQuickSlotItemIDChange(int oldID, int newID)
+        {
+            QuickSlotItem quickSlotItem = null;
+
+            if (WorldItemDatabase.instance.GetQuickSlotItemByID(newID))
+                quickSlotItem = Instantiate(WorldItemDatabase.instance.GetQuickSlotItemByID(newID));
+
+            if (quickSlotItem != null)
+            {
+                player.playerInventoryManager.currentQuickSlotItem = quickSlotItem;
+
+                if (player.IsOwner)
+                    PlayerUIManager.instance.playerUIHudManager.SetQuickSlotItemIcon(newID);
+            }
         }
 
         //Item Actions

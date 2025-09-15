@@ -27,10 +27,11 @@ namespace LS
         [Header("Hand Equipments")]
         [SerializeField] List<HandEquipmentItem> handEquipments = new List<HandEquipmentItem>();
 
-
+        [Header("Quick Slot")]
+        [SerializeField] List<QuickSlotItem> quickSlotItems = new List<QuickSlotItem>();
         //item list
         [Header("Items")]
-        [SerializeField] List<Item> items = new List<Item>();
+        private List<Item> items = new List<Item>();
         private void Awake()
         {
             if (instance == null)
@@ -59,6 +60,10 @@ namespace LS
                 items.Add(item);
             }
             foreach (var item in handEquipments)
+            {
+                items.Add(item);
+            }
+            foreach (var item in quickSlotItems)
             {
                 items.Add(item);
             }
@@ -96,6 +101,11 @@ namespace LS
         public HandEquipmentItem GetHandEquipmentByID(int ID)
         {
             return handEquipments.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public QuickSlotItem GetQuickSlotItemByID(int ID)
+        {
+            return quickSlotItems.FirstOrDefault(item => item.itemID == ID);
         }
     }
 }

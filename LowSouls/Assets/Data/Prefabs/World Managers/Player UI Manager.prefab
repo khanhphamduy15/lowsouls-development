@@ -1004,6 +1004,7 @@ MonoBehaviour:
   healthBar: {fileID: 5177018998104900901}
   rightWeaponQuickSlotIcon: {fileID: 3015139300406675981}
   leftWeaponQuickSlotIcon: {fileID: 1184964177024098225}
+  quickSlotItemIcon: {fileID: 7346831651664672832}
   bossHealthBarParent: {fileID: 843648431919695100}
   bossHealthBarObject: {fileID: 6891332086259042907, guid: 278da7d320ebbed43913b91b44a9e958, type: 3}
 --- !u!225 &4620529937486604395
@@ -8033,6 +8034,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6875833318889758360, guid: ff88ade66168e594e9a83ea24e377ba2, type: 3}
   m_PrefabInstance: {fileID: 6476701412379960762}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7346831651664672832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4329346726243343866, guid: ff88ade66168e594e9a83ea24e377ba2, type: 3}
+  m_PrefabInstance: {fileID: 6476701412379960762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6928212911970248205
 PrefabInstance:
   m_ObjectHideFlags: 0

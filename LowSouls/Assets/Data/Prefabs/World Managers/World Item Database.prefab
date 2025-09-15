@@ -60,4 +60,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 52c54e5ff2d239643898b4dc3c2ff0ab, type: 2}
   handEquipments:
   - {fileID: 11400000, guid: 6788d0169e50a8d408e0e38f2ae9ce42, type: 2}
+  quickSlotItems:
+  - {fileID: 11400000, guid: 4676f340473253b4592673d4b17ab0a1, type: 2}
   items: []

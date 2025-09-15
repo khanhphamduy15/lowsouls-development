@@ -13,6 +13,7 @@ public class PlayerUIHudManager : MonoBehaviour
     [Header("Quick Slots")]
     [SerializeField] Image rightWeaponQuickSlotIcon;
     [SerializeField] Image leftWeaponQuickSlotIcon;
+    [SerializeField] Image quickSlotItemIcon;
 
     [Header("Boss Health Bar")]
     public Transform bossHealthBarParent;
@@ -111,5 +112,25 @@ public class PlayerUIHudManager : MonoBehaviour
         leftWeaponQuickSlotIcon.sprite = weapon.itemIcon;
         leftWeaponQuickSlotIcon.enabled = true;
 
+    }
+
+    public void SetQuickSlotItemIcon(int itemID)
+    {
+        QuickSlotItem quickSlotItem = WorldItemDatabase.instance.GetQuickSlotItemByID(itemID);
+
+        if (quickSlotItem == null)
+        {
+            quickSlotItemIcon.enabled = false;
+            quickSlotItemIcon.sprite = null;
+            return;
+        }
+        if (quickSlotItem.itemIcon == null)
+        {
+            quickSlotItemIcon.enabled = false;
+            quickSlotItemIcon.sprite = null;
+            return;
+        }
+        quickSlotItemIcon.sprite = quickSlotItem.itemIcon;
+        quickSlotItemIcon.enabled = true;
     }
 }

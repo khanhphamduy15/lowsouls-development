@@ -234,5 +234,21 @@ namespace LS
             damagedCharacter.characterEffectsManager.ProcessInstantEffects(damageEffect);
         }
 
+        [ServerRpc]
+        public void DestroyAllCurrentActionFXServerRpc()
+        {
+            if (IsServer)
+            {
+                DestroyAllCurrentActionFXClientRpc();
+            }
+        }
+
+        [ClientRpc]
+        private void DestroyAllCurrentActionFXClientRpc()
+        {
+            if (character.characterEffectsManager.activeQuickSlotItemFX != null)
+                Destroy(character.characterEffectsManager.activeQuickSlotItemFX);
+        }
+
     }
 }

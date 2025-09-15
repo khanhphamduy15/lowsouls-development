@@ -34,7 +34,7 @@ namespace LS
         [SerializeField] bool switchRightWeaponInput = false;
         [SerializeField] bool switchLeftWeaponInput = false;
         [SerializeField] bool interactInput = false;
-
+        [SerializeField] bool useItemInput = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RBInput = false;
@@ -76,6 +76,7 @@ namespace LS
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switchRightWeaponInput = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switchLeftWeaponInput = true;
                 playerControls.PlayerActions.Interact.performed += i => interactInput = true;
+                playerControls.PlayerActions.UseItem.performed += i => useItemInput = true;
 
                 //Bumper
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
@@ -91,7 +92,6 @@ namespace LS
 
                 playerControls.PlayerActions.TwoHandLeftWeapon.performed += i => twoHandLeftInput = true;
                 playerControls.PlayerActions.TwoHandLeftWeapon.canceled += i => twoHandLeftInput = false;
-
 
                 //Triggers
                 playerControls.PlayerActions.RT.performed += i => RTInput = true;
@@ -198,6 +198,24 @@ namespace LS
             HandleInteractionInput();
             HandleOpenUIInput();
             HandleCloseUIInput();
+            HandleUseItemInput();
+        }
+        
+        //use item
+        private void HandleUseItemInput()
+        {
+            if (useItemInput)
+            {
+                useItemInput = false;
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
+                if (player.playerInventoryManager.currentQuickSlotItem != null)
+                {
+                    player.playerInventoryManager.currentQuickSlotItem.AttemptToUseItem(player);
+
+                }
+            }
         }
 
         //Two Handing 
