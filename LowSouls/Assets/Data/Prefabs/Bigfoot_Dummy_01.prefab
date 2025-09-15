@@ -443,6 +443,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5717807349210574571}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5112042186760051843}
     - targetCorrespondingSourceObject: {fileID: 4575353127508647185, guid: 4e839f0fbcb5baf419df9fa9671dc1f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1119950120154198649}
@@ -903,6 +906,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   bossCharacter: {fileID: 0}
 --- !u!114 &4078868095591080867
 MonoBehaviour:
@@ -922,6 +926,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   bigfootCharacterManager: {fileID: 0}
 --- !u!1 &5308886106836461678 stripped
 GameObject:
@@ -1248,6 +1253,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   bossCharacter: {fileID: 0}
 --- !u!1 &7991673518207408047 stripped
 GameObject:
@@ -1543,6 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 0}
+  staticEffects: []
 --- !u!114 &3044459194388604757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,6 +1564,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRegenerationAmount: 0.5
   staminaRegenerationDelay: 2
+  blockingPhysicalAbsorption: 0
+  blockingMagicAbsorption: 0
+  blockingLightningAbsorption: 0
+  blockingFireAbsorption: 0
+  blockingHolyAbsorption: 0
+  blockingStability: 0
+  armorPhysicalDamageAbsoprtion: 0
+  armorMagicDamageAbsoprtion: 0
+  armorFireDamageAbsoprtion: 0
+  armorLightningDamageAbsoprtion: 0
+  armorHolyDamageAbsoprtion: 0
+  armorImmunity: 0
+  armorRobustness: 0
+  armorFocus: 0
+  armorVitality: 0
+  totalPoiseDamage: 0
+  offensivePoiseBonus: 0
+  basePoiseDefense: 0
+  defaultPoiseResetTimer: 8
+  poiseResetTimer: 0
 --- !u!114 &4046903316054967237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1594,6 +1621,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 
+  hit_Forward_Ping_01: Hit_Forward_Ping_01
+  hit_Forward_Ping_02: Hit_Forward_Ping_02
+  hit_Backward_Ping_01: Hit_Backward_Ping_01
+  hit_Backward_Ping_02: Hit_Backward_Ping_02
+  hit_Left_Ping_01: Hit_Left_Ping_01
+  hit_Left_Ping_02: Hit_Left_Ping_02
+  hit_Right_Ping_01: Hit_Right_Ping_01
+  hit_Right_Ping_02: Hit_Right_Ping_02
+  forward_Ping_Damage: []
+  backward_Ping_Damage: []
+  left_Ping_Damage: []
+  right_Ping_Damage: []
   hit_Forward_Medium_01: Hit_Forward_Medium_01
   hit_Forward_Medium_02: Hit_Forward_Medium_02
   hit_Backward_Medium_01: Hit_Backward_Medium_01
@@ -1638,6 +1677,8 @@ MonoBehaviour:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
     m_InternalValue: 0
+  isBlocking:
+    m_InternalValue: 0
   isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
@@ -1648,10 +1689,16 @@ MonoBehaviour:
     m_InternalValue: 0
   isChargingAttack:
     m_InternalValue: 0
+  isAttacking:
+    m_InternalValue: 0
   vitality:
     m_InternalValue: 5
   endurance:
     m_InternalValue: 5
+  strength:
+    m_InternalValue: 1
+  strengthModifier:
+    m_InternalValue: 1
   currentHealth:
     m_InternalValue: 1000
   maxHealth:
@@ -1678,6 +1725,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lockOnTransform: {fileID: 0}
   canPerformRollAttack: 0
+  canBlock: 1
   actionRecoveryTimer: 0
   enablePivot: 1
   detectionRadius: 15
@@ -1692,6 +1740,7 @@ MonoBehaviour:
   groundAttackCollider: {fileID: 4078868095591080867}
   groundAttackRadius: 1.5
   baseDamage: 25
+  basePoiseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.2
   attack03DamageModifier: 1.4
@@ -1844,6 +1893,7 @@ MonoBehaviour:
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterStatsManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
   characterUIManager: {fileID: 0}
@@ -1889,3 +1939,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasFloatingHPBar: 0
   characterHPBar: {fileID: 6913861485396013487}
+--- !u!114 &5112042186760051843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796499245278644270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e3e13235ae74548b346b4fc3cc998c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemChance: 10
+  droppableItem:
+  - {fileID: 11400000, guid: 0ced3ab647e59a04fab5697987a19de5, type: 2}
+  - {fileID: 11400000, guid: 942ad15331bff404e84fa3a65e87eb64, type: 2}

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unarmedWeapon: {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
+  pickUpItemPrefab: {fileID: 5494202620974111197, guid: 82ea3f8a27be4e543ba1671daf3f4abe, type: 3}
   weapons:
   - {fileID: 11400000, guid: fe9eeb9729040824ab6a2f90d5c58218, type: 2}
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}

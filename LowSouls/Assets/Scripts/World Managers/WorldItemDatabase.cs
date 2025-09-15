@@ -10,6 +10,8 @@ namespace LS
 
         public WeaponItem unarmedWeapon;
 
+        public GameObject pickUpItemPrefab;
+
         [Header("Weapons")]
         [SerializeField] List<WeaponItem> weapons = new List<WeaponItem>();
 
@@ -70,6 +72,10 @@ namespace LS
         public WeaponItem GetWeaponByID(int ID)
         {
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
+        }
+        public Item GetItemByID(int ID)
+        {
+            return items.FirstOrDefault(item => item.itemID == ID);
         }
 
         public HeadEquipmentItem GetHeadEquipmentByID(int ID)

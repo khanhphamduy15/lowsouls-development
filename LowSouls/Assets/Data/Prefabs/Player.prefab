@@ -4074,10 +4074,10 @@ MonoBehaviour:
   horizontalMovement: 0
   moveAmount: 0
   walkingSpeed: 2
-  runningSpeed: 5
+  runningSpeed: 3
   rotationSpeed: 15
-  sprintingSpeed: 8
-  sprintingStaminaCost: 1
+  sprintingSpeed: 4
+  sprintingStaminaCost: 3
   jumpHeight: 3
   jumpStaminaCost: 8
   rollStaminaCost: 15
@@ -4126,6 +4126,7 @@ MonoBehaviour:
   bodyEquipment: {fileID: 0}
   legEquipment: {fileID: 0}
   handEquipment: {fileID: 0}
+  itemsInInventory: []
 --- !u!114 &459622003869578303
 MonoBehaviour:
   m_ObjectHideFlags: 0

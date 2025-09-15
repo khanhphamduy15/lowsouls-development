@@ -149,6 +149,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   zombieCharacter: {fileID: 0}
 --- !u!1 &601429310971491104
 GameObject:
@@ -229,6 +230,7 @@ GameObject:
   - component: {fileID: 6272058830409197286}
   - component: {fileID: 3962196009318446680}
   - component: {fileID: -7841259178689256174}
+  - component: {fileID: -6397030508234865043}
   m_Layer: 8
   m_Name: Zombie_Dummy_01
   m_TagString: Untagged
@@ -488,6 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 0}
+  staticEffects: []
 --- !u!114 &1785995110548160578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +510,21 @@ MonoBehaviour:
   blockingLightningAbsorption: 0
   blockingFireAbsorption: 0
   blockingHolyAbsorption: 0
+  blockingStability: 0
+  armorPhysicalDamageAbsoprtion: 0
+  armorMagicDamageAbsoprtion: 0
+  armorFireDamageAbsoprtion: 0
+  armorLightningDamageAbsoprtion: 0
+  armorHolyDamageAbsoprtion: 0
+  armorImmunity: 0
+  armorRobustness: 0
+  armorFocus: 0
+  armorVitality: 0
+  totalPoiseDamage: 0
+  offensivePoiseBonus: 0
+  basePoiseDefense: 0
+  defaultPoiseResetTimer: 8
+  poiseResetTimer: 0
 --- !u!114 &1830947569070368293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +579,8 @@ MonoBehaviour:
   characterName: Zombie
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
-  aICharacterLocomotionManager: {fileID: 0}
+  aiCharacterLocomotionManager: {fileID: 0}
+  aiCharacterInventoryManager: {fileID: 0}
   currentState: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
@@ -605,6 +624,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 
+  hit_Forward_Ping_01: Hit_Forward_Ping_01
+  hit_Forward_Ping_02: Hit_Forward_Ping_02
+  hit_Backward_Ping_01: Hit_Backward_Ping_01
+  hit_Backward_Ping_02: Hit_Backward_Ping_02
+  hit_Left_Ping_01: Hit_Left_Ping_01
+  hit_Left_Ping_02: Hit_Left_Ping_02
+  hit_Right_Ping_01: Hit_Right_Ping_01
+  hit_Right_Ping_02: Hit_Right_Ping_02
+  forward_Ping_Damage: []
+  backward_Ping_Damage: []
+  left_Ping_Damage: []
+  right_Ping_Damage: []
   hit_Forward_Medium_01: Hit_Forward_Medium_01
   hit_Forward_Medium_02: Hit_Forward_Medium_02
   hit_Backward_Medium_01: Hit_Backward_Medium_01
@@ -635,6 +666,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lockOnTransform: {fileID: 0}
   canPerformRollAttack: 0
+  canBlock: 1
   actionRecoveryTimer: 0
   enablePivot: 1
   detectionRadius: 15
@@ -647,6 +679,7 @@ MonoBehaviour:
   rightHandDamageCollider: {fileID: 5726750383523237047}
   leftHandDamageCollider: {fileID: 734975651594780422}
   baseDamage: 25
+  basePoiseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.2
   attack03DamageModifier: 1.4
@@ -708,10 +741,16 @@ MonoBehaviour:
     m_InternalValue: 0
   isChargingAttack:
     m_InternalValue: 0
+  isAttacking:
+    m_InternalValue: 0
   vitality:
     m_InternalValue: 5
   endurance:
     m_InternalValue: 5
+  strength:
+    m_InternalValue: 1
+  strengthModifier:
+    m_InternalValue: 1
   currentHealth:
     m_InternalValue: 150
   maxHealth:
@@ -720,6 +759,21 @@ MonoBehaviour:
     m_InternalValue: 150
   maxStamina:
     m_InternalValue: 150
+--- !u!114 &-6397030508234865043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842103163252997315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e3e13235ae74548b346b4fc3cc998c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemChance: 10
+  droppableItem:
+  - {fileID: 11400000, guid: afdeab2185b97f041954fcf9d115af56, type: 2}
 --- !u!1 &886416252126033724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,6 +2621,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   zombieCharacter: {fileID: 0}
 --- !u!1 &7812838419350072048
 GameObject:
@@ -2936,6 +2991,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   zombieCharacter: {fileID: 0}
 --- !u!1 &8637762926231117561
 GameObject:

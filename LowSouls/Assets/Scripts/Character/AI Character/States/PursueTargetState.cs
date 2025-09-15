@@ -26,7 +26,7 @@ namespace LS
                     aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
             }
 
-            aiCharacter.aICharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
+            aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
 
             //within combat range -> switch state to combat
                 if (aiCharacter.aiCharacterCombatManager.distanceFromTarget <= aiCharacter.navMeshAgent.stoppingDistance)

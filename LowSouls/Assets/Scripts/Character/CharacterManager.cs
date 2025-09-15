@@ -88,8 +88,6 @@ namespace LS
 
         public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
-            Debug.Log("ProcessDeathEvent called!");
-
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;
@@ -156,6 +154,7 @@ namespace LS
 
             characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
+            isDead.OnValueChanged += characterNetworkManager.OnIsDeadChanged;
         }
 
         public override void OnNetworkDespawn()
@@ -163,7 +162,7 @@ namespace LS
             base.OnNetworkDespawn();
             characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged -= characterNetworkManager.OnIsActiveChanged;
-
+            isDead.OnValueChanged -= characterNetworkManager.OnIsDeadChanged;
         }
     }
 }

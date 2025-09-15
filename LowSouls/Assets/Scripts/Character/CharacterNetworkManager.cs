@@ -71,6 +71,11 @@ namespace LS
             }
         }
 
+        public virtual void OnIsDeadChanged(bool oldStatus,  bool newStatus)
+        {
+
+        }
+
         public void OnLockOnTargetIDChange(ulong oldID, ulong newID)
         {
             if (!IsOwner)

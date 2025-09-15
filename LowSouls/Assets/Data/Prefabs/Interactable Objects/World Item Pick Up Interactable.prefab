@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 5057130474454793564}
   - component: {fileID: 7315208844944981202}
   m_Layer: 13
-  m_Name: Item Pick Up Interactable
+  m_Name: World Item Pick Up Interactable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
