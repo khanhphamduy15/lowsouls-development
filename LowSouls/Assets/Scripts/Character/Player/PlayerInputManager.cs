@@ -34,6 +34,7 @@ namespace LS
         [SerializeField] bool jumpInput = false;
         [SerializeField] bool switchRightWeaponInput = false;
         [SerializeField] bool switchLeftWeaponInput = false;
+        [SerializeField] bool switchQuickSlotItemInput = false;
         [SerializeField] bool interactInput = false;
         [SerializeField] bool useItemInput = false;
 
@@ -76,6 +77,7 @@ namespace LS
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switchRightWeaponInput = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switchLeftWeaponInput = true;
+                playerControls.PlayerActions.SwitchQuickSlotItem.performed += i => switchQuickSlotItemInput = true;
                 playerControls.PlayerActions.Interact.performed += i => interactInput = true;
                 playerControls.PlayerActions.UseItem.performed += i => useItemInput = true;
 
@@ -200,6 +202,7 @@ namespace LS
             HandleOpenUIInput();
             HandleCloseUIInput();
             HandleUseItemInput();
+            HandleSwitchQuickSlotItemInput();
         }
         
         //use item
@@ -414,10 +417,16 @@ namespace LS
 
         private void HandleJumpInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (jumpInput)
             {
                 jumpInput = false;
+
                 //Return if menu or ui window is open
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
 
                 //Attempt to Jump
 
@@ -441,6 +450,9 @@ namespace LS
 
         private void HandleRBInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (twoHandInput)
                 return;
 
@@ -449,6 +461,8 @@ namespace LS
                 RBInput = false;
 
                 //ui window open => do nothing
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
@@ -459,6 +473,9 @@ namespace LS
 
         private void HandleLBInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (twoHandInput)
                 return;
 
@@ -467,6 +484,8 @@ namespace LS
                 LBInput = false;
 
                 //ui window open => do nothing
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
 
                 player.playerNetworkManager.SetCharacterActionHand(false);
 
@@ -477,11 +496,16 @@ namespace LS
 
         private void HandleRTInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (RTInput)
             {
                 RTInput = false;
 
                 //ui window open => do nothing
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
@@ -492,10 +516,15 @@ namespace LS
 
         private void HandleChargeRTInput()
         {
-            //
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (player.isPerformingAction)
             {
-               if (player.playerNetworkManager.isUsingRightHand.Value)
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
+                if (player.playerNetworkManager.isUsingRightHand.Value)
                {
                     player.playerNetworkManager.isChargingAttack.Value = ChargeRTInput;
                }
@@ -511,6 +540,13 @@ namespace LS
 
                 if (PlayerUIManager.instance.menuWindowIsOpen)
                     return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
+
                 player.playerEquipmentManager.SwitchRightWeapon();
             }
         }
@@ -522,7 +558,32 @@ namespace LS
 
                 if (PlayerUIManager.instance.menuWindowIsOpen)
                     return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void HandleSwitchQuickSlotItemInput()
+        {
+            if (switchQuickSlotItemInput)
+            {
+                switchQuickSlotItemInput = false;
+
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
+
+                player.playerEquipmentManager.SwitchQuickSlotItem();
             }
         }
 

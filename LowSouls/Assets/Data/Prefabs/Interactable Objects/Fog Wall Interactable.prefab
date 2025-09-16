@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  interactableText: Pass Through
+  interactableText: "B\u01B0\u1EDBc qua"
   interactableCollider: {fileID: 7239394290388614248}
   hostOnlyInteractable: 0
   fogWallObjects:

@@ -1,4 +1,6 @@
 using LS;
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,7 @@ public class PlayerUIHudManager : MonoBehaviour
     [SerializeField] Image rightWeaponQuickSlotIcon;
     [SerializeField] Image leftWeaponQuickSlotIcon;
     [SerializeField] Image quickSlotItemIcon;
+    [SerializeField] TextMeshProUGUI quickSlotItemCount;
 
     [Header("Boss Health Bar")]
     public Transform bossHealthBarParent;
@@ -117,20 +120,32 @@ public class PlayerUIHudManager : MonoBehaviour
     public void SetQuickSlotItemIcon(int itemID)
     {
         QuickSlotItem quickSlotItem = WorldItemDatabase.instance.GetQuickSlotItemByID(itemID);
-
         if (quickSlotItem == null)
         {
             quickSlotItemIcon.enabled = false;
             quickSlotItemIcon.sprite = null;
+            quickSlotItemCount.enabled = false;
             return;
         }
         if (quickSlotItem.itemIcon == null)
         {
             quickSlotItemIcon.enabled = false;
             quickSlotItemIcon.sprite = null;
+            quickSlotItemCount.enabled = false;
             return;
         }
         quickSlotItemIcon.sprite = quickSlotItem.itemIcon;
         quickSlotItemIcon.enabled = true;
+
+        if (quickSlotItem.isConsumable)
+        {
+            PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+            quickSlotItemCount.enabled = true;
+            quickSlotItemCount.text = quickSlotItem.GetCurrentAmount(player).ToString();
+        }
+        else
+        {
+            quickSlotItemCount.enabled = false;
+        }
     }
 }

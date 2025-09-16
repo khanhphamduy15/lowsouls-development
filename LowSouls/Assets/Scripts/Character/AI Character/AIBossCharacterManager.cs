@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
@@ -94,7 +94,7 @@ namespace LS
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
-            PlayerUIManager.instance.playerUIPopUpManager.SendBossDefeatedPopUp("GREAT FOE FELLED");
+            PlayerUIManager.instance.playerUIPopUpManager.SendBossDefeatedPopUp("ĐÃ CHIẾN THẮNG");
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;

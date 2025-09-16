@@ -245,10 +245,14 @@ namespace LS
             if (quickSlotItem != null)
             {
                 player.playerInventoryManager.currentQuickSlotItem = quickSlotItem;
-
-                if (player.IsOwner)
-                    PlayerUIManager.instance.playerUIHudManager.SetQuickSlotItemIcon(newID);
             }
+            else
+            {
+                player.playerInventoryManager.currentQuickSlotItem = null;
+            }
+
+            if (player.IsOwner)
+                PlayerUIManager.instance.playerUIHudManager.SetQuickSlotItemIcon(newID);
         }
 
         //Item Actions
@@ -298,7 +302,7 @@ namespace LS
         {
             if (clientID != NetworkManager.Singleton.LocalClientId)
             {
-                QuickSlotItem item =  WorldItemDatabase.instance.GetQuickSlotItemByID(quickSlotItemID);
+                QuickSlotItem item = WorldItemDatabase.instance.GetQuickSlotItemByID(quickSlotItemID);
                 item.AttemptToUseItem(player);
             }
         }
@@ -308,7 +312,7 @@ namespace LS
             WeaponItemAction weaponAction = WorldActionManager.instance.GetWeaponItemActionByID(actionID);
             if (weaponAction != null)
             {
-                weaponAction.AttemptToPerformAction(player,WorldItemDatabase.instance.GetWeaponByID(weaponID));
+                weaponAction.AttemptToPerformAction(player, WorldItemDatabase.instance.GetWeaponByID(weaponID));
             }
             else
             {

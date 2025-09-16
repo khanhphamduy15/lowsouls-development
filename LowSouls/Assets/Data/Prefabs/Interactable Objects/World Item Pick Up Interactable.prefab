@@ -5048,12 +5048,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  interactableText: Pick Up Item
+  interactableText: "Nh\u1EB7t"
   interactableCollider: {fileID: 0}
   hostOnlyInteractable: 1
   pickUpType: 0
   item: {fileID: 11400000, guid: 942ad15331bff404e84fa3a65e87eb64, type: 2}
-  itemID: 0
+  itemID:
+    m_InternalValue: 0
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  enemyDropID:
+    m_InternalValue: 0
+  trackEnemyDropPos: 1
+  worldSpawnInteractableID: 0
   hasBeenLooted: 0
 --- !u!135 &7315208844944981202
 SphereCollider:

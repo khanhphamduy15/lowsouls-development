@@ -10,6 +10,9 @@ namespace LS
         [Header("Animation")]
         [SerializeField] protected string useItemAnimation;
 
+        [Header("Consumable")]
+        public bool isConsumable = true;    
+
         public virtual void AttemptToUseItem(PlayerManager player)
         {
             if (!CanIUseThisItem(player)) 
@@ -25,6 +28,11 @@ namespace LS
         public virtual bool CanIUseThisItem(PlayerManager player)
         {
             return true;
+        }
+
+        public virtual int GetCurrentAmount(PlayerManager player)
+        {
+            return 0;
         }
     }
 }

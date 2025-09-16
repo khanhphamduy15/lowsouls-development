@@ -86,5 +86,12 @@ namespace LS
             Destroy(fx, 2f);
             player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.instance.healingSFX);
         }
+
+        public override int GetCurrentAmount(PlayerManager player)
+        {
+            int currentAmount = player.playerNetworkManager.remainingHealthFlask.Value;
+
+            return currentAmount;
+        }
     }
 }

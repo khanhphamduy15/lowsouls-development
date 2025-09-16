@@ -1548,6 +1548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf95da72ec91ce4d9b52deb10fcdedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeQuickSlotItemFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 0}
   staticEffects: []
 --- !u!114 &3044459194388604757
@@ -1605,9 +1606,10 @@ MonoBehaviour:
   groundedVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
-  canRotate: 1
-  canMove: 1
   isGrounded: 1
+  canMove: 1
+  canRotate: 1
+  canRoll: 1
 --- !u!114 &5004244984652757995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,10 +1901,11 @@ MonoBehaviour:
   characterUIManager: {fileID: 0}
   isPerformingAction: 0
   characterGroup: 1
-  characterName: Great Ape
+  characterName: "Kh\u1ED5ng l\u1ED3"
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
-  aICharacterLocomotionManager: {fileID: 0}
+  aiCharacterLocomotionManager: {fileID: 0}
+  aiCharacterInventoryManager: {fileID: 0}
   currentState: {fileID: 0}
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: 86e452e998d91fc48b6b4af3b66a0346, type: 2}

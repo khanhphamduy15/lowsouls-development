@@ -448,6 +448,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Quick Slot Item",
+                    "type": "Button",
+                    "id": "6f09055b-fdfe-4ed8-9782-9c20e56791df",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -701,6 +710,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Switch Left Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ef94e60-fb5d-4b02-929f-a3e5d4cc10ed",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Quick Slot Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "820b668d-475b-497a-bbf5-810190c4644f",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Quick Slot Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

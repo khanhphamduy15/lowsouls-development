@@ -21,9 +21,6 @@ namespace LS
         [HideInInspector] public GameObject rightHandWeaponModel;
         [HideInInspector] public GameObject leftHandWeaponModel;
 
-        [Header("Debug")]
-        [SerializeField] bool equipmentItem = false;
-
         [Header("General Equipment Models")]
         public GameObject halfHelmetObject;
         [HideInInspector] public GameObject[] halfHelmets;
@@ -272,12 +269,66 @@ namespace LS
             leftLegs = leftLegList.ToArray();
         }
 
-        private void Update()
+        //Quick Slot
+        public void SwitchQuickSlotItem()
         {
-            if (equipmentItem)
+            if (!player.IsOwner) 
+                return;
+
+            QuickSlotItem selectedItem = null;
+
+            //go to the next item
+            player.playerInventoryManager.quickSlotItemIndex += 1;
+
+            //if index is out of bounds, go back to idx 0 (pos1)
+            if (player.playerInventoryManager.quickSlotItemIndex < 0 || player.playerInventoryManager.quickSlotItemIndex > 2)
             {
-                equipmentItem = false;
-                EquipArmor();
+                player.playerInventoryManager.quickSlotItemIndex = 0;
+                //check if holding more than one weap
+                float itemCount = 0;
+                QuickSlotItem firstItem = null;
+                int firstItemPosition = 0;
+
+                for (int i = 0; i < player.playerInventoryManager.quickSlotItemInSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.quickSlotItemInSlots[i] != null)
+                    {
+                        itemCount += 1;
+                        if (firstItem == null)
+                        {
+                            firstItem = player.playerInventoryManager.quickSlotItemInSlots[i];
+                            firstItemPosition = i;
+                        }
+                    }
+                }
+                if (itemCount <= 1)
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = -1;
+                    selectedItem = null;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+                }
+                else
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = firstItemPosition;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = firstItem.itemID;
+                }
+                return;
+            }
+
+            if (player.playerInventoryManager.quickSlotItemInSlots[player.playerInventoryManager.quickSlotItemIndex] != null)
+            {
+                selectedItem = player.playerInventoryManager.quickSlotItemInSlots[player.playerInventoryManager.quickSlotItemIndex];
+                //assign network weapon id to sync
+                player.playerNetworkManager.currentQuickSlotItemID.Value = player.playerInventoryManager.quickSlotItemInSlots[player.playerInventoryManager.quickSlotItemIndex].itemID;
+            }
+            else
+            {
+                player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+            }
+
+            if (selectedItem == null && player.playerInventoryManager.quickSlotItemIndex <= 2)
+            {
+                SwitchQuickSlotItem();
             }
         }
 

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -70,7 +70,7 @@ namespace LS
 
             player.playerAnimatorManager.PlayTargetActionAnimation("Activate_Site_Of_Grace_01", true);
 
-            PlayerUIManager.instance.playerUIPopUpManager.SendGraceRestoredPopUp("SITE OF GRACE RESTORED");
+            PlayerUIManager.instance.playerUIPopUpManager.SendGraceRestoredPopUp("TÌM THẤY THÁNH TÍCH");
 
             StartCoroutine(WaitForAnimationAndPopUpThenRestoreCollider());
         }

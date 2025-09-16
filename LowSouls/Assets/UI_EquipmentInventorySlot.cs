@@ -245,6 +245,69 @@ namespace LS
                     PlayerUIManager.instance.playerUIEquipmentMenuManager.RefreshMenu();
 
                     break;
+                case EquipmentSlotType.QuickSlot01:
+
+                    equippedItem = player.playerInventoryManager.quickSlotItemInSlots[0];
+
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+
+                    player.playerInventoryManager.quickSlotItemInSlots[0] = currentItem as QuickSlotItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+
+
+                    //Re equip
+                    if (player.playerInventoryManager.quickSlotItemIndex == 0)
+                        player.playerNetworkManager.currentQuickSlotItemID.Value = currentItem.itemID;
+
+                    //Refresh
+                    PlayerUIManager.instance.playerUIEquipmentMenuManager.RefreshMenu();
+
+                    break;
+                case EquipmentSlotType.QuickSlot02:
+
+                    equippedItem = player.playerInventoryManager.quickSlotItemInSlots[1];
+
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+
+                    player.playerInventoryManager.quickSlotItemInSlots[1] = currentItem as QuickSlotItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+
+
+                    //Re equip
+                    if (player.playerInventoryManager.quickSlotItemIndex == 1)
+                        player.playerNetworkManager.currentQuickSlotItemID.Value = currentItem.itemID;
+
+                    //Refresh
+                    PlayerUIManager.instance.playerUIEquipmentMenuManager.RefreshMenu();
+
+                    break;
+                case EquipmentSlotType.QuickSlot03:
+
+                    equippedItem = player.playerInventoryManager.quickSlotItemInSlots[2];
+
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+
+                    player.playerInventoryManager.quickSlotItemInSlots[2] = currentItem as QuickSlotItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+
+
+                    //Re equip
+                    if (player.playerInventoryManager.quickSlotItemIndex == 2)
+                        player.playerNetworkManager.currentQuickSlotItemID.Value = currentItem.itemID;
+
+                    //Refresh
+                    PlayerUIManager.instance.playerUIEquipmentMenuManager.RefreshMenu();
+
+                    break;
                 default:
                     break;
             }

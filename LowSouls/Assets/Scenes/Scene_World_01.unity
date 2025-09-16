@@ -35875,15 +35875,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  interactableText: Rest
+  interactableText: "Ngh\u1EC9 ng\u01A1i"
   interactableCollider: {fileID: 1382961925}
   hostOnlyInteractable: 1
   siteOfGraceID: 0
   isActivated:
     m_InternalValue: 0
   activatedParticles: {fileID: 8740592699091063809}
-  unactivatedInteractionText: Restore Site Of Grace
-  activatedInteractionText: Rest
+  unactivatedInteractionText: "Kh\xF4i ph\u1EE5c th\xE1nh t\xEDch"
+  activatedInteractionText: "Ngh\u1EC9 ng\u01A1i"
 --- !u!54 &919132147613995313
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36047,9 +36047,17 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 1289306261
       objectReference: {fileID: 0}
+    - target: {fileID: 5057130474454793564, guid: 10c516d4ec9788e419c38064c775fb1e, type: 3}
+      propertyPath: interactableText
+      value: "Nh\u1EB7t"
+      objectReference: {fileID: 0}
     - target: {fileID: 5494202620974111197, guid: 10c516d4ec9788e419c38064c775fb1e, type: 3}
       propertyPath: m_Name
       value: Item Pick Up Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225523839135458099, guid: 10c516d4ec9788e419c38064c775fb1e, type: 3}
+      propertyPath: m_Intensity
+      value: 10.13489
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

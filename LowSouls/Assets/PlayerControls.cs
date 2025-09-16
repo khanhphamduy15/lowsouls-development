@@ -534,6 +534,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch Quick Slot Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f09055b-fdfe-4ed8-9782-9c20e56791df"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -787,6 +796,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Switch Left Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ef94e60-fb5d-4b02-929f-a3e5d4cc10ed"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Quick Slot Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""820b668d-475b-497a-bbf5-810190c4644f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Quick Slot Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1061,6 +1092,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_OpenMenu = m_PlayerActions.FindAction("Open Menu", throwIfNotFound: true);
         m_PlayerActions_Unequipitem = m_PlayerActions.FindAction("Unequip item", throwIfNotFound: true);
         m_PlayerActions_UseItem = m_PlayerActions.FindAction("Use Item", throwIfNotFound: true);
+        m_PlayerActions_SwitchQuickSlotItem = m_PlayerActions.FindAction("Switch Quick Slot Item", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
@@ -1360,6 +1392,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_OpenMenu;
     private readonly InputAction m_PlayerActions_Unequipitem;
     private readonly InputAction m_PlayerActions_UseItem;
+    private readonly InputAction m_PlayerActions_SwitchQuickSlotItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player Actions".
     /// </summary>
@@ -1456,6 +1489,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @UseItem => m_Wrapper.m_PlayerActions_UseItem;
         /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/SwitchQuickSlotItem".
+        /// </summary>
+        public InputAction @SwitchQuickSlotItem => m_Wrapper.m_PlayerActions_SwitchQuickSlotItem;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
@@ -1544,6 +1581,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @SwitchQuickSlotItem.started += instance.OnSwitchQuickSlotItem;
+            @SwitchQuickSlotItem.performed += instance.OnSwitchQuickSlotItem;
+            @SwitchQuickSlotItem.canceled += instance.OnSwitchQuickSlotItem;
         }
 
         /// <summary>
@@ -1618,6 +1658,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @SwitchQuickSlotItem.started -= instance.OnSwitchQuickSlotItem;
+            @SwitchQuickSlotItem.performed -= instance.OnSwitchQuickSlotItem;
+            @SwitchQuickSlotItem.canceled -= instance.OnSwitchQuickSlotItem;
         }
 
         /// <summary>
@@ -1931,6 +1974,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Switch Quick Slot Item" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchQuickSlotItem(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

@@ -69,8 +69,10 @@ namespace LS
         Head,
         Body,
         Legs,
-        Hands
-        
+        Hands,
+        QuickSlot01,
+        QuickSlot02,
+        QuickSlot03
     }
 
     public enum HeadEquipmentType
