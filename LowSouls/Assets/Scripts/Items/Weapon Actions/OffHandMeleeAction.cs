@@ -8,6 +8,9 @@ namespace LS {
         {
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
 
+            if (playerPerformingAction.playerCombatManager.isUsingItem)
+                return;
+
             //can block check
             if (!playerPerformingAction.playerCombatManager.canBlock)
                 return;

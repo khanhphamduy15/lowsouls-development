@@ -17,11 +17,17 @@ namespace LS
         {
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
 
-            if (!playerPerformingAction.IsOwner) return;
+            if (!playerPerformingAction.IsOwner) 
+                return;
 
-            if (playerPerformingAction.playerNetworkManager.currentStamina.Value <= 0) return;
+            if (playerPerformingAction.playerCombatManager.isUsingItem)
+                return;
 
-            if (!playerPerformingAction.playerLocomotionManager.isGrounded) return;
+            if (playerPerformingAction.playerNetworkManager.currentStamina.Value <= 0) 
+                return;
+
+            if (!playerPerformingAction.playerLocomotionManager.isGrounded) 
+                return;
 
             if (playerPerformingAction.IsOwner)
                 playerPerformingAction.playerNetworkManager.isAttacking.Value = true;

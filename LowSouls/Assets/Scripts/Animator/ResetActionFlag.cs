@@ -15,6 +15,7 @@ namespace LS
             character.isPerformingAction = false;
             character.characterLocomotionManager.canMove = true;
             character.characterLocomotionManager.canRotate = true;
+            character.characterLocomotionManager.canRoll = true;
             character.characterLocomotionManager.isRolling = false;
             character.characterCombatManager.DisableCanDoCombo();
             character.characterCombatManager.DisableCanDoRollingAttack();

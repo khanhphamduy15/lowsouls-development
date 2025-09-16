@@ -9,6 +9,9 @@ namespace LS
         PlayerManager player;
         public NetworkVariable<FixedString64Bytes> characterName = new NetworkVariable<FixedString64Bytes>("Character", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Flasks")]
+        public NetworkVariable<int> remainingHealthFlask = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [Header("Equipment")]
         public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -264,6 +267,39 @@ namespace LS
             if (clientID != NetworkManager.Singleton.LocalClientId)
             {
                 PerformWeaponBasedAction(actionID, weaponID);
+            }
+        }
+
+        [ServerRpc]
+        public void HideWeaponServerRpc()
+        {
+            if (IsServer)
+                HideWeaponClientRpc();
+        }
+
+        [ClientRpc]
+        private void HideWeaponClientRpc()
+        {
+            if (player.playerEquipmentManager.rightHandWeaponModel != null)
+                player.playerEquipmentManager.rightHandWeaponModel.SetActive(false);
+
+            if (player.playerEquipmentManager.leftHandWeaponModel != null)
+                player.playerEquipmentManager.leftHandWeaponModel.SetActive(false);
+        }
+
+        [ServerRpc]
+        public void NotifyServerOfQuickSlotItemActionServerRpc(ulong clientID, int quickSlotItemID)
+        {
+            NotifyServerOfQuickSlotItemActionClientRpc(clientID, quickSlotItemID);
+        }
+
+        [ClientRpc]
+        private void NotifyServerOfQuickSlotItemActionClientRpc(ulong clientID, int quickSlotItemID)
+        {
+            if (clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                QuickSlotItem item =  WorldItemDatabase.instance.GetQuickSlotItemByID(quickSlotItemID);
+                item.AttemptToUseItem(player);
             }
         }
 

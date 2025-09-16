@@ -9,6 +9,8 @@ namespace LS
 
         [Header("VFX")]
         public GameObject bloodSplatterVFX;
+        public GameObject healingVFX;
+
 
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;

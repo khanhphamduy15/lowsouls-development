@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -213,7 +214,7 @@ namespace LS
                 if (player.playerInventoryManager.currentQuickSlotItem != null)
                 {
                     player.playerInventoryManager.currentQuickSlotItem.AttemptToUseItem(player);
-
+                    player.playerNetworkManager.NotifyServerOfQuickSlotItemActionServerRpc(NetworkManager.Singleton.LocalClientId, player.playerInventoryManager.currentQuickSlotItem.itemID);
                 }
             }
         }

@@ -18,9 +18,10 @@ namespace LS
 
         [Header("Flags")]
         public bool isRolling = false;
-        public bool canRotate = true;
-        public bool canMove = true;
         public bool isGrounded = true;
+        public bool canMove = true;
+        public bool canRotate = true;
+        public bool canRoll = true;
 
         protected virtual void Awake()
         {

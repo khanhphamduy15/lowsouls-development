@@ -18,4 +18,7 @@ MonoBehaviour:
   itemID: 0
   itemModel: {fileID: 8885261896269281129, guid: 05f9dd29df0bd1346b8ba57b8f451725, type: 3}
   useItemAnimation: Drink_Potion_01
+  flaskRestoration: 50
   emptyFlaskItem: {fileID: 8201378953974358585, guid: ea91b4659a0097b4693cc707ed7e17be, type: 3}
+  emptyFlaskAnimation: Drink_Potion_01
+  healingVFX: {fileID: 0}

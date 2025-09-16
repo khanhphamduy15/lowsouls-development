@@ -17,6 +17,18 @@ namespace LS
             if (player.playerEffectsManager.activeQuickSlotItemFX != null)
                 Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
 
+            player.playerEquipmentManager.UnhideWeapon();
+
+            if (player.playerEffectsManager.activeQuickSlotItemFX != null)
+                Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
+
+            if (player.playerCombatManager.isUsingItem)
+            {
+                player.playerCombatManager.isUsingItem = false;
+
+                if (!player.isPerformingAction)
+                    player.playerLocomotionManager.canRoll = true;
+            }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

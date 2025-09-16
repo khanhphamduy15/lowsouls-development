@@ -205,7 +205,7 @@ namespace LS
         public void AttemptToPerformDodge()
         {
             //moving when dodge = roll, staying still when dodge = backstep
-            if (player.isPerformingAction)
+            if (!player.playerLocomotionManager.canRoll)
             {
                 return;
             }
