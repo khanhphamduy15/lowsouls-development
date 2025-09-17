@@ -70,6 +70,8 @@ namespace LS
                 player.playerNetworkManager.currentHealth.Value += flaskRestoration;
                 player.playerNetworkManager.remainingHealthFlask.Value -= 1;
                 PlayHealFX(player);
+                PlayerUIManager.instance.playerUIHudManager.SetQuickSlotItemIcon(player.playerInventoryManager.currentQuickSlotItem);
+
             }
 
             if (player.playerNetworkManager.remainingHealthFlask.Value <= 0)

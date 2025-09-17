@@ -117,31 +117,30 @@ public class PlayerUIHudManager : MonoBehaviour
 
     }
 
-    public void SetQuickSlotItemIcon(int itemID)
+    public void SetQuickSlotItemIcon(QuickSlotItem quickSlot)
     {
-        QuickSlotItem quickSlotItem = WorldItemDatabase.instance.GetQuickSlotItemByID(itemID);
-        if (quickSlotItem == null)
+        if (quickSlot == null)
         {
             quickSlotItemIcon.enabled = false;
             quickSlotItemIcon.sprite = null;
             quickSlotItemCount.enabled = false;
             return;
         }
-        if (quickSlotItem.itemIcon == null)
+        if (quickSlot.itemIcon == null)
         {
             quickSlotItemIcon.enabled = false;
             quickSlotItemIcon.sprite = null;
             quickSlotItemCount.enabled = false;
             return;
         }
-        quickSlotItemIcon.sprite = quickSlotItem.itemIcon;
+        quickSlotItemIcon.sprite = quickSlot.itemIcon;
         quickSlotItemIcon.enabled = true;
 
-        if (quickSlotItem.isConsumable)
+        if (quickSlot.isConsumable)
         {
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             quickSlotItemCount.enabled = true;
-            quickSlotItemCount.text = quickSlotItem.GetCurrentAmount(player).ToString();
+            quickSlotItemCount.text = quickSlot.GetCurrentAmount(player).ToString();
         }
         else
         {

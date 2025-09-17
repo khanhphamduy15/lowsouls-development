@@ -121,5 +121,28 @@ namespace LS
 
             return weapon;
         }
+
+        public FlaskItem GetFlaskFromSerializableData(SerializableFlask serializableData)
+        {
+            FlaskItem flask = null;
+
+            if (GetQuickSlotItemByID(serializableData.itemID))
+                flask = Instantiate(GetQuickSlotItemByID(serializableData.itemID)) as FlaskItem;
+
+            return flask;
+        }
+
+        public QuickSlotItem GetQuickSlotItemFromSerializableData(SerializableQuickSlotItem serializableData)
+        {
+            QuickSlotItem item = null;
+
+            if (GetQuickSlotItemByID(serializableData.itemID))
+            {
+                item = Instantiate(GetQuickSlotItemByID(serializableData.itemID)) as QuickSlotItem;
+                item.itemAmount = serializableData.itemAmount;
+            }
+
+            return item;
+        }
     }
 }

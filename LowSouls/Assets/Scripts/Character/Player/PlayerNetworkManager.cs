@@ -259,7 +259,7 @@ namespace LS
             }
 
             if (player.IsOwner)
-                PlayerUIManager.instance.playerUIHudManager.SetQuickSlotItemIcon(newID);
+                PlayerUIManager.instance.playerUIHudManager.SetQuickSlotItemIcon(player.playerInventoryManager.currentQuickSlotItem);
         }
 
         //Item Actions

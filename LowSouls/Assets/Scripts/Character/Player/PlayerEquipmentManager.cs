@@ -592,6 +592,25 @@ namespace LS
             LoadHandEquipment(player.playerInventoryManager.handEquipment);
         }
 
+        //Quick Slot
+        public void LoadQuickSlotItem(QuickSlotItem item)
+        {
+            if (item == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+
+                player.playerInventoryManager.currentQuickSlotItem = null;
+                return;
+            }
+
+            player.playerInventoryManager.currentQuickSlotItem = item;
+
+            if (player.IsOwner)
+                player.playerNetworkManager.currentQuickSlotItemID.Value = item.itemID;
+        }
+
+        //Weapons
         private void InitializeWeaponSlots()
         {
             WeaponModelInstantiationSlot[] weaponSlots = GetComponentsInChildren<WeaponModelInstantiationSlot>();

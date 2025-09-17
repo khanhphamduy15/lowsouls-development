@@ -239,5 +239,35 @@ namespace LS
             serializableWeapon.itemID = weapon.itemID;
             return serializableWeapon;
         }
+
+        public SerializableFlask GetSerializableFlaskFromFlaskItem(FlaskItem flaskItem)
+        {
+            SerializableFlask serializableFlask = new SerializableFlask();
+            if (flaskItem != null)
+            {
+                serializableFlask.itemID = flaskItem.itemID;
+            }
+            else
+            {
+                serializableFlask.itemID = -1;
+            }
+            return serializableFlask;
+        }
+
+        public SerializableQuickSlotItem GetSerializableQuickSlotItemFromQuickSlotItem(QuickSlotItem quickSlotItem)
+        {
+            SerializableQuickSlotItem serializableQuickSlotItem = new SerializableQuickSlotItem();
+            if (quickSlotItem != null)
+            {
+                serializableQuickSlotItem.itemID = quickSlotItem.itemID;
+                serializableQuickSlotItem.itemAmount = quickSlotItem.itemAmount;
+            }
+            else
+            {
+                serializableQuickSlotItem.itemID = -1;
+            }
+            return serializableQuickSlotItem;
+        }
+
     }
 }
