@@ -12,6 +12,9 @@ namespace LS {
         [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
         [HideInInspector] public PlayerUICharacterMenuManager playerUICharacterMenuManager;
         [HideInInspector] public PlayerUIEquipmentMenuManager playerUIEquipmentMenuManager;
+        [HideInInspector] public PlayerUISiteOfGraceManager playerUISiteOfGraceManager;
+        [HideInInspector] public PlayerUITeleportLocationManager playerUITeleportLocationManager;
+
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -31,6 +34,8 @@ namespace LS {
             playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
             playerUICharacterMenuManager = GetComponentInChildren<PlayerUICharacterMenuManager>();
             playerUIEquipmentMenuManager = GetComponentInChildren<PlayerUIEquipmentMenuManager>();
+            playerUISiteOfGraceManager = GetComponentInChildren<PlayerUISiteOfGraceManager>();
+            playerUITeleportLocationManager = GetComponentInChildren<PlayerUITeleportLocationManager>();
         }
 
         private void Start()
@@ -53,6 +58,8 @@ namespace LS {
         {
             playerUICharacterMenuManager.CloseCharacterMenu();
             playerUIEquipmentMenuManager.CloseEquipmentManagerMenu();
+            playerUISiteOfGraceManager.CloseSiteOfGraceManagerMenu();
+            playerUITeleportLocationManager.CloseTeleportLocationManagerMenu();
         }
     }
 }

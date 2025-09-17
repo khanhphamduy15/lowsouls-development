@@ -79,6 +79,7 @@ namespace LS {
         public void OpenEquipmentManagerMenu()
         {
             PlayerUIManager.instance.menuWindowIsOpen = true;
+            ToggleEquipmentButtons(true);
             menu.SetActive(true);
             equipmentInventoryWindow.SetActive(false);
             ClearEquipmentInventory();

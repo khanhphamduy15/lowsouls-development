@@ -639,7 +639,11 @@ namespace LS
 
         public void SwitchRightWeapon()
         {
-            if (!player.IsOwner) return;
+            if (!player.IsOwner) 
+                return;
+
+            player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+
             player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;
@@ -807,7 +811,11 @@ namespace LS
 
         public void SwitchLeftWeapon()
         {
-            if (!player.IsOwner) return;
+            if (!player.IsOwner) 
+                return;
+
+            player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+
             player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Left_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;

@@ -7,7 +7,7 @@ namespace LS
     public class SiteOfGraceInteractable : Interactable
     {
         [Header("Site Of Grace Info")]
-        [SerializeField] int siteOfGraceID;
+        public int siteOfGraceID;
         public NetworkVariable<bool> isActivated = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("VFX")]
@@ -16,6 +16,9 @@ namespace LS
         [Header("Interaction Text")]
         [SerializeField] string unactivatedInteractionText = "Restore Site Of Grace";
         [SerializeField] string activatedInteractionText = "Rest";
+
+        [Header("Teleport Transform")]
+        [SerializeField] Transform teleportTransform;   
 
         protected override void Start()
         {
@@ -51,6 +54,8 @@ namespace LS
                 OnIsActivatedChanged(false, isActivated.Value);
 
             isActivated.OnValueChanged += OnIsActivatedChanged;
+
+            WorldObjectManager.instance.AddSiteOfGraceToList(this);
         }
 
         public override void OnNetworkDespawn()
@@ -77,6 +82,7 @@ namespace LS
 
         private void RestAtSiteOfGrace(PlayerManager player)
         {
+            PlayerUIManager.instance.playerUISiteOfGraceManager.OpenSiteOfGraceManagerMenu();
             Debug.Log("RESTING");
             interactableCollider.enabled = true;
 
@@ -119,6 +125,16 @@ namespace LS
             {
                 interactableText = unactivatedInteractionText;
             }
+        }
+
+        public void TeleportToSiteOfGrace()
+        {
+            PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+
+            //loading screen
+
+            //tp
+            player.transform.position = teleportTransform.position;
         }
     }
 }
