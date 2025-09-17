@@ -83,7 +83,6 @@ namespace LS
         private void RestAtSiteOfGrace(PlayerManager player)
         {
             PlayerUIManager.instance.playerUISiteOfGraceManager.OpenSiteOfGraceManagerMenu();
-            Debug.Log("RESTING");
             interactableCollider.enabled = true;
 
             //heals
@@ -91,7 +90,7 @@ namespace LS
             player.playerNetworkManager.currentStamina.Value = player.playerNetworkManager.currentStamina.Value;
 
             //reset mobs position
-            WorldAIManager.instance.ResetAllCharacters();
+            WorldAIManager.instance.SpawnAllCharacters();
         }
 
         public override void Interact(PlayerManager player)
@@ -132,9 +131,12 @@ namespace LS
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
 
             //loading screen
+            PlayerUIManager.instance.playerUILoadingScreenManager.ActivateLoadingScreen();
 
             //tp
             player.transform.position = teleportTransform.position;
+            PlayerUIManager.instance.playerUILoadingScreenManager.DeactivateLoadingScreen();
+
         }
     }
 }

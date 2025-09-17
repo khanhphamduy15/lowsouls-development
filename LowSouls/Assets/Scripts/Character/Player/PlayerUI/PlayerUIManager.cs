@@ -14,6 +14,7 @@ namespace LS {
         [HideInInspector] public PlayerUIEquipmentMenuManager playerUIEquipmentMenuManager;
         [HideInInspector] public PlayerUISiteOfGraceManager playerUISiteOfGraceManager;
         [HideInInspector] public PlayerUITeleportLocationManager playerUITeleportLocationManager;
+        [HideInInspector] public PlayerUILoadingScreenManager playerUILoadingScreenManager;
 
 
         [Header("UI Flags")]
@@ -36,6 +37,7 @@ namespace LS {
             playerUIEquipmentMenuManager = GetComponentInChildren<PlayerUIEquipmentMenuManager>();
             playerUISiteOfGraceManager = GetComponentInChildren<PlayerUISiteOfGraceManager>();
             playerUITeleportLocationManager = GetComponentInChildren<PlayerUITeleportLocationManager>();
+            playerUILoadingScreenManager = GetComponentInChildren<PlayerUILoadingScreenManager>();
         }
 
         private void Start()
