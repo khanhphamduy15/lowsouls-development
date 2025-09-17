@@ -232,5 +232,12 @@ namespace LS
         {
             return worldSceneIndex;
         }
+
+        public SerializableWeapon GetSerializableWeaponFromItem(WeaponItem weapon)
+        {
+            SerializableWeapon serializableWeapon = new SerializableWeapon();
+            serializableWeapon.itemID = weapon.itemID;
+            return serializableWeapon;
+        }
     }
 }

@@ -74,6 +74,7 @@ namespace LS
             }
         }
         
+        //Item Db
         public WeaponItem GetWeaponByID(int ID)
         {
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
@@ -106,6 +107,19 @@ namespace LS
         public QuickSlotItem GetQuickSlotItemByID(int ID)
         {
             return quickSlotItems.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        //Item serialization
+        public WeaponItem GetWeaponFromSerializeData(SerializableWeapon serializableData)
+        {
+            WeaponItem weapon = null;
+            if (GetWeaponByID(serializableData.itemID))
+                weapon = Instantiate(GetWeaponByID(serializableData.itemID));
+
+            if (weapon == null)
+                return Instantiate(unarmedWeapon);
+
+            return weapon;
         }
     }
 }

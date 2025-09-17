@@ -202,8 +202,11 @@ namespace LS
 
         public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
         {
-            WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
-            player.playerInventoryManager.currentRightHandWeapon = newWeapon;
+            if (!player.IsOwner)
+            {
+                WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
+                player.playerInventoryManager.currentRightHandWeapon = newWeapon;
+            }
             player.playerEquipmentManager.LoadRightWeapon();
 
             if (player.IsOwner)
@@ -214,8 +217,12 @@ namespace LS
 
         public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
         {
-            WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
-            player.playerInventoryManager.currentLeftHandWeapon = newWeapon;
+            if (!player.IsOwner)
+            {
+                WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
+                player.playerInventoryManager.currentLeftHandWeapon = newWeapon;
+            }
+
             player.playerEquipmentManager.LoadLeftWeapon();
 
             if (player.IsOwner)
