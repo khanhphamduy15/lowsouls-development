@@ -30,6 +30,7 @@ namespace LS
         public float currentStamina;
 
         [Header("Site Of Grace")]
+        public int lastSiteOfGraceRestedAt = 0;
         public SerializableDictionary<int, bool> sitesOfGrace; 
 
 

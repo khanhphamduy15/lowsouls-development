@@ -3222,7 +3222,7 @@ PrefabInstance:
       addedObject: {fileID: 8898668073535857180}
     - targetCorrespondingSourceObject: {fileID: 1752634011024786, guid: 3f581b8f5dacdc54b8e405d2157e1d8b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8085904831605698937}
+      addedObject: {fileID: 7547384145117724913}
     - targetCorrespondingSourceObject: {fileID: 1759081923977764, guid: 3f581b8f5dacdc54b8e405d2157e1d8b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8971796430146375657}
@@ -4067,9 +4067,10 @@ MonoBehaviour:
   groundedVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
-  canRotate: 1
-  canMove: 1
   isGrounded: 1
+  canMove: 1
+  canRotate: 1
+  canRoll: 1
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -4093,6 +4094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1b7a167e7661145b1663a11217d443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeQuickSlotItemFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 0}
   staticEffects: []
   effectsToTest: {fileID: 11400000, guid: 006b28a47e0efe74d82a8de6bfb8f37f, type: 2}
@@ -4122,6 +4124,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
   - {fileID: 11400000, guid: 5c45afa43b6a3fb4786e471663f9f65e, type: 2}
   leftHandWeaponIndex: 0
+  quickSlotItemInSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  quickSlotItemIndex: 0
+  currentQuickSlotItem: {fileID: 0}
   headEquipment: {fileID: 0}
   bodyEquipment: {fileID: 0}
   legEquipment: {fileID: 0}
@@ -4145,7 +4153,6 @@ MonoBehaviour:
   backSlot: {fileID: 0}
   rightHandWeaponModel: {fileID: 0}
   leftHandWeaponModel: {fileID: 0}
-  equipmentItem: 0
   halfHelmetObject: {fileID: 4783536858132330730}
   halfHelmets: []
   hoodObject: {fileID: 4783278908033762922}
@@ -4240,6 +4247,7 @@ MonoBehaviour:
   canBlock: 1
   currentWeaponBeingUsed: {fileID: 0}
   canComboWithMainHandWeapon: 0
+  isUsingItem: 0
 --- !u!114 &7628160118075793484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4295,7 +4303,7 @@ MonoBehaviour:
   - {fileID: 4783617137903167018}
   - {fileID: 4783268683028871654}
   eyebrows: {fileID: 4783749387985027808}
---- !u!114 &-8085904831605698937
+--- !u!114 &7547384145117724913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4426,11 +4434,15 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  remainingHealthFlask:
+    m_InternalValue: 3
   currentWeaponBeingUsed:
     m_InternalValue: 0
   currentRightHandWeaponID:
     m_InternalValue: 0
   currentLeftHandWeaponID:
+    m_InternalValue: 0
+  currentQuickSlotItemID:
     m_InternalValue: 0
   isUsingRightHand:
     m_InternalValue: 0

@@ -23,7 +23,6 @@ namespace LS
 
         public virtual void Interact(PlayerManager player)
         {
-            Debug.Log("Interacted");
             if (!player.IsOwner)
                 return;
 

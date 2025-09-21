@@ -89,6 +89,9 @@ namespace LS
             player.playerNetworkManager.currentHealth.Value = player.playerNetworkManager.maxHealth.Value;
             player.playerNetworkManager.currentStamina.Value = player.playerNetworkManager.currentStamina.Value;
 
+            //reset flasks
+            player.playerNetworkManager.remainingHealthFlask.Value = 3;
+
             //reset mobs position
             WorldAIManager.instance.SpawnAllCharacters();
         }
@@ -96,6 +99,14 @@ namespace LS
         public override void Interact(PlayerManager player)
         {
             base.Interact(player);
+
+            if (player.isPerformingAction)
+                return;
+
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
+            WorldSaveGameManager.instance.currentCharacterData.lastSiteOfGraceRestedAt = siteOfGraceID;
 
             if (!isActivated.Value)
             {

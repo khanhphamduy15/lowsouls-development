@@ -106,7 +106,7 @@ namespace LS
             //Disable character 
         }
 
-        protected virtual void ReviveCharacter()
+        public virtual void ReviveCharacter()
         {
 
         }

@@ -72,6 +72,7 @@ namespace LS
                 PlayerCamera.instance.player = this;
                 PlayerInputManager.instance.player = this;
                 WorldSaveGameManager.instance.player = this;
+                PlayerUIManager.instance.localPlayer = this;
 
                 playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
                 playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxStaminaValue;
@@ -184,14 +185,15 @@ namespace LS
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
             if (IsOwner)
-            {
                 PlayerUIManager.instance.playerUIPopUpManager.SendDeathPopUp();
-            }
+
+            WorldGameSessionManager.instance.WaitAndReviveHost();
+
             return base.ProcessDeathEvent(manuallySelectDeathAnimation);
 
         }
 
-        protected override void ReviveCharacter()
+        public override void ReviveCharacter()
         {
             base.ReviveCharacter();
             if (IsOwner)

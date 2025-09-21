@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace LS
         public static WorldGameSessionManager instance;
         [Header("Active Players In Session")]
         public List<PlayerManager> players = new List<PlayerManager>();
+
+        private Coroutine revivalCoroutine;
 
         private void Awake()
         {
@@ -20,6 +23,33 @@ namespace LS
                 Destroy(gameObject);
             }
         }
+
+        public void WaitAndReviveHost()
+        {
+            if (revivalCoroutine != null)
+                StopCoroutine(revivalCoroutine);
+
+            revivalCoroutine = StartCoroutine(ReviveHostCoroutine(5));
+        }
+
+        private IEnumerator ReviveHostCoroutine(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            PlayerUIManager.instance.playerUILoadingScreenManager.ActivateLoadingScreen();
+
+            PlayerUIManager.instance.localPlayer.ReviveCharacter();
+
+            for (int i = 0; i < WorldObjectManager.instance.sitesOfGrace.Count; i++)
+            {
+                if (WorldObjectManager.instance.sitesOfGrace[i].siteOfGraceID == WorldSaveGameManager.instance.currentCharacterData.lastSiteOfGraceRestedAt)
+                {
+                    WorldObjectManager.instance.sitesOfGrace[i].TeleportToSiteOfGrace();
+                    break;
+                }
+            }
+        }
+
         public void AddPlayerToActivePlayersList(PlayerManager player)
         {
             //if list does not already contains player, add them
