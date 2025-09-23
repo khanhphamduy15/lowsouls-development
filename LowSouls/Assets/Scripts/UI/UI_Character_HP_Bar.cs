@@ -41,10 +41,13 @@ namespace LS {
                 characterName.enabled = true;
 
                 if (aiCharacter != null)
-                    characterName.text = aiCharacter.characterName;
-
-                if (playerCharacter != null)
+                {
+                    characterName.text = aiCharacter.characterName.ToString();
+                }
+                else if (playerCharacter != null)
+                {
                     characterName.text = playerCharacter.playerNetworkManager.characterName.Value.ToString();
+                }
             }
             slider.maxValue = character.characterNetworkManager.maxHealth.Value;
 

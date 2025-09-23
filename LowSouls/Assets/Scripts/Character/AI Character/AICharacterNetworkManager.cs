@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -22,8 +23,18 @@ namespace LS
             {
                 if (aiCharacter != null && aiCharacter.aiCharacterInventoryManager != null)
                 {
+                    StartCoroutine(DestroyAfterTime(5));
                     aiCharacter.aiCharacterInventoryManager.DropItem();
                 }
+            }
+        }
+        private IEnumerator DestroyAfterTime(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            if (IsServer && NetworkObject != null && NetworkObject.IsSpawned)
+            {
+                NetworkObject.Despawn();
             }
         }
     }

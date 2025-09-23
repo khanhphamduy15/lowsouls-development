@@ -93,7 +93,7 @@ namespace LS
             player.playerNetworkManager.remainingHealthFlask.Value = 3;
 
             //reset mobs position
-            WorldAIManager.instance.SpawnAllCharacters();
+            WorldAIManager.instance.ResetAllCharacters();
         }
 
         public override void Interact(PlayerManager player)

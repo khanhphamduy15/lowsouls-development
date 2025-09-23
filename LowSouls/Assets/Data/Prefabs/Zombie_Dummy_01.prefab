@@ -3299,6 +3299,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3749373460247482933, guid: 7cadeb1fa188b274c844602149fef44c, type: 3}
+      propertyPath: m_text
+      value: Ghoul
+      objectReference: {fileID: 0}
     - target: {fileID: 4794825175730563614, guid: 7cadeb1fa188b274c844602149fef44c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
