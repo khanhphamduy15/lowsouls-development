@@ -91,6 +91,12 @@ namespace LS
 
             //reset flasks
             player.playerNetworkManager.remainingHealthFlask.Value = 3;
+            //reset model
+            if (player.playerEffectsManager.activeQuickSlotItemFX != null)
+            {
+                Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
+                player.playerEffectsManager.activeQuickSlotItemFX = null;
+            }
 
             //reset mobs position
             WorldAIManager.instance.ResetAllCharacters();

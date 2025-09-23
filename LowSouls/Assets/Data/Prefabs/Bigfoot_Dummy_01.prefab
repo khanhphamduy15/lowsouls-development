@@ -1956,5 +1956,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropItemChance: 100
   droppableItem:
-  - {fileID: 11400000, guid: 0ced3ab647e59a04fab5697987a19de5, type: 2}
   - {fileID: 11400000, guid: 942ad15331bff404e84fa3a65e87eb64, type: 2}
