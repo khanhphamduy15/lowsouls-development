@@ -22,6 +22,10 @@ public class PlayerUIHudManager : MonoBehaviour
     public Transform bossHealthBarParent;
     public GameObject bossHealthBarObject;
 
+    private void Start()
+    {
+        ToggleHUD(false);
+    }
     public void ToggleHUD(bool status)
     {
         //to do transition
