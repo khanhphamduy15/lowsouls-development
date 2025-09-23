@@ -773,7 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e3e13235ae74548b346b4fc3cc998c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItemChance: 10
+  dropItemChance: 30
   droppableItem:
   - {fileID: 11400000, guid: afdeab2185b97f041954fcf9d115af56, type: 2}
   - {fileID: 11400000, guid: 6788d0169e50a8d408e0e38f2ae9ce42, type: 2}
