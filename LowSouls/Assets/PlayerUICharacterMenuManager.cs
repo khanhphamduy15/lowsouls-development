@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LS
 {
@@ -23,7 +25,6 @@ namespace LS
         public void CloseCharacterMenuAfterTime()
         {
             StartCoroutine(WaitThenCloseMenu());
-
         }
 
         private IEnumerator WaitThenCloseMenu()
@@ -31,6 +32,19 @@ namespace LS
             yield return new WaitForFixedUpdate();
             PlayerUIManager.instance.menuWindowIsOpen = false;
             menu.SetActive(false);
+        }
+
+        public void ReturnToTitleMenu()
+        {
+            if (PlayerUIManager.instance != null)
+            {
+                CloseCharacterMenuAfterTime();
+            }
+
+            PlayerUIManager.instance.playerUILoadingScreenManager.ActivateLoadingScreen();
+
+            string menuScene = SceneUtility.GetScenePathByBuildIndex(0);
+            NetworkManager.Singleton.SceneManager.LoadScene(menuScene, LoadSceneMode.Single);
         }
     }
 }
