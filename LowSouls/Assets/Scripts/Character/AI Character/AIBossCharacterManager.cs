@@ -20,7 +20,7 @@ namespace LS
         [SerializeField] string awakeAnimation;
 
         [Header("States")]
-        [SerializeField] BossSleepingState sleepState;
+        public BossSleepingState sleepState;
 
         [Header("Phase Shift")]
         public float minimumHPPercentToShift = 50;
@@ -50,7 +50,7 @@ namespace LS
                 {
                     WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Add(bossID, false);
                     WorldSaveGameManager.instance.currentCharacterData.bossesDefeated.Add(bossID, false);
-
+                    sleepState.hasBeenAwakened = hasBeenAwakened.Value;
                 }
                 else
                 {
@@ -162,6 +162,7 @@ namespace LS
                 }
                 bossFightIsActive.Value = true;
                 hasBeenAwakened.Value = true;
+                aiCharacterNetworkManager.isAwake.Value = true;
                 currentState = idle;
 
                 if (!WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.ContainsKey(bossID))
@@ -189,6 +190,7 @@ namespace LS
                 GameObject bossHealthBar = Instantiate(PlayerUIManager.instance.playerUIHudManager.bossHealthBarObject, PlayerUIManager.instance.playerUIHudManager.bossHealthBarParent);
                 UI_Boss_HP_Bar bossHPBar = bossHealthBar.GetComponentInChildren<UI_Boss_HP_Bar>();
                 bossHPBar.EnableBossHPBar(this);
+                PlayerUIManager.instance.playerUIHudManager.currentBossHPBar = bossHPBar;
             }
         }
 

@@ -74,6 +74,12 @@ namespace LS
 
             }
 
+            if (player.playerEffectsManager.activeQuickSlotItemFX != null)
+            {
+                GameObject.Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
+                player.playerEffectsManager.activeQuickSlotItemFX = null;
+            }
+
             if (player.playerNetworkManager.remainingHealthFlask.Value <= 0)
             {
                 Destroy(player.playerEffectsManager.activeQuickSlotItemFX);

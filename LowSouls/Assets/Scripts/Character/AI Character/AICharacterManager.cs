@@ -14,7 +14,7 @@ namespace LS {
 
 
         [Header("Current State")]
-        [SerializeField] protected AIState currentState;
+        [SerializeField] public AIState currentState;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;

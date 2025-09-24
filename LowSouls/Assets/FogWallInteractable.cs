@@ -21,8 +21,9 @@ namespace LS
         public override void Interact(PlayerManager player)
         {
             base.Interact(player);
-
-            Quaternion targetRotation = Quaternion.LookRotation(-Vector3.forward);
+            Vector3 directionToFog = (transform.position - player.transform.position).normalized;
+            directionToFog.y = 0;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToFog);
             player.transform.rotation = targetRotation;
 
             AllowPlayerThroughFogWallCollidersServerRpc(player.NetworkObjectId);

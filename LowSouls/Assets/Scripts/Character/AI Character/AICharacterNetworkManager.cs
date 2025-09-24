@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ namespace LS
     public class AICharacterNetworkManager : CharacterNetworkManager
     {
         AICharacterManager aiCharacter;
+
+        public NetworkVariable<bool> isAwake = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<FixedString64Bytes> sleepAnimation = new NetworkVariable<FixedString64Bytes>("Sleep_01", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<FixedString64Bytes> wakeAnimation = new NetworkVariable<FixedString64Bytes>("Awaken_01", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         protected override void Awake()
         {

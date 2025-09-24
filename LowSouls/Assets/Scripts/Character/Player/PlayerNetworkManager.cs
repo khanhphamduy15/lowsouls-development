@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using Unity.Collections;
+using Unity.VisualScripting;
 
 namespace LS
 {
@@ -39,6 +40,17 @@ namespace LS
             player = GetComponent<PlayerManager>();
         }
 
+        public override void OnIsDeadChanged(bool oldStatus, bool newStatus)
+        {
+            base.OnIsDeadChanged(oldStatus, newStatus);
+            if (player.isDead.Value && NetworkManager.Singleton.IsServer)
+            {
+                if (PlayerUIManager.instance.playerUIHudManager.currentBossHPBar != null)
+                    PlayerUIManager.instance.playerUIHudManager.currentBossHPBar.RemoveHPBar(1f);
+
+                WorldAIManager.instance.DisableAllBossFights();
+            }
+        }
         public override void OnIsBlockingChanged(bool oldStatus, bool newStatus)
         {
             base.OnIsBlockingChanged(oldStatus, newStatus);

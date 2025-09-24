@@ -1796,6 +1796,7 @@ MonoBehaviour:
   quickSlotItemCount: {fileID: 1912804595743741351}
   bossHealthBarParent: {fileID: 843648431919695100}
   bossHealthBarObject: {fileID: 6891332086259042907, guid: 278da7d320ebbed43913b91b44a9e958, type: 3}
+  currentBossHPBar: {fileID: 0}
 --- !u!225 &4620529937486604395
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5227,7 +5228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &916368899822138893
 RectTransform:
   m_ObjectHideFlags: 0

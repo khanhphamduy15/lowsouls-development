@@ -8,7 +8,7 @@ namespace LS {
             return this;
         }
 
-        protected virtual AIState SwitchState(AICharacterManager aICharacter, AIState newState)
+        public virtual AIState SwitchState(AICharacterManager aICharacter, AIState newState)
         {
             ResetStateFlags(aICharacter);
             return newState;

@@ -144,6 +144,17 @@ namespace LS
             return spawnedInBosses.FirstOrDefault(boss => boss.bossID == id);
         }
 
+        public void DisableAllBossFights()
+        {
+            for (int i = 0; i < spawnedInBosses.Count; i++)
+            {
+                if (spawnedInBosses[i] == null)
+                    continue;
+
+                spawnedInBosses[i].bossFightIsActive.Value = false;
+            }
+        }
+
         private void DisableAllCharacters()
         {
 
