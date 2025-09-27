@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a0edbfef733f548bc706a7bbe11a78, type: 3}
   m_Name: Knight's Leggings
   m_EditorClassIdentifier: 
-  itemName: Knight's Leggings
-  itemIcon: {fileID: 21300000, guid: d6c9713663fe7e444b001f68f6c04919, type: 3}
+  itemName: "Gi\xE1p ch\xE2n hi\u1EC7p s\u0129"
+  itemIcon: {fileID: 21300000, guid: 0a6427785b1275040ba55b12aeb12dec, type: 3}
   itemDescription: 
   itemID: 7
   itemWeight: 6.6

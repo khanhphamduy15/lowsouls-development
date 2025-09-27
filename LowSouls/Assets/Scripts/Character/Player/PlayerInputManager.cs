@@ -211,7 +211,8 @@ namespace LS
             if (useItemInput)
             {
                 useItemInput = false;
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 if (player.playerInventoryManager.currentQuickSlotItem != null)
@@ -346,6 +347,17 @@ namespace LS
         //Movements
         private void HandlePlayerMovementInput()
         {
+            if (PlayerUIManager.instance.AnyWindowIsOpen)
+            {
+                verticalInput = 0;
+                horizontalInput = 0;
+                moveAmount = 0;
+
+                if (player != null)
+                    player.playerNetworkManager.isMoving.Value = false;
+                return;
+            }
+
             verticalInput = movementInput.y;
             horizontalInput = movementInput.x;
 
@@ -384,6 +396,13 @@ namespace LS
 
         private void HandleCameraMovementInput()
         {
+            if (PlayerUIManager.instance.AnyWindowIsOpen)
+            {
+                cameraVerticalInput = 0;
+                cameraHorizontalInput = 0;
+                return;
+            }
+
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
         }
@@ -395,7 +414,7 @@ namespace LS
             {
                 dodgeInput = false;
                 //Return if menu or ui window is open
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 //Dodge
@@ -425,7 +444,7 @@ namespace LS
                 jumpInput = false;
 
                 //Return if menu or ui window is open
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 //Attempt to Jump
@@ -461,7 +480,7 @@ namespace LS
                 RBInput = false;
 
                 //ui window open => do nothing
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
@@ -484,7 +503,7 @@ namespace LS
                 LBInput = false;
 
                 //ui window open => do nothing
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 player.playerNetworkManager.SetCharacterActionHand(false);
@@ -504,7 +523,7 @@ namespace LS
                 RTInput = false;
 
                 //ui window open => do nothing
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
@@ -521,7 +540,7 @@ namespace LS
 
             if (player.isPerformingAction)
             {
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 if (player.playerNetworkManager.isUsingRightHand.Value)
@@ -538,7 +557,7 @@ namespace LS
             {
                 switchRightWeaponInput = false;
 
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 if (player.isPerformingAction)
@@ -556,7 +575,7 @@ namespace LS
             {
                 switchLeftWeaponInput = false;
 
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 if (player.isPerformingAction)
@@ -574,7 +593,7 @@ namespace LS
             {
                 switchQuickSlotItemInput = false;
 
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
                     return;
 
                 if (player.isPerformingAction)
@@ -662,7 +681,11 @@ namespace LS
             {
                 closeMenuInput = false;
 
-                if (PlayerUIManager.instance.menuWindowIsOpen)
+                if (PlayerUIManager.instance.subMenuWindowIsOpen)
+                {
+                    PlayerUIManager.instance.CloseAllSubMenuWindows();
+                }
+                else if (PlayerUIManager.instance.menuWindowIsOpen)
                 {
                     PlayerUIManager.instance.CloseAllMenuWindows();
                 }

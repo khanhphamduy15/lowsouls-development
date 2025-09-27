@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe5a95a980ab9b41b7fdf57b5042a28, type: 3}
   m_Name: Health Flask Item
   m_EditorClassIdentifier: 
-  itemName: Health Flask
-  itemIcon: {fileID: 21300000, guid: fbaa56255c7b9bc4e9b7a90180715cd4, type: 3}
+  itemName: "B\xECnh h\u1ED3i ph\u1EE5c"
+  itemIcon: {fileID: 21300000, guid: 1b8cdafc06976914cbd5eb9c0b8a22be, type: 3}
   itemDescription: 
-  itemID: 0
+  itemID: 9
   itemModel: {fileID: 8885261896269281129, guid: 05f9dd29df0bd1346b8ba57b8f451725, type: 3}
   useItemAnimation: Drink_Potion_01
+  isConsumable: 1
+  itemAmount: 1
   flaskRestoration: 50
   emptyFlaskItem: {fileID: 8201378953974358585, guid: ea91b4659a0097b4693cc707ed7e17be, type: 3}
   emptyFlaskAnimation: Drink_Potion_01

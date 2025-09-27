@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Open Knight's Helm
   m_EditorClassIdentifier: 
   itemName: Open Knight's Helm
-  itemIcon: {fileID: 21300000, guid: 06485fadd6760424295e74f3ad7775a0, type: 3}
+  itemIcon: {fileID: 21300000, guid: f94f2b7c1d85d1b4ea54264eb8c74ea5, type: 3}
   itemDescription: 
   itemID: 5
   itemWeight: 4.6

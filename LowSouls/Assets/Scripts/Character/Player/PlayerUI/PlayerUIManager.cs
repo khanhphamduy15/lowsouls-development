@@ -20,7 +20,9 @@ namespace LS {
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
+        public bool subMenuWindowIsOpen = false;
         public bool popupWindowIsOpen = false;
+        public bool AnyWindowIsOpen => menuWindowIsOpen || subMenuWindowIsOpen;
 
         private void Awake()
         {
@@ -63,6 +65,11 @@ namespace LS {
             playerUIEquipmentMenuManager.CloseEquipmentManagerMenu();
             playerUISiteOfGraceManager.CloseSiteOfGraceManagerMenu();
             playerUITeleportLocationManager.CloseTeleportLocationManagerMenu();
+        }
+
+        public void CloseAllSubMenuWindows()
+        {
+            playerUIEquipmentMenuManager.CloseEquipmentManagerMenu();
         }
     }
 }

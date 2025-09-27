@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1997b61aa5f752419c4b4795d8dd232, type: 3}
   m_Name: Claymore
   m_EditorClassIdentifier: 
-  itemName: Claymore
-  itemIcon: {fileID: 21300000, guid: 572691319f2ae1a4e9c7057e91cad1e0, type: 3}
+  itemName: "\u0110\u1EA1i ki\u1EBFm"
+  itemIcon: {fileID: 21300000, guid: b65065f47ca69db4bad4427c5455a0c7, type: 3}
   itemDescription: 
   itemID: 2
   itemWeight: 0
