@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a957d952376c3641aa6ccaa806ad3e9, type: 3}
   m_Name: Knight's Armor
   m_EditorClassIdentifier: 
-  itemName: Knight's Armor
-  itemIcon: {fileID: 0}
+  itemName: "Gi\xE1p hi\u1EC7p s\u0129"
+  itemIcon: {fileID: 21300000, guid: 5e44671119eb7ce4ebb81aa2a905405f, type: 3}
   itemDescription: 
   itemID: 6
   itemWeight: 10.6

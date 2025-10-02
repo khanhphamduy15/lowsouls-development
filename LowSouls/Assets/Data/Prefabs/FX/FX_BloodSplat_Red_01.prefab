@@ -4782,7 +4782,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14d85cbd857f03640a74d86deb1fcc86, type: 2}
+  - {fileID: 2100000, guid: e88ae70fdb7a9234bb51f64e1f7d21d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4847,3 +4847,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b4c959e621c6c45b85bd473b7a5823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeUntilDestroyed: 5

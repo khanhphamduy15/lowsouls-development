@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1997b61aa5f752419c4b4795d8dd232, type: 3}
   m_Name: Medium Shield
   m_EditorClassIdentifier: 
-  itemName: Medium Shield
-  itemIcon: {fileID: 0}
+  itemName: "Khi\xEAn"
+  itemIcon: {fileID: 21300000, guid: 47e9199c5e536ec4eb24fe0e80b273e4, type: 3}
   itemDescription: 
   itemID: 3
+  itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: 97cc29811b23818478b136719990ac12, type: 2}
   weaponModelType: 1
   weaponModel: {fileID: 3216235260147742545, guid: ac9edd0f9aff5a44ba2f10fa0fb63a31, type: 3}

@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace LS
 {
@@ -8,6 +9,7 @@ namespace LS
         [Header("Character")]
         [SerializeField] GameObject characterGameObject;
         [SerializeField] GameObject instantiatedGameObject;
+        private AICharacterManager aiCharacter;
 
         private void Awake()
         {
@@ -27,7 +29,39 @@ namespace LS
                 instantiatedGameObject.transform.position = transform.position;
                 instantiatedGameObject.transform.rotation = transform.rotation;
                 instantiatedGameObject.GetComponent<NetworkObject>().Spawn();
-                WorldAIManager.instance.AddCharacterToSpawnedCharactersList(instantiatedGameObject.GetComponent<AICharacterManager>());
+                aiCharacter =  instantiatedGameObject.GetComponent<AICharacterManager>();
+                if (aiCharacter != null)
+                    WorldAIManager.instance.AddCharacterToSpawnedCharactersList(aiCharacter);
+            }
+        }
+
+        public void ResetCharacter()
+        {
+            if (instantiatedGameObject == null)
+                return;
+
+            if (aiCharacter == null)
+                return;
+          
+            instantiatedGameObject.transform.position = transform.position;
+            instantiatedGameObject.transform.rotation = transform.rotation;
+            aiCharacter.aiCharacterNetworkManager.currentHealth.Value = aiCharacter.aiCharacterNetworkManager.maxHealth.Value;
+
+            if (aiCharacter.isDead.Value)
+            {
+                aiCharacter.isDead.Value = false;
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Empty", false, false, true, true, true);
+                aiCharacter.currentState.SwitchState(aiCharacter, aiCharacter.idle);
+            }
+
+            aiCharacter.characterUIManager.ResetCharacterHPBar();
+
+            if (aiCharacter is AIBossCharacterManager)
+            {
+                AIBossCharacterManager boss = aiCharacter as AIBossCharacterManager;
+                boss.aiCharacterNetworkManager.isAwake.Value = false;
+                boss.sleepState.hasBeenAwakened = boss.hasBeenAwakened.Value;
+                boss.currentState = boss.currentState.SwitchState(boss, boss.sleepState);
             }
         }
     }

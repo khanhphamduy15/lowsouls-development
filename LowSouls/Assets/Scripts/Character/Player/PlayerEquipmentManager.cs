@@ -21,9 +21,6 @@ namespace LS
         [HideInInspector] public GameObject rightHandWeaponModel;
         [HideInInspector] public GameObject leftHandWeaponModel;
 
-        [Header("Debug")]
-        [SerializeField] bool equipmentItem = false;
-
         [Header("General Equipment Models")]
         public GameObject halfHelmetObject;
         [HideInInspector] public GameObject[] halfHelmets;
@@ -272,12 +269,66 @@ namespace LS
             leftLegs = leftLegList.ToArray();
         }
 
-        private void Update()
+        //Quick Slot
+        public void SwitchQuickSlotItem()
         {
-            if (equipmentItem)
+            if (!player.IsOwner) 
+                return;
+
+            QuickSlotItem selectedItem = null;
+
+            //go to the next item
+            player.playerInventoryManager.quickSlotItemIndex += 1;
+
+            //if index is out of bounds, go back to idx 0 (pos1)
+            if (player.playerInventoryManager.quickSlotItemIndex < 0 || player.playerInventoryManager.quickSlotItemIndex > 2)
             {
-                equipmentItem = false;
-                DebugEquipNewItem();
+                player.playerInventoryManager.quickSlotItemIndex = 0;
+                //check if holding more than one weap
+                float itemCount = 0;
+                QuickSlotItem firstItem = null;
+                int firstItemPosition = 0;
+
+                for (int i = 0; i < player.playerInventoryManager.quickSlotItemInSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.quickSlotItemInSlots[i] != null)
+                    {
+                        itemCount += 1;
+                        if (firstItem == null)
+                        {
+                            firstItem = player.playerInventoryManager.quickSlotItemInSlots[i];
+                            firstItemPosition = i;
+                        }
+                    }
+                }
+                if (itemCount <= 1)
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = -1;
+                    selectedItem = null;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+                }
+                else
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = firstItemPosition;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = firstItem.itemID;
+                }
+                return;
+            }
+
+            if (player.playerInventoryManager.quickSlotItemInSlots[player.playerInventoryManager.quickSlotItemIndex] != null)
+            {
+                selectedItem = player.playerInventoryManager.quickSlotItemInSlots[player.playerInventoryManager.quickSlotItemIndex];
+                //assign network weapon id to sync
+                player.playerNetworkManager.currentQuickSlotItemID.Value = player.playerInventoryManager.quickSlotItemInSlots[player.playerInventoryManager.quickSlotItemIndex].itemID;
+            }
+            else
+            {
+                player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+            }
+
+            if (selectedItem == null && player.playerInventoryManager.quickSlotItemIndex <= 2)
+            {
+                SwitchQuickSlotItem();
             }
         }
 
@@ -374,6 +425,8 @@ namespace LS
 
             player.playerInventoryManager.bodyEquipment = equipment;
 
+            player.playerBodyManager.DisableBody();
+
             foreach (var model in equipment.equipmentModels)
             {
                 model.LoadModel(player);
@@ -425,31 +478,139 @@ namespace LS
 
         public void LoadLegEquipment(LegEquipmentItem equipment)
         {
+            //unload old models
+            UnloadLegEquipmentModels();
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.legEquipmentID.Value = -1;
+
+                player.playerInventoryManager.legEquipment = null;
+                return;
+            }
+
+            player.playerInventoryManager.legEquipment = equipment;
+
+            player.playerBodyManager.DisableLowerBody();
+
+
+            foreach (var model in equipment.equipmentModels)
+            {
+                model.LoadModel(player);
+            }
+
             //calc total armor absorption
             player.playerStatsManager.CalculateTotalArmorAbsorption();
+
+            if (player.IsOwner)
+                player.playerNetworkManager.legEquipmentID.Value = equipment.itemID;
+        }
+
+        public void UnloadLegEquipmentModels()
+        {
+            foreach (var model in hips)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in rightKnees)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftKnees)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftLegs)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in rightLegs)
+            {
+                model.SetActive(false);
+            }
+            player.playerBodyManager.EnableLowerBody();
         }
 
         public void LoadHandEquipment(HandEquipmentItem equipment)
         {
+            //unload old models
+            UnloadHandEquipmentModels();
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.handEquipmentID.Value = -1;
+
+                player.playerInventoryManager.handEquipment = null;
+                return;
+            }
+
+            player.playerInventoryManager.handEquipment = equipment;
+
+            player.playerBodyManager.DisableArms();
+
+
+            foreach (var model in equipment.equipmentModels)
+            {
+                model.LoadModel(player);
+            }
+
             //calc total armor absorption
             player.playerStatsManager.CalculateTotalArmorAbsorption();
+
+            if (player.IsOwner)
+                player.playerNetworkManager.handEquipmentID.Value = equipment.itemID;
         }
 
-        private void DebugEquipNewItem()
+        public void UnloadHandEquipmentModels()
         {
-            Debug.Log("equipping new item");
-
-            LoadHeadEquipment(player.playerInventoryManager.headEquipment);
-
-            LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
-
-            if (player.playerInventoryManager.legEquipment != null)
-                LoadLegEquipment(player.playerInventoryManager.legEquipment);
-
-            if (player.playerInventoryManager.handEquipment != null)
-                LoadHandEquipment(player.playerInventoryManager.handEquipment);
+            foreach (var model in rightLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in rightHands)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in leftHands)
+            {
+                model.SetActive(false);
+            }
+            player.playerBodyManager.EnableArms();
         }
 
+        public void EquipArmor()
+        {
+            LoadHeadEquipment(player.playerInventoryManager.headEquipment);
+            LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
+            LoadLegEquipment(player.playerInventoryManager.legEquipment);
+            LoadHandEquipment(player.playerInventoryManager.handEquipment);
+        }
+
+        //Quick Slot
+        public void LoadQuickSlotItem(QuickSlotItem item)
+        {
+            if (item == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+
+                player.playerInventoryManager.currentQuickSlotItem = null;
+                return;
+            }
+
+            player.playerInventoryManager.currentQuickSlotItem = item;
+
+            if (player.IsOwner)
+                player.playerNetworkManager.currentQuickSlotItemID.Value = item.itemID;
+        }
+
+        //Weapons
         private void InitializeWeaponSlots()
         {
             WeaponModelInstantiationSlot[] weaponSlots = GetComponentsInChildren<WeaponModelInstantiationSlot>();
@@ -497,7 +658,11 @@ namespace LS
 
         public void SwitchRightWeapon()
         {
-            if (!player.IsOwner) return;
+            if (!player.IsOwner) 
+                return;
+
+            player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+
             player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;
@@ -530,11 +695,13 @@ namespace LS
                 {
                     player.playerInventoryManager.rightHandWeaponIndex = -1;
                     selectedWeapon = WorldItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = selectedWeapon.itemID;
                 }
                 else
                 {
                     player.playerInventoryManager.rightHandWeaponIndex = firstWeaponPosition;
+                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = firstWeapon.itemID;
                 }
                 return;
@@ -547,7 +714,8 @@ namespace LS
                 {
                     selectedWeapon = player.playerInventoryManager.weaponInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex];
                     //assign network weapon id to sync
-                    player.playerNetworkManager.currentRightHandWeaponID.Value = player.playerInventoryManager.weaponInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex].itemID;
+                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
+                    player.playerNetworkManager.currentRightHandWeaponID.Value = selectedWeapon.itemID;
                     return;
                 }
             }
@@ -665,7 +833,11 @@ namespace LS
 
         public void SwitchLeftWeapon()
         {
-            if (!player.IsOwner) return;
+            if (!player.IsOwner) 
+                return;
+
+            player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+
             player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Left_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;
@@ -698,11 +870,13 @@ namespace LS
                 {
                     player.playerInventoryManager.leftHandWeaponIndex = -1;
                     selectedWeapon = WorldItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
                 }
                 else
                 {
                     player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;
+                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
                 }
                 return;
@@ -715,7 +889,8 @@ namespace LS
                 {
                     selectedWeapon = player.playerInventoryManager.weaponInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];
                     //assign network weapon id to sync
-                    player.playerNetworkManager.currentLeftHandWeaponID.Value = player.playerInventoryManager.weaponInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID;
+                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
+                    player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
                     return;
                 }
             }
@@ -753,6 +928,16 @@ namespace LS
             {
                 leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
             }
+        }
+
+        //unhide weapon
+        public void UnhideWeapon()
+        {
+            if (player.playerEquipmentManager.rightHandWeaponModel != null)
+                player.playerEquipmentManager.rightHandWeaponModel.SetActive(true);
+
+            if (player.playerEquipmentManager.leftHandWeaponModel != null)
+                player.playerEquipmentManager.leftHandWeaponModel.SetActive(true);
         }
     }
 }

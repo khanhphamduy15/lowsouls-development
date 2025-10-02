@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using Unity.Collections;
+using Unity.VisualScripting;
 
 namespace LS
 {
@@ -9,10 +10,14 @@ namespace LS
         PlayerManager player;
         public NetworkVariable<FixedString64Bytes> characterName = new NetworkVariable<FixedString64Bytes>("Character", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Flasks")]
+        public NetworkVariable<int> remainingHealthFlask = new NetworkVariable<int>(3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [Header("Equipment")]
         public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentLeftHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> currentQuickSlotItemID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingLeftHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -23,10 +28,10 @@ namespace LS
         public NetworkVariable<bool> isTwoHandingLeftWeapon = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Armor")]
-        public NetworkVariable<int> headEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> bodyEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> legEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> handEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> headEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> bodyEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> legEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> handEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
         protected override void Awake()
@@ -35,6 +40,17 @@ namespace LS
             player = GetComponent<PlayerManager>();
         }
 
+        public override void OnIsDeadChanged(bool oldStatus, bool newStatus)
+        {
+            base.OnIsDeadChanged(oldStatus, newStatus);
+            if (player.isDead.Value && NetworkManager.Singleton.IsServer)
+            {
+                if (PlayerUIManager.instance.playerUIHudManager.currentBossHPBar != null)
+                    PlayerUIManager.instance.playerUIHudManager.currentBossHPBar.RemoveHPBar(1f);
+
+                WorldAIManager.instance.DisableAllBossFights();
+            }
+        }
         public override void OnIsBlockingChanged(bool oldStatus, bool newStatus)
         {
             base.OnIsBlockingChanged(oldStatus, newStatus);
@@ -198,8 +214,11 @@ namespace LS
 
         public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
         {
-            WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
-            player.playerInventoryManager.currentRightHandWeapon = newWeapon;
+            if (!player.IsOwner)
+            {
+                WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
+                player.playerInventoryManager.currentRightHandWeapon = newWeapon;
+            }
             player.playerEquipmentManager.LoadRightWeapon();
 
             if (player.IsOwner)
@@ -210,8 +229,12 @@ namespace LS
 
         public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
         {
-            WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
-            player.playerInventoryManager.currentLeftHandWeapon = newWeapon;
+            if (!player.IsOwner)
+            {
+                WeaponItem newWeapon = Instantiate(WorldItemDatabase.instance.GetWeaponByID(newID));
+                player.playerInventoryManager.currentLeftHandWeapon = newWeapon;
+            }
+
             player.playerEquipmentManager.LoadLeftWeapon();
 
             if (player.IsOwner)
@@ -229,6 +252,26 @@ namespace LS
 
             if (player.playerCombatManager.currentWeaponBeingUsed != null)
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerCombatManager.currentWeaponBeingUsed.weaponAnimator);
+        }
+
+        public void OnCurrentQuickSlotItemIDChange(int oldID, int newID)
+        {
+            QuickSlotItem quickSlotItem = null;
+
+            if (WorldItemDatabase.instance.GetQuickSlotItemByID(newID))
+                quickSlotItem = Instantiate(WorldItemDatabase.instance.GetQuickSlotItemByID(newID));
+
+            if (quickSlotItem != null)
+            {
+                player.playerInventoryManager.currentQuickSlotItem = quickSlotItem;
+            }
+            else
+            {
+                player.playerInventoryManager.currentQuickSlotItem = null;
+            }
+
+            if (player.IsOwner)
+                PlayerUIManager.instance.playerUIHudManager.SetQuickSlotItemIcon(player.playerInventoryManager.currentQuickSlotItem);
         }
 
         //Item Actions
@@ -250,12 +293,45 @@ namespace LS
             }
         }
 
+        [ServerRpc]
+        public void HideWeaponServerRpc()
+        {
+            if (IsServer)
+                HideWeaponClientRpc();
+        }
+
+        [ClientRpc]
+        private void HideWeaponClientRpc()
+        {
+            if (player.playerEquipmentManager.rightHandWeaponModel != null)
+                player.playerEquipmentManager.rightHandWeaponModel.SetActive(false);
+
+            if (player.playerEquipmentManager.leftHandWeaponModel != null)
+                player.playerEquipmentManager.leftHandWeaponModel.SetActive(false);
+        }
+
+        [ServerRpc]
+        public void NotifyServerOfQuickSlotItemActionServerRpc(ulong clientID, int quickSlotItemID)
+        {
+            NotifyServerOfQuickSlotItemActionClientRpc(clientID, quickSlotItemID);
+        }
+
+        [ClientRpc]
+        private void NotifyServerOfQuickSlotItemActionClientRpc(ulong clientID, int quickSlotItemID)
+        {
+            if (clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                QuickSlotItem item = WorldItemDatabase.instance.GetQuickSlotItemByID(quickSlotItemID);
+                item.AttemptToUseItem(player);
+            }
+        }
+
         private void PerformWeaponBasedAction(int actionID, int weaponID)
         {
             WeaponItemAction weaponAction = WorldActionManager.instance.GetWeaponItemActionByID(actionID);
             if (weaponAction != null)
             {
-                weaponAction.AttemptToPerformAction(player,WorldItemDatabase.instance.GetWeaponByID(weaponID));
+                weaponAction.AttemptToPerformAction(player, WorldItemDatabase.instance.GetWeaponByID(weaponID));
             }
             else
             {

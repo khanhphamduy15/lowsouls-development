@@ -30,8 +30,6 @@ namespace LS
 
         protected virtual void Awake()
         {
-            DontDestroyOnLoad(this);
-
             characterController = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
@@ -88,8 +86,6 @@ namespace LS
 
         public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
-            Debug.Log("ProcessDeathEvent called!");
-
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;
@@ -108,7 +104,7 @@ namespace LS
             //Disable character 
         }
 
-        protected virtual void ReviveCharacter()
+        public virtual void ReviveCharacter()
         {
 
         }
@@ -156,6 +152,7 @@ namespace LS
 
             characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
+            isDead.OnValueChanged += characterNetworkManager.OnIsDeadChanged;
         }
 
         public override void OnNetworkDespawn()
@@ -163,7 +160,7 @@ namespace LS
             base.OnNetworkDespawn();
             characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged -= characterNetworkManager.OnIsActiveChanged;
-
+            isDead.OnValueChanged -= characterNetworkManager.OnIsDeadChanged;
         }
     }
 }

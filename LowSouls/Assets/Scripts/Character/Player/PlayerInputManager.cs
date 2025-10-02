@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,8 +34,9 @@ namespace LS
         [SerializeField] bool jumpInput = false;
         [SerializeField] bool switchRightWeaponInput = false;
         [SerializeField] bool switchLeftWeaponInput = false;
+        [SerializeField] bool switchQuickSlotItemInput = false;
         [SerializeField] bool interactInput = false;
-
+        [SerializeField] bool useItemInput = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RBInput = false;
@@ -56,6 +58,11 @@ namespace LS
         [SerializeField] bool que_RB_Input = false;
         [SerializeField] bool que_RT_Input = false;
 
+        [Header("UI Input")]
+        [SerializeField] bool openMenuInput = false;
+        [SerializeField] bool closeMenuInput = false;
+
+
         private void OnEnable()
         {
             if (playerControls == null)
@@ -70,7 +77,9 @@ namespace LS
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switchRightWeaponInput = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switchLeftWeaponInput = true;
+                playerControls.PlayerActions.SwitchQuickSlotItem.performed += i => switchQuickSlotItemInput = true;
                 playerControls.PlayerActions.Interact.performed += i => interactInput = true;
+                playerControls.PlayerActions.UseItem.performed += i => useItemInput = true;
 
                 //Bumper
                 playerControls.PlayerActions.RB.performed += i => RBInput = true;
@@ -86,7 +95,6 @@ namespace LS
 
                 playerControls.PlayerActions.TwoHandLeftWeapon.performed += i => twoHandLeftInput = true;
                 playerControls.PlayerActions.TwoHandLeftWeapon.canceled += i => twoHandLeftInput = false;
-
 
                 //Triggers
                 playerControls.PlayerActions.RT.performed += i => RTInput = true;
@@ -107,6 +115,15 @@ namespace LS
                 playerControls.PlayerActions.QueRB.performed += i => QueInput(ref que_RB_Input);
                 playerControls.PlayerActions.QueRT.performed += i => QueInput(ref que_RT_Input);
 
+                //UI input
+                playerControls.PlayerActions.Dodge.performed += i => closeMenuInput = true;
+                playerControls.PlayerActions.OpenMenu.performed += i =>
+                {
+                    if (PlayerUIManager.instance.menuWindowIsOpen)
+                        closeMenuInput = true;
+                    else
+                        openMenuInput = true;
+                };
             }
             playerControls.Enable();
         }
@@ -182,6 +199,28 @@ namespace LS
             HandleSwitchLeftWeaponInput();
             HandleQuedInputs();
             HandleInteractionInput();
+            HandleOpenUIInput();
+            HandleCloseUIInput();
+            HandleUseItemInput();
+            HandleSwitchQuickSlotItemInput();
+        }
+        
+        //use item
+        private void HandleUseItemInput()
+        {
+            if (useItemInput)
+            {
+                useItemInput = false;
+
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
+
+                if (player.playerInventoryManager.currentQuickSlotItem != null)
+                {
+                    player.playerInventoryManager.currentQuickSlotItem.AttemptToUseItem(player);
+                    player.playerNetworkManager.NotifyServerOfQuickSlotItemActionServerRpc(NetworkManager.Singleton.LocalClientId, player.playerInventoryManager.currentQuickSlotItem.itemID);
+                }
+            }
         }
 
         //Two Handing 
@@ -308,6 +347,17 @@ namespace LS
         //Movements
         private void HandlePlayerMovementInput()
         {
+            if (PlayerUIManager.instance.AnyWindowIsOpen)
+            {
+                verticalInput = 0;
+                horizontalInput = 0;
+                moveAmount = 0;
+
+                if (player != null)
+                    player.playerNetworkManager.isMoving.Value = false;
+                return;
+            }
+
             verticalInput = movementInput.y;
             horizontalInput = movementInput.x;
 
@@ -346,6 +396,13 @@ namespace LS
 
         private void HandleCameraMovementInput()
         {
+            if (PlayerUIManager.instance.AnyWindowIsOpen)
+            {
+                cameraVerticalInput = 0;
+                cameraHorizontalInput = 0;
+                return;
+            }
+
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
         }
@@ -357,8 +414,10 @@ namespace LS
             {
                 dodgeInput = false;
                 //Return if menu or ui window is open
-                //Dodge
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
 
+                //Dodge
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
         }
@@ -377,10 +436,16 @@ namespace LS
 
         private void HandleJumpInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (jumpInput)
             {
                 jumpInput = false;
+
                 //Return if menu or ui window is open
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
 
                 //Attempt to Jump
 
@@ -404,6 +469,9 @@ namespace LS
 
         private void HandleRBInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (twoHandInput)
                 return;
 
@@ -412,6 +480,8 @@ namespace LS
                 RBInput = false;
 
                 //ui window open => do nothing
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
@@ -422,6 +492,9 @@ namespace LS
 
         private void HandleLBInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (twoHandInput)
                 return;
 
@@ -430,6 +503,8 @@ namespace LS
                 LBInput = false;
 
                 //ui window open => do nothing
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
 
                 player.playerNetworkManager.SetCharacterActionHand(false);
 
@@ -440,11 +515,16 @@ namespace LS
 
         private void HandleRTInput()
         {
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (RTInput)
             {
                 RTInput = false;
 
                 //ui window open => do nothing
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
@@ -455,10 +535,15 @@ namespace LS
 
         private void HandleChargeRTInput()
         {
-            //
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (player.isPerformingAction)
             {
-               if (player.playerNetworkManager.isUsingRightHand.Value)
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
+
+                if (player.playerNetworkManager.isUsingRightHand.Value)
                {
                     player.playerNetworkManager.isChargingAttack.Value = ChargeRTInput;
                }
@@ -471,6 +556,16 @@ namespace LS
             if (switchRightWeaponInput)
             {
                 switchRightWeaponInput = false;
+
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
+
                 player.playerEquipmentManager.SwitchRightWeapon();
             }
         }
@@ -479,7 +574,35 @@ namespace LS
             if (switchLeftWeaponInput)
             {
                 switchLeftWeaponInput = false;
+
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void HandleSwitchQuickSlotItemInput()
+        {
+            if (switchQuickSlotItemInput)
+            {
+                switchQuickSlotItemInput = false;
+
+                if (PlayerUIManager.instance.AnyWindowIsOpen)
+                    return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
+
+                player.playerEquipmentManager.SwitchQuickSlotItem();
             }
         }
 
@@ -536,6 +659,35 @@ namespace LS
 
                     input_Que_Is_Active = false;
                     que_Input_Timer = 0;
+                }
+            }
+        }
+
+        private void HandleOpenUIInput()
+        {
+            if (openMenuInput)
+            {
+                openMenuInput = false;
+
+                PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopUpWindows();
+                PlayerUIManager.instance.CloseAllMenuWindows();
+                PlayerUIManager.instance.playerUICharacterMenuManager.OpenCharacterMenu();
+            }
+        }
+
+        private void HandleCloseUIInput()
+        {
+            if (closeMenuInput)
+            {
+                closeMenuInput = false;
+
+                if (PlayerUIManager.instance.subMenuWindowIsOpen)
+                {
+                    PlayerUIManager.instance.CloseAllSubMenuWindows();
+                }
+                else if (PlayerUIManager.instance.menuWindowIsOpen)
+                {
+                    PlayerUIManager.instance.CloseAllMenuWindows();
                 }
             }
         }

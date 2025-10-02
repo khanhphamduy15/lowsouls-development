@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ namespace LS
         [SerializeField] Button loadMenuReturnButton;
         [SerializeField] Button mainMenuNewGameButton;
         [SerializeField] Button mainMenuLoadGameButton;
+        [SerializeField] Button mainMenuQuitGameButton;
         [SerializeField] Button deleteCharPopUpConfirmButton;
         [SerializeField] Button noCharSlotsOKButton;
 
@@ -113,6 +115,11 @@ namespace LS
         {
             deleteCharSlotPopUp.SetActive(false);
             loadMenuReturnButton.Select();
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
         }
     }
 }

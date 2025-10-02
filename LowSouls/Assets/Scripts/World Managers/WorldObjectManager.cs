@@ -14,6 +14,9 @@ namespace LS {
         [Header("Fog Walls")]
         public List<FogWallInteractable> fogWalls;
 
+        [Header("Site Of Grace")]
+        public List<SiteOfGraceInteractable> sitesOfGrace;
+
         private void Awake()
         {
             if (instance == null)
@@ -47,6 +50,22 @@ namespace LS {
             if (fogWalls.Contains(fogWall))
             {
                 fogWalls.Remove(fogWall);
+            }
+        }
+
+        public void AddSiteOfGraceToList(SiteOfGraceInteractable siteOfGrace)
+        {
+            if (!sitesOfGrace.Contains(siteOfGrace))
+            {
+                sitesOfGrace.Add(siteOfGrace);
+            }
+        }
+
+        public void RemoveSiteOfGraceToList(SiteOfGraceInteractable siteOfGrace)
+        {
+            if (sitesOfGrace.Contains(siteOfGrace))
+            {
+                sitesOfGrace.Remove(siteOfGrace);
             }
         }
     }

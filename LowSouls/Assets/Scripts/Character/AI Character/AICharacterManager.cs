@@ -9,10 +9,12 @@ namespace LS {
 
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
-        [HideInInspector] public AICharacterLocomotionManager aICharacterLocomotionManager;
+        [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
+        [HideInInspector] public AICharacterInventoryManager aiCharacterInventoryManager;
+
 
         [Header("Current State")]
-        [SerializeField] protected AIState currentState;
+        [SerializeField] public AIState currentState;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;
@@ -34,7 +36,8 @@ namespace LS {
             base.Awake();
             aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
             aiCharacterCombatManager = GetComponent<AICharacterCombatManager>();
-            aICharacterLocomotionManager = GetComponent <AICharacterLocomotionManager>();
+            aiCharacterLocomotionManager = GetComponent <AICharacterLocomotionManager>();
+            aiCharacterInventoryManager = GetComponent<AICharacterInventoryManager>();
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         }
 

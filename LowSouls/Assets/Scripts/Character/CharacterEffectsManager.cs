@@ -12,6 +12,9 @@ namespace LS
         //static effects
         CharacterManager character;
 
+        [Header("Current Active FX")]
+        public GameObject activeQuickSlotItemFX;
+
         [Header("VFX")]
         [SerializeField] GameObject bloodSplatterVFX;
 

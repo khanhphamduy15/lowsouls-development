@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -5,8 +7,40 @@ namespace LS
 {
     public class AICharacterNetworkManager : CharacterNetworkManager
     {
+        AICharacterManager aiCharacter;
 
+        public NetworkVariable<bool> isAwake = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<FixedString64Bytes> sleepAnimation = new NetworkVariable<FixedString64Bytes>("Sleep_01", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<FixedString64Bytes> wakeAnimation = new NetworkVariable<FixedString64Bytes>("Awaken_01", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        protected override void Awake()
+        {
+            base.Awake();
 
+            aiCharacter = GetComponent<AICharacterManager>();
+        }
+
+        public override void OnIsDeadChanged(bool oldStatus, bool newStatus)
+        {
+            base.OnIsDeadChanged(oldStatus, newStatus);
+
+            if (newStatus)
+            {
+                if (aiCharacter != null && aiCharacter.aiCharacterInventoryManager != null)
+                {
+                    StartCoroutine(DestroyAfterTime(5));
+                    aiCharacter.aiCharacterInventoryManager.DropItem();
+                }
+            }
+        }
+        private IEnumerator DestroyAfterTime(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            if (IsServer && NetworkObject != null && NetworkObject.IsSpawned)
+            {
+                NetworkObject.Despawn();
+            }
+        }
     }
 }

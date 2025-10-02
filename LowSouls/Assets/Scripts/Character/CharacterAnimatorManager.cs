@@ -173,7 +173,8 @@ namespace LS
             bool isPerformingAction, 
             bool applyRootMotion = true,
             bool canRotate = false, 
-            bool canMove = false)
+            bool canMove = false,
+            bool canRoll = false)
         {
             character.animator.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
@@ -181,6 +182,7 @@ namespace LS
             character.isPerformingAction = isPerformingAction;
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRoll = canRoll;
 
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
@@ -192,7 +194,8 @@ namespace LS
             bool isPerformingAction,
             bool applyRootMotion = true,
             bool canRotate = false,
-            bool canMove = false)
+            bool canMove = false,
+            bool canRoll = false)
         {
             //keep track of last attack performed (for combos)
             //keep track of current attack type (light heavy etc)
@@ -207,6 +210,8 @@ namespace LS
             character.isPerformingAction = isPerformingAction;
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRoll = canRoll;
+            character.characterNetworkManager.isAttacking.Value = true;
 
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }

@@ -10,6 +10,8 @@ namespace LS
 
         public WeaponItem unarmedWeapon;
 
+        public GameObject pickUpItemPrefab;
+
         [Header("Weapons")]
         [SerializeField] List<WeaponItem> weapons = new List<WeaponItem>();
 
@@ -25,10 +27,11 @@ namespace LS
         [Header("Hand Equipments")]
         [SerializeField] List<HandEquipmentItem> handEquipments = new List<HandEquipmentItem>();
 
-
+        [Header("Quick Slot")]
+        [SerializeField] List<QuickSlotItem> quickSlotItems = new List<QuickSlotItem>();
         //item list
         [Header("Items")]
-        [SerializeField] List<Item> items = new List<Item>();
+        private List<Item> items = new List<Item>();
         private void Awake()
         {
             if (instance == null)
@@ -60,6 +63,10 @@ namespace LS
             {
                 items.Add(item);
             }
+            foreach (var item in quickSlotItems)
+            {
+                items.Add(item);
+            }
             //create unique id for every item
             for (int i = 0; i < items.Count; i++)
             {
@@ -67,9 +74,14 @@ namespace LS
             }
         }
         
+        //Item Db
         public WeaponItem GetWeaponByID(int ID)
         {
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
+        }
+        public Item GetItemByID(int ID)
+        {
+            return items.FirstOrDefault(item => item.itemID == ID);
         }
 
         public HeadEquipmentItem GetHeadEquipmentByID(int ID)
@@ -90,6 +102,47 @@ namespace LS
         public HandEquipmentItem GetHandEquipmentByID(int ID)
         {
             return handEquipments.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public QuickSlotItem GetQuickSlotItemByID(int ID)
+        {
+            return quickSlotItems.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        //Item serialization
+        public WeaponItem GetWeaponFromSerializeData(SerializableWeapon serializableData)
+        {
+            WeaponItem weapon = null;
+            if (GetWeaponByID(serializableData.itemID))
+                weapon = Instantiate(GetWeaponByID(serializableData.itemID));
+
+            if (weapon == null)
+                return Instantiate(unarmedWeapon);
+
+            return weapon;
+        }
+
+        public FlaskItem GetFlaskFromSerializableData(SerializableFlask serializableData)
+        {
+            FlaskItem flask = null;
+
+            if (GetQuickSlotItemByID(serializableData.itemID))
+                flask = Instantiate(GetQuickSlotItemByID(serializableData.itemID)) as FlaskItem;
+
+            return flask;
+        }
+
+        public QuickSlotItem GetQuickSlotItemFromSerializableData(SerializableQuickSlotItem serializableData)
+        {
+            QuickSlotItem item = null;
+
+            if (GetQuickSlotItemByID(serializableData.itemID))
+            {
+                item = Instantiate(GetQuickSlotItemByID(serializableData.itemID)) as QuickSlotItem;
+                item.itemAmount = serializableData.itemAmount;
+            }
+
+            return item;
         }
     }
 }

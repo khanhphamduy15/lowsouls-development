@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1997b61aa5f752419c4b4795d8dd232, type: 3}
   m_Name: Claymore
   m_EditorClassIdentifier: 
-  itemName: Claymore
-  itemIcon: {fileID: 0}
+  itemName: "\u0110\u1EA1i ki\u1EBFm"
+  itemIcon: {fileID: 21300000, guid: b65065f47ca69db4bad4427c5455a0c7, type: 3}
   itemDescription: 
   itemID: 2
+  itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: a43c623d473a3ab48b1c00d82964670f, type: 2}
   weaponModelType: 0
   weaponModel: {fileID: 4522433441981415866, guid: 93ac689af1e82a7468b8efd5f9e01c6c, type: 3}

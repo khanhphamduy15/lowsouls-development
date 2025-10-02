@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fcf2981558bfad4eb42b233a2f9b35b, type: 3}
   m_Name: Knight's Gauntlets
   m_EditorClassIdentifier: 
-  itemName: Knight's Gauntlets
-  itemIcon: {fileID: 0}
+  itemName: "Gi\xE1p tay hi\u1EC7p s\u0129"
+  itemIcon: {fileID: 21300000, guid: f468a3265857bcf4c83f2e38b653ff59, type: 3}
   itemDescription: 
-  itemID: 7
+  itemID: 8
   itemWeight: 3.5
   physicalDamageAbsoprtion: 3.1
   magicDamageAbsoprtion: 2
@@ -27,3 +27,8 @@ MonoBehaviour:
   focus: 6
   vitality: 6
   poise: 5
+  equipmentModels:
+  - {fileID: 11400000, guid: be68f74057ad837428c035ee597b0623, type: 2}
+  - {fileID: 11400000, guid: fe9a3f33deca6bd41b3a0b9e0bbb4615, type: 2}
+  - {fileID: 11400000, guid: 9c28852b7c5294a4dbb980fc7d9df412, type: 2}
+  - {fileID: 11400000, guid: e794544c5ba975d43b95578b465bcdc3, type: 2}

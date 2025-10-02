@@ -219,6 +219,8 @@ namespace LS
         }
         public void LoadWorldScene(int buildIndex)
         {
+            PlayerUIManager.instance.playerUIHudManager.ToggleHUD(true);
+            PlayerUIManager.instance.playerUILoadingScreenManager.ActivateLoadingScreen();
             string worldScene = SceneUtility.GetScenePathByBuildIndex(buildIndex);
             NetworkManager.Singleton.SceneManager.LoadScene(worldScene, LoadSceneMode.Single);
 
@@ -231,5 +233,42 @@ namespace LS
         {
             return worldSceneIndex;
         }
+
+        public SerializableWeapon GetSerializableWeaponFromItem(WeaponItem weapon)
+        {
+            SerializableWeapon serializableWeapon = new SerializableWeapon();
+            serializableWeapon.itemID = weapon.itemID;
+            return serializableWeapon;
+        }
+
+        public SerializableFlask GetSerializableFlaskFromFlaskItem(FlaskItem flaskItem)
+        {
+            SerializableFlask serializableFlask = new SerializableFlask();
+            if (flaskItem != null)
+            {
+                serializableFlask.itemID = flaskItem.itemID;
+            }
+            else
+            {
+                serializableFlask.itemID = -1;
+            }
+            return serializableFlask;
+        }
+
+        public SerializableQuickSlotItem GetSerializableQuickSlotItemFromQuickSlotItem(QuickSlotItem quickSlotItem)
+        {
+            SerializableQuickSlotItem serializableQuickSlotItem = new SerializableQuickSlotItem();
+            if (quickSlotItem != null)
+            {
+                serializableQuickSlotItem.itemID = quickSlotItem.itemID;
+                serializableQuickSlotItem.itemAmount = quickSlotItem.itemAmount;
+            }
+            else
+            {
+                serializableQuickSlotItem.itemID = -1;
+            }
+            return serializableQuickSlotItem;
+        }
+
     }
 }

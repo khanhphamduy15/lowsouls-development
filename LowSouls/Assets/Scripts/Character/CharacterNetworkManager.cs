@@ -71,6 +71,11 @@ namespace LS
             }
         }
 
+        public virtual void OnIsDeadChanged(bool oldStatus,  bool newStatus)
+        {
+
+        }
+
         public void OnLockOnTargetIDChange(ulong oldID, ulong newID)
         {
             if (!IsOwner)
@@ -227,6 +232,22 @@ namespace LS
             damageEffect.characterCausingDamage = characterCausingDamage;
 
             damagedCharacter.characterEffectsManager.ProcessInstantEffects(damageEffect);
+        }
+
+        [ServerRpc]
+        public void DestroyAllCurrentActionFXServerRpc()
+        {
+            if (IsServer)
+            {
+                DestroyAllCurrentActionFXClientRpc();
+            }
+        }
+
+        [ClientRpc]
+        private void DestroyAllCurrentActionFXClientRpc()
+        {
+            if (character.characterEffectsManager.activeQuickSlotItemFX != null)
+                Destroy(character.characterEffectsManager.activeQuickSlotItemFX);
         }
 
     }

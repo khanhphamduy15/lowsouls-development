@@ -149,6 +149,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   zombieCharacter: {fileID: 0}
 --- !u!1 &601429310971491104
 GameObject:
@@ -229,6 +230,7 @@ GameObject:
   - component: {fileID: 6272058830409197286}
   - component: {fileID: 3962196009318446680}
   - component: {fileID: -7841259178689256174}
+  - component: {fileID: -6397030508234865043}
   m_Layer: 8
   m_Name: Zombie_Dummy_01
   m_TagString: Untagged
@@ -244,8 +246,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842103163252997315}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.98930556, z: -0, w: 0.14585821}
-  m_LocalPosition: {x: 6.9646463, y: 0, z: -7.911199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -254,7 +256,7 @@ Transform:
   - {fileID: 7857636466319960991}
   - {fileID: 8766963660734120742}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 163.226, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3706340672442919166
 Animator:
   serializedVersion: 7
@@ -487,7 +489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf95da72ec91ce4d9b52deb10fcdedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeQuickSlotItemFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 0}
+  staticEffects: []
 --- !u!114 &1785995110548160578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +511,21 @@ MonoBehaviour:
   blockingLightningAbsorption: 0
   blockingFireAbsorption: 0
   blockingHolyAbsorption: 0
+  blockingStability: 0
+  armorPhysicalDamageAbsoprtion: 0
+  armorMagicDamageAbsoprtion: 0
+  armorFireDamageAbsoprtion: 0
+  armorLightningDamageAbsoprtion: 0
+  armorHolyDamageAbsoprtion: 0
+  armorImmunity: 0
+  armorRobustness: 0
+  armorFocus: 0
+  armorVitality: 0
+  totalPoiseDamage: 0
+  offensivePoiseBonus: 0
+  basePoiseDefense: 0
+  defaultPoiseResetTimer: 8
+  poiseResetTimer: 0
 --- !u!114 &1830947569070368293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +580,8 @@ MonoBehaviour:
   characterName: Zombie
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
-  aICharacterLocomotionManager: {fileID: 0}
+  aiCharacterLocomotionManager: {fileID: 0}
+  aiCharacterInventoryManager: {fileID: 0}
   currentState: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: ca5fad718ef4d974a878e9fc18569b68, type: 2}
@@ -589,9 +609,10 @@ MonoBehaviour:
   groundedVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
-  canRotate: 1
-  canMove: 1
   isGrounded: 1
+  canMove: 1
+  canRotate: 1
+  canRoll: 1
 --- !u!114 &880773276701100890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,6 +626,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 
+  hit_Forward_Ping_01: Hit_Forward_Ping_01
+  hit_Forward_Ping_02: Hit_Forward_Ping_02
+  hit_Backward_Ping_01: Hit_Backward_Ping_01
+  hit_Backward_Ping_02: Hit_Backward_Ping_02
+  hit_Left_Ping_01: Hit_Left_Ping_01
+  hit_Left_Ping_02: Hit_Left_Ping_02
+  hit_Right_Ping_01: Hit_Right_Ping_01
+  hit_Right_Ping_02: Hit_Right_Ping_02
+  forward_Ping_Damage: []
+  backward_Ping_Damage: []
+  left_Ping_Damage: []
+  right_Ping_Damage: []
   hit_Forward_Medium_01: Hit_Forward_Medium_01
   hit_Forward_Medium_02: Hit_Forward_Medium_02
   hit_Backward_Medium_01: Hit_Backward_Medium_01
@@ -635,6 +668,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lockOnTransform: {fileID: 0}
   canPerformRollAttack: 0
+  canBlock: 1
   actionRecoveryTimer: 0
   enablePivot: 1
   detectionRadius: 15
@@ -647,6 +681,7 @@ MonoBehaviour:
   rightHandDamageCollider: {fileID: 5726750383523237047}
   leftHandDamageCollider: {fileID: 734975651594780422}
   baseDamage: 25
+  basePoiseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.2
   attack03DamageModifier: 1.4
@@ -708,10 +743,16 @@ MonoBehaviour:
     m_InternalValue: 0
   isChargingAttack:
     m_InternalValue: 0
+  isAttacking:
+    m_InternalValue: 0
   vitality:
     m_InternalValue: 5
   endurance:
     m_InternalValue: 5
+  strength:
+    m_InternalValue: 1
+  strengthModifier:
+    m_InternalValue: 1
   currentHealth:
     m_InternalValue: 150
   maxHealth:
@@ -720,6 +761,164 @@ MonoBehaviour:
     m_InternalValue: 150
   maxStamina:
     m_InternalValue: 150
+  isAwake:
+    m_InternalValue: 0
+  sleepAnimation:
+    m_InternalValue:
+      utf8LengthInBytes: 8
+      bytes:
+        offset0000:
+          byte0000: 83
+          byte0001: 108
+          byte0002: 101
+          byte0003: 101
+          byte0004: 112
+          byte0005: 95
+          byte0006: 48
+          byte0007: 49
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        offset0016:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        offset0032:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        byte0048: 0
+        byte0049: 0
+        byte0050: 0
+        byte0051: 0
+        byte0052: 0
+        byte0053: 0
+        byte0054: 0
+        byte0055: 0
+        byte0056: 0
+        byte0057: 0
+        byte0058: 0
+        byte0059: 0
+        byte0060: 0
+        byte0061: 0
+  wakeAnimation:
+    m_InternalValue:
+      utf8LengthInBytes: 9
+      bytes:
+        offset0000:
+          byte0000: 65
+          byte0001: 119
+          byte0002: 97
+          byte0003: 107
+          byte0004: 101
+          byte0005: 110
+          byte0006: 95
+          byte0007: 48
+          byte0008: 49
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        offset0016:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        offset0032:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        byte0048: 0
+        byte0049: 0
+        byte0050: 0
+        byte0051: 0
+        byte0052: 0
+        byte0053: 0
+        byte0054: 0
+        byte0055: 0
+        byte0056: 0
+        byte0057: 0
+        byte0058: 0
+        byte0059: 0
+        byte0060: 0
+        byte0061: 0
+--- !u!114 &-6397030508234865043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842103163252997315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e3e13235ae74548b346b4fc3cc998c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemChance: 40
+  droppableItem:
+  - {fileID: 11400000, guid: afdeab2185b97f041954fcf9d115af56, type: 2}
+  - {fileID: 11400000, guid: 6788d0169e50a8d408e0e38f2ae9ce42, type: 2}
+  - {fileID: 11400000, guid: 0ced3ab647e59a04fab5697987a19de5, type: 2}
+  - {fileID: 11400000, guid: 52c54e5ff2d239643898b4dc3c2ff0ab, type: 2}
 --- !u!1 &886416252126033724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,7 +2502,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8257928079569425312, guid: db271f6ea22ec184f9832982ff01eafb, type: 3}
+  - {fileID: 2100000, guid: ff36cd53afec73941adec743ef60ad0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2567,6 +2766,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   zombieCharacter: {fileID: 0}
 --- !u!1 &7812838419350072048
 GameObject:
@@ -2936,6 +3136,7 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  poiseDamage: 0
   zombieCharacter: {fileID: 0}
 --- !u!1 &8637762926231117561
 GameObject:
@@ -3237,6 +3438,10 @@ PrefabInstance:
     - target: {fileID: 873842786947410636, guid: 7cadeb1fa188b274c844602149fef44c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749373460247482933, guid: 7cadeb1fa188b274c844602149fef44c, type: 3}
+      propertyPath: m_text
+      value: Ghoul
       objectReference: {fileID: 0}
     - target: {fileID: 4794825175730563614, guid: 7cadeb1fa188b274c844602149fef44c, type: 3}
       propertyPath: m_Pivot.x

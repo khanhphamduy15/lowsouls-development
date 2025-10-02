@@ -1,6 +1,5 @@
 using Unity.Netcode;
 using UnityEngine;
-
 namespace LS 
 {
     public class PlayerCombatManager : CharacterCombatManager
@@ -10,6 +9,8 @@ namespace LS
 
         [Header("Flags")]
         public bool canComboWithMainHandWeapon = false;
+        public bool isUsingItem = false;
+
 
         protected override void Awake()
         {
@@ -85,6 +86,11 @@ namespace LS
             }
         }
 
+        public void SuccessfullyUseQuickSlotItem()
+        {
+            if (player.playerInventoryManager.currentQuickSlotItem != null)
+                player.playerInventoryManager.currentQuickSlotItem.SuccessfullyUseItem(player);
+        }
         public override void DisableCanDoCombo()
         {
             player.playerCombatManager.canComboWithMainHandWeapon = false;

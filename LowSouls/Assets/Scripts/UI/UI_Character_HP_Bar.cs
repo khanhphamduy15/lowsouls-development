@@ -11,7 +11,7 @@ namespace LS {
         [SerializeField] bool displayCharacterNameOrDamage = false;
         [SerializeField] float defaultTimeBeforeBarHides = 3;
         [SerializeField] float hideTimer = 0;
-        [SerializeField] int currentDamageTaken = 0;
+        public int currentDamageTaken = 0;
         [SerializeField] TextMeshProUGUI characterName;
         [SerializeField] TextMeshProUGUI characterDamage;
         [HideInInspector] public int oldHealthValue = 0;
@@ -41,10 +41,13 @@ namespace LS {
                 characterName.enabled = true;
 
                 if (aiCharacter != null)
-                    characterName.text = aiCharacter.characterName;
-
-                if (playerCharacter != null)
+                {
+                    characterName.text = aiCharacter.characterName.ToString();
+                }
+                else if (playerCharacter != null)
+                {
                     characterName.text = playerCharacter.playerNetworkManager.characterName.Value.ToString();
+                }
             }
             slider.maxValue = character.characterNetworkManager.maxHealth.Value;
 

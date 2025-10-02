@@ -58,6 +58,23 @@ namespace LS
         LeftKnee
     }
 
+    public enum EquipmentSlotType
+    {
+        RightWeapon01,
+        RightWeapon02,
+        RightWeapon03,
+        LeftWeapon01,
+        LeftWeapon02,
+        LeftWeapon03,
+        Head,
+        Body,
+        Legs,
+        Hands,
+        QuickSlot01,
+        QuickSlot02,
+        QuickSlot03
+    }
+
     public enum HeadEquipmentType
     {
         FullHelmet,
@@ -99,5 +116,11 @@ namespace LS
     {
         Team01,
         Team02,
+    }
+
+    public enum ItemPickUpType
+    {
+        WorldSpawn,
+        CharacterDrop
     }
 }

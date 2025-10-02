@@ -115,7 +115,7 @@ namespace LS
             if (currentTarget == null)
                 return;
 
-            if (!aiCharacter.aICharacterLocomotionManager.canRotate)
+            if (!aiCharacter.aiCharacterLocomotionManager.canRotate)
                 return;
 
             if (!aiCharacter.isPerformingAction)

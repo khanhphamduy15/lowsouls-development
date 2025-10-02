@@ -15,9 +15,14 @@ namespace LS
             character.isPerformingAction = false;
             character.characterLocomotionManager.canMove = true;
             character.characterLocomotionManager.canRotate = true;
+            character.characterLocomotionManager.canRoll = true;
             character.characterLocomotionManager.isRolling = false;
             character.characterCombatManager.DisableCanDoCombo();
             character.characterCombatManager.DisableCanDoRollingAttack();
+
+            if (character.characterEffectsManager.activeQuickSlotItemFX != null)
+                Destroy(character.characterEffectsManager.activeQuickSlotItemFX);
+
             if (character.IsOwner)
             {
                 character.characterNetworkManager.isJumping.Value = false;
